@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IntexiaU Ventures | The Venture Launch Engine</title>
+<meta name="description" content="IntexiaU Ventures — the venture launch engine of IntexiaU Corp. From idea to AI-native platform: how we build, launch, and scale new ventures." />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+  :root {
+    --blue:#2a6bc2; --purple:#7b3fa0; --magenta:#c0306a; --gold:#d4891a; --gold-light:#e8a93a;
+    --teal:#3a8a9a; --green:#4f8a5b; --bg:#f6f4f0; --text:#1a1612; --muted:#6a6055;
+    --faint:#b0a898; --border:rgba(0,0,0,0.07);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
+  .grid-overlay { position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:linear-gradient(rgba(0,0,0,0.022) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.022) 1px,transparent 1px);
+    background-size:80px 80px; }
+
+  nav { display:flex; justify-content:space-between; align-items:center; padding:14px 64px;
+    background:rgba(246,244,240,0.9); backdrop-filter:blur(20px); border-bottom:1px solid var(--border);
+    position:sticky; top:0; z-index:200; }
+  .logo-wordmark { display:flex; flex-direction:column; line-height:1.05; }
+  .logo-main { font-family:'Playfair Display',serif; font-size:20px; font-weight:600; }
+  .logo-sub { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); }
+  nav ul { list-style:none; display:flex; gap:32px; align-items:center; }
+  nav ul li a { color:var(--muted); text-decoration:none; font-size:11px; letter-spacing:1.8px; text-transform:uppercase; font-weight:500; transition:color 0.2s; }
+  nav ul li a:hover { color:var(--blue); }
+  .nav-cta { background:linear-gradient(135deg,var(--blue),var(--purple)) !important; color:#fff !important;
+    padding:9px 22px; border-radius:3px; font-weight:600 !important; letter-spacing:1.2px !important;
+    box-shadow:0 4px 16px rgba(42,107,194,0.28); }
+
+  .hero { min-height:70vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:80px 60px 60px; position:relative; z-index:1; }
+  .eyebrow { font-size:10px; letter-spacing:5px; text-transform:uppercase; color:var(--blue); margin-bottom:28px;
+    font-weight:500; display:flex; align-items:center; justify-content:center; gap:12px; }
+  .eyebrow::before,.eyebrow::after { content:''; width:32px; height:1px; background:rgba(42,107,194,0.3); }
+  .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(34px,4.5vw,58px); font-weight:400; line-height:1.2;
+    max-width:860px; margin-bottom:28px;
+    background:linear-gradient(135deg,var(--blue) 0%,var(--purple) 50%,var(--magenta) 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hero p.sub { font-size:17px; color:var(--muted); max-width:640px; line-height:1.8; margin-bottom:44px; font-weight:300; }
+  .routing { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+  .route-btn { padding:13px 28px; border:1px solid rgba(42,107,194,0.25); background:rgba(255,255,255,0.65);
+    color:var(--blue); font-size:11px; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer;
+    border-radius:3px; transition:all 0.25s; font-weight:500; backdrop-filter:blur(8px); text-decoration:none; display:inline-block; }
+  .route-btn.solid { background:linear-gradient(135deg,var(--blue),var(--purple)); color:#fff; border:none;
+    box-shadow:0 4px 16px rgba(42,107,194,0.28); }
+  .route-btn:hover { transform:translateY(-1px); box-shadow:0 8px 24px rgba(0,0,0,0.1); }
+
+  .divider { width:1px; height:60px; background:linear-gradient(to bottom,rgba(42,107,194,0.3),transparent); margin:0 auto; }
+
+  .section-head { text-align:center; margin-bottom:56px; max-width:700px; margin-left:auto; margin-right:auto; padding:0 24px; }
+  .section-head h2 { font-family:'Playfair Display',serif; font-size:34px; font-weight:400; margin-bottom:14px; }
+  .section-head p { font-size:15px; color:var(--muted); line-height:1.8; font-weight:300; }
+
+  /* ENGINE STEPS */
+  .engine { padding:90px 60px; position:relative; z-index:1; }
+  .engine-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; max-width:1080px; margin:0 auto; }
+  .engine-step { padding:36px 28px; background:rgba(255,255,255,0.6); backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,0.85); position:relative; overflow:hidden; transition:all 0.3s; }
+  .engine-step::before { content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg,var(--blue),var(--purple)); }
+  .engine-step:hover { background:rgba(255,255,255,0.88); transform:translateY(-3px); box-shadow:0 12px 40px rgba(0,0,0,0.08); }
+  .engine-num { font-family:'Playfair Display',serif; font-size:28px; font-weight:600; color:var(--blue); margin-bottom:14px; }
+  .engine-step h3 { font-family:'Playfair Display',serif; font-size:18px; font-weight:600; margin-bottom:10px; }
+  .engine-step p { font-size:13.5px; color:var(--muted); line-height:1.75; font-weight:300; }
+
+  /* PORTFOLIO */
+  .portfolio { padding:90px 60px; position:relative; z-index:1; }
+  .portfolio-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; max-width:1080px; margin:0 auto; }
+  .venture-card { padding:32px 28px; background:rgba(255,255,255,0.6); backdrop-filter:blur(12px);
+    border:1px solid var(--border); border-radius:8px; transition:all 0.3s; }
+  .venture-card:hover { background:rgba(255,255,255,0.88); transform:translateY(-3px); box-shadow:0 12px 40px rgba(0,0,0,0.08); }
+  .venture-icon { font-size:28px; margin-bottom:14px; display:block; }
+  .venture-card .tag { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:10px; display:block; }
+  .venture-card h3 { font-family:'Playfair Display',serif; font-size:18px; font-weight:600; margin-bottom:8px; }
+  .venture-card p { font-size:13.5px; color:var(--muted); line-height:1.75; font-weight:300; margin-bottom:16px; }
+  .venture-link { font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--blue); font-weight:600; text-decoration:none; }
+
+  /* PHILOSOPHY BAND */
+  .philosophy-band { padding:70px 60px; position:relative; z-index:1;
+    background:linear-gradient(135deg,rgba(42,107,194,0.06),rgba(123,63,160,0.06));
+    border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .philosophy-inner { max-width:780px; margin:0 auto; text-align:center; }
+  .philosophy-inner h2 { font-family:'Playfair Display',serif; font-size:28px; font-weight:400; margin-bottom:18px; }
+  .philosophy-inner p { font-size:15px; color:var(--muted); line-height:1.85; font-weight:300; }
+
+  /* CTA */
+  .cta { padding:90px 60px; text-align:center; position:relative; z-index:1; }
+  .cta h2 { font-family:'Playfair Display',serif; font-size:32px; font-weight:400; margin-bottom:18px; }
+  .cta p { font-size:15px; color:var(--muted); max-width:540px; margin:0 auto 36px; line-height:1.8; font-weight:300; }
+
+  footer { padding:40px 60px; text-align:center; border-top:1px solid var(--border); font-size:12px; color:var(--faint); position:relative; z-index:1; }
+  footer a { color:var(--muted); text-decoration:none; margin:0 10px; }
+  footer a:hover { color:var(--blue); }
+
+  @media (max-width:880px) {
+    .engine-grid { grid-template-columns:repeat(2,1fr); }
+    .portfolio-grid { grid-template-columns:1fr; }
+    nav { padding:14px 24px; }
+    nav ul { display:none; }
+    .hero,.engine,.portfolio,.philosophy-band,.cta { padding-left:24px; padding-right:24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-overlay"></div>
+
+<nav>
+  <a href="/" style="text-decoration:none;color:inherit;">
+    <div class="logo-wordmark">
+      <span class="logo-main">IntexiaU</span>
+      <span class="logo-sub">Ventures</span>
+    </div>
+  </a>
+  <ul>
+    <li><a href="#engine">How We Build</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="/store">Store</a></li>
+    <li><a href="/">IntexiaU Corp</a></li>
+    <li><a href="/store" class="nav-cta">Explore Apps</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" aria-label="Hero — IntexiaU Ventures">
+  <div class="eyebrow">IntexiaU Ventures</div>
+  <h1>The Venture Launch Engine</h1>
+  <p class="sub">
+    A division of IntexiaU Corp, Ventures takes ideas from concept to AI-native platform —
+    building, launching, and scaling new products across legal tech, civic education,
+    enthusiast communities, and beyond.
+  </p>
+  <div class="routing">
+    <a href="/store" class="route-btn solid">Explore the Portfolio</a>
+    <a href="/" class="route-btn">About IntexiaU Corp</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW WE BUILD -->
+<section class="engine" id="engine" aria-label="How We Build">
+  <div class="section-head">
+    <h2>From Idea to AI-Native Platform</h2>
+    <p>Every IntexiaU venture follows the same disciplined build engine — designed to move fast without sacrificing the foundations a real product needs.</p>
+  </div>
+  <div class="engine-grid">
+    <div class="engine-step">
+      <div class="engine-num">01</div>
+      <h3>Validate</h3>
+      <p>Identify a real problem, a real audience, and a clear path to value — before a line of code is written.</p>
+    </div>
+    <div class="engine-step">
+      <div class="engine-num">02</div>
+      <h3>Build</h3>
+      <p>Stand up the product on a proven AI-native stack — React, Supabase, Stripe, and AI integration from day one.</p>
+    </div>
+    <div class="engine-step">
+      <div class="engine-num">03</div>
+      <h3>Launch</h3>
+      <p>Deploy, connect domains and payments, and open the doors — fast, lean, and ready for real users.</p>
+    </div>
+    <div class="engine-step">
+      <div class="engine-num">04</div>
+      <h3>Scale</h3>
+      <p>Grow what works — new verticals, new subdomains, new tiers — while feeding lessons back into the next venture.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY BAND -->
+<section class="philosophy-band" aria-label="Ventures Philosophy">
+  <div class="philosophy-inner">
+    <div class="eyebrow" style="justify-content:center;">Built on Economic Authorship</div>
+    <h2>Every Venture Is a Portfolio Asset</h2>
+    <p>
+      IntexiaU Ventures isn't just a product studio — it's the proof of concept for Economic
+      Authorship in action. Every platform we launch is built so that anyone, anywhere, can
+      apply the same playbook to build, own, and grow their own portfolio of AI agents and ventures.
+    </p>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio" aria-label="Ventures Portfolio">
+  <div class="section-head">
+    <h2>Current Ventures</h2>
+    <p>A growing portfolio of AI-native platforms — each solving a real problem for a real community.</p>
+  </div>
+  <div class="portfolio-grid">
+    <div class="venture-card">
+      <span class="venture-icon">⚖️</span>
+      <span class="tag">Legal Information</span>
+      <h3>BriefConsiliar</h3>
+      <p>The Consiliar Suite — AI-powered legal information tools for entities, leases, tradenames, and corporate policy.</p>
+      <a class="venture-link" href="https://www.briefconsiliar.com" target="_blank" rel="noopener">Visit BriefConsiliar →</a>
+    </div>
+    <div class="venture-card">
+      <span class="venture-icon">🏛️</span>
+      <span class="tag">Civic Education</span>
+      <h3>Voices Across History™</h3>
+      <p>Cinematic AI conversations with history's most important figures — Founders, Philosophers, and Inventors.</p>
+      <a class="venture-link" href="/store">Explore in Store →</a>
+    </div>
+    <div class="venture-card">
+      <span class="venture-icon">🏎️</span>
+      <span class="tag">Enthusiast Community</span>
+      <h3>VictoryRevConnect</h3>
+      <p>A multi-vertical enthusiast platform with dedicated communities for autos, motorcycles, boats, EVs, golf carts, and more.</p>
+      <a class="venture-link" href="https://www.victoryrevconnect.com" target="_blank" rel="noopener">Visit VictoryRevConnect →</a>
+    </div>
+    <div class="venture-card">
+      <span class="venture-icon">🤖</span>
+      <span class="tag">Professional Development</span>
+      <h3>AI for Everyone in 30 Days</h3>
+      <p>A guided, self-paced course taking professionals from AI-curious to AI-confident in 30 days.</p>
+      <a class="venture-link" href="/store">Explore in Store →</a>
+    </div>
+    <div class="venture-card">
+      <span class="venture-icon">🎓</span>
+      <span class="tag">Institute</span>
+      <h3>IntexiaU Institute &amp; Innovations</h3>
+      <p>Professional, personal, and corporate development built on the Economic Authorship framework.</p>
+      <a class="venture-link" href="/institute">Visit the Institute →</a>
+    </div>
+    <div class="venture-card">
+      <span class="venture-icon">🚀</span>
+      <span class="tag">Coming Next</span>
+      <h3>What's Next</h3>
+      <p>The next venture is already in motion. Follow The Brvenik Brief for announcements as new platforms launch.</p>
+      <a class="venture-link" href="https://www.brvenikbrief.com" target="_blank" rel="noopener">Follow the Brief →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" aria-label="Get Started with Ventures">
+  <div class="eyebrow">Partner With Us</div>
+  <h2>Have an Idea? Let's Build It.</h2>
+  <p>IntexiaU Ventures partners with founders, professionals, and organizations ready to turn an idea into a real AI-native platform.</p>
+  <div class="routing">
+    <a href="/" class="route-btn solid">Contact IntexiaU Corp</a>
+    <a href="/store" class="route-btn">View the Portfolio</a>
+  </div>
+</section>
+
+<footer>
+  IntexiaU Ventures · A Division of IntexiaU Corp · intexiau.com/ventures
+  <br>
+  <a href="#engine">How We Build</a>
+  <a href="#portfolio">Portfolio</a>
+  <a href="/store">Store</a>
+  <a href="/">Main Site</a>
+  <br><br>
+  © 2025 IntexiaU Corp · All rights reserved
+</footer>
+
+</body>
+</html>
