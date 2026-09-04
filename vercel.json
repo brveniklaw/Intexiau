@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/institute",
+      "destination": "https://institute.intexiau.com",
+      "permanent": true
+    },
+    {
+      "source": "/institute/(.*)",
+      "destination": "https://institute.intexiau.com/$1",
+      "permanent": true
+    }
+  ]
+}
