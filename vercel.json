@@ -6,6 +6,11 @@
       "permanent": true
     },
     {
+      "source": "/institute/",
+      "destination": "https://institute.intexiau.com",
+      "permanent": true
+    },
+    {
       "source": "/institute/:path*",
       "destination": "https://institute.intexiau.com/:path*",
       "permanent": true
