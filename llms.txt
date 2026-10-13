@@ -1,0 +1,27 @@
+# IntexiaU Corp
+
+> IntexiaU Corp (Florida, USA) builds AI-native platforms, programs, and media that help people become the authors of their economic lives. Its founding principle, Economic Authorship, holds that every person has the right to be an active author of their economic life, not a passive spectator, in education, in work, or in life. Founder and CEO: Andrea Brvenik.
+
+The company runs three engines: education (the IntexiaU Institute), platforms (IntexiaU Ventures), and media (The Brvenik Brief). The name comes from the Latin "intexere", to weave together.
+
+## Education
+
+- [IntexiaU Institute and Innovation Center](https://institute.intexiau.com): hands-on AI training programs with verifiable certificates and digital badges, plus physical Innovation Centers. A professional development platform, not a university or degree-granting institution, and not regionally accredited.
+- [AI Training Academy](https://academy.intexiau.com): self-paced programs including AI for Everyone, Board-Ready AI, Foundation Board AI, Founder AI, Workforce AI, Student AI, and Prompt Architecture.
+
+## Platforms
+
+- [BriefConsiliar](https://www.briefconsiliar.com): AI-powered legal information tools for businesses, landlords, and professionals (GC Consiliar, Landlord Consiliar; more verticals in development). Legal information, not legal advice.
+- [Voices Across History](https://voicesacrosshistory.intexiau.com): AI conversations with founders, philosophers, and inventors, grounded in primary sources. One subscription, $9.99 per month, with a 7-day free trial.
+- [VictoryRevConnect](https://www.victoryrevconnect.com): a multi-vertical enthusiast community for automotive, boating, golf carts, and more.
+- Coming soon: Victoria's Compass (AI life coaching), Agentic Workforce Intelligence, and a Health and Wellness platform.
+
+## Media
+
+- [The Brvenik Brief](https://www.brvenikbrief.com): AI-native editorial media; AI agents draft and human editors approve. Covers AI, robotics, economic authorship, and liberty.
+
+## Contact
+
+- Investors and partners: investors@intexiau.com
+- [Ventures](https://www.intexiau.com/ventures/)
+- [Store](https://www.intexiau.com/store/)
