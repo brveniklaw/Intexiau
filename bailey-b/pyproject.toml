@@ -1,0 +1,54 @@
+[project]
+name = "bailey-b"
+version = "0.1.0"
+description = "Bailey B retrieval module: Florida/federal legal corpus retrieval for Bay Area Legal Services."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.7",
+    "pydantic-settings>=2.3",
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+# Step 1: corpus download + chunking (Online Sunshine zip, CourtListener, FL court sites).
+corpus = [
+    "beautifulsoup4>=4.12",
+    "lxml>=5.2",
+    "tenacity>=8.3",
+]
+# Steps 2-3: bge-m3 dense+sparse embeddings and cross-encoder reranking.
+embed = [
+    "FlagEmbedding>=1.2.10",
+    "sentence-transformers>=3.0",
+]
+# Step 2: vector store backends. The doc leaves pgvector vs. Qdrant open; install one.
+qdrant = ["qdrant-client>=1.10"]
+pgvector = [
+    "psycopg[binary]>=3.2",
+    "pgvector>=0.3",
+]
+dev = [
+    "pytest>=8.2",
+    "ruff>=0.5",
+]
+
+[project.scripts]
+bailey-b = "bailey_b.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/bailey_b"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
