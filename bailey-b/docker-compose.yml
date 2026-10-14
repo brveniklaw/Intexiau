@@ -1,5 +1,6 @@
-# Local vector store. Start one: `docker compose --profile qdrant up -d`
-# or `docker compose --profile pgvector up -d`.
+# Local stand-in for Supabase: `docker compose --profile pgvector up -d`.
+# Production uses the BALS-owned Supabase project (paid plan, no auto-pause).
+# The qdrant profile is kept only as an alternative backend.
 services:
   qdrant:
     profiles: ["qdrant"]

@@ -37,7 +37,7 @@ bailey-b/
 ├── evals/                   eval question files (JSONL)
 ├── data/                    downloaded corpus + chunks (gitignored)
 ├── tests/
-└── docker-compose.yml       local Qdrant or pgvector
+└── docker-compose.yml       local Postgres + pgvector (stand-in for Supabase)
 ```
 
 ## Setup
@@ -46,11 +46,21 @@ bailey-b/
 cd bailey-b
 uv venv && uv pip install -e ".[dev]"       # core + tests
 uv pip install -e ".[corpus]"               # step 1
-uv pip install -e ".[embed,qdrant]"         # steps 2-3 (or .[embed,pgvector])
+uv pip install -e ".[embed,pgvector]"       # steps 2-3
 cp .env.example .env                        # add CourtListener / LegiScan keys
-docker compose --profile qdrant up -d       # or --profile pgvector
+docker compose --profile pgvector up -d     # local stand-in for Supabase
 pytest
 ```
+
+## Hosting
+
+- **Database:** Supabase (Postgres + pgvector), on a BALS-owned paid plan. Paid
+  projects don't auto-pause; the free tier pauses after inactivity, so it is
+  not used for anything beyond throwaway testing.
+- **Models + scheduled refreshes:** a small always-on cloud VM (Supabase does
+  not run bge-m3 or the reranker).
+- **Client material** (intake questions, uploaded drafts, private evals) lives
+  only in BALS-owned systems, never in this repo or a personal account.
 
 ## Citation IDs
 

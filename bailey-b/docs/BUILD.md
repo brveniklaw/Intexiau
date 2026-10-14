@@ -17,6 +17,7 @@
 - Chunk by statute section (natural unit, citation-preserving). For case law, chunk by opinion with headnotes/syllabus where available.
 - Embed with bge-m3: dense + sparse vectors in one pass, giving hybrid search for free.
 - Store in pgvector or Qdrant. Both are open source and cheap to run on a single server.
+  - **Decided:** pgvector on Supabase (BALS-owned, paid plan). Qdrant remains a supported local alternative.
 
 ## 3. Query Path
 

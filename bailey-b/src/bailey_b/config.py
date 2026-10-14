@@ -65,7 +65,8 @@ class EmbedSettings(BaseModel):
 
 
 class VectorStoreSettings(BaseModel):
-    backend: VectorBackend = VectorBackend.QDRANT
+    # Production is Supabase (managed Postgres + pgvector); Qdrant kept as a local alternative.
+    backend: VectorBackend = VectorBackend.PGVECTOR
     collection: str = "bailey_b"
     qdrant_url: str = "http://localhost:6333"
     postgres_dsn: SecretStr = SecretStr("postgresql://bailey:bailey@localhost:5432/bailey_b")
