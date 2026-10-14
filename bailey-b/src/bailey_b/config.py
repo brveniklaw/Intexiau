@@ -1,7 +1,7 @@
 """Runtime configuration.
 
 Every setting is read from the environment (prefix ``BAILEY_``) or from a
-``.env`` file in the working directory. See ``.env.example`` for the full list.
+``bailey-b/.env`` file. See ``.env.example`` for the full list.
 Nested settings use a double underscore, e.g. ``BAILEY_SEARCH__TOP_K=20``.
 """
 
@@ -11,8 +11,12 @@ from enum import StrEnum
 from functools import lru_cache
 from pathlib import Path
 
-from pydantic import BaseModel, Field, SecretStr
+from pydantic import BaseModel, Field, SecretStr, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# The bailey-b/ directory. Relative paths in settings resolve against it, not the
+# current working directory, so data never lands in the public website tree.
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 
 class VectorBackend(StrEnum):
@@ -21,7 +25,7 @@ class VectorBackend(StrEnum):
 
 
 class CorpusSettings(BaseModel):
-    data_dir: Path = Path("data")
+    data_dir: Path = Field(default=Path("data"), validate_default=True)
     # Florida Statutes edition year to pull from Online Sunshine (flsenate.gov).
     statutes_year: int = 2026
     # Chapters in BALS practice areas; statutes ingestion is limited to these first.
@@ -41,6 +45,11 @@ class CorpusSettings(BaseModel):
         ]
     )
     # fmt: on
+
+    @field_validator("data_dir")
+    @classmethod
+    def _anchor_data_dir(cls, v: Path) -> Path:
+        return v if v.is_absolute() else PROJECT_ROOT / v
 
 
 class CourtListenerSettings(BaseModel):
@@ -83,7 +92,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_prefix="BAILEY_",
         env_nested_delimiter="__",
-        env_file=".env",
+        env_file=PROJECT_ROOT / ".env",
         extra="ignore",
     )
 
