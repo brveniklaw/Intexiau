@@ -17,6 +17,25 @@ def _config(_: argparse.Namespace) -> int:
     return 0
 
 
+def _corpus_statutes(args: argparse.Namespace) -> int:
+    from bailey_b.corpus import statutes
+
+    settings = get_settings().corpus
+    if not args.skip_download:
+        manifest = statutes.download(settings, force=args.force)
+        mb = sum(v["bytes"] for v in manifest.values()) / 1e6
+        print(f"raw: {len(manifest)} chapters, {mb:.1f} MB in {statutes.raw_dir(settings)}")
+    chunks = list(statutes.iter_chunks(settings, max_words=args.max_words))
+    path = statutes.chunks_path(settings)
+    statutes.write_chunks(chunks, path)
+    by_chapter = Counter(c.metadata["chapter"] for c in chunks)
+    sections = len({c.citation_id for c in chunks})
+    print(f"chunks: {len(chunks)} from {sections} sections -> {path}")
+    for chapter in settings.statute_chapters:
+        print(f"  ch. {chapter}: {by_chapter[chapter]}")
+    return 0
+
+
 def _eval_validate(args: argparse.Namespace) -> int:
     try:
         questions = load_eval_set(args.path)
@@ -47,6 +66,15 @@ def main(argv: list[str] | None = None) -> int:
     sub = parser.add_subparsers(dest="command", required=True)
 
     sub.add_parser("config", help="print resolved settings").set_defaults(func=_config)
+
+    corpus = sub.add_parser("corpus", help="download and chunk sources").add_subparsers(
+        dest="corpus_command", required=True
+    )
+    st = corpus.add_parser("statutes", help="Florida Statutes: download chapters, write chunks")
+    st.add_argument("--force", action="store_true", help="re-download even if present")
+    st.add_argument("--skip-download", action="store_true", help="chunk existing raw files only")
+    st.add_argument("--max-words", type=int, default=1200, help="split sections longer than this")
+    st.set_defaults(func=_corpus_statutes)
 
     ev = sub.add_parser("eval", help="retrieval eval set").add_subparsers(
         dest="eval_command", required=True

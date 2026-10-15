@@ -10,7 +10,7 @@ verification pass, many consumers. The full spec is in [docs/BUILD.md](docs/BUIL
 |---|---|---|
 | 0. Scaffold: layout, deps, config | — | done |
 | Eval harness (runs alongside step 1) | `bailey_b.evals` | harness done; **questions needed** |
-| 1. Corpus download + chunking (statutes first) | `bailey_b.corpus` | not started |
+| 1. Corpus download + chunking (statutes first) | `bailey_b.corpus` | **statutes done** (1,273 sections → 1,479 chunks); case law next |
 | 2. Embedding + vector store | `bailey_b.index` | not started |
 | 3. Hybrid search + reranking | `bailey_b.search` | interface only (`retrieve`) |
 | 4. Citation verification | `bailey_b.verify` | not started |
@@ -61,6 +61,24 @@ pytest
   not run bge-m3 or the reranker).
 - **Client material** (intake questions, uploaded drafts, private evals) lives
   only in BALS-owned systems, never in this repo or a personal account.
+
+## Corpus: Florida Statutes
+
+```bash
+bailey-b corpus statutes            # download the 16 BALS chapters, then chunk
+bailey-b corpus statutes --force    # re-download (annual refresh)
+```
+
+- **Source:** `flsenate.gov/Laws/Statutes/<year>/Chapter<N>/All`, one page per
+  chapter, about 7 MB total. Each raw file is recorded in `manifest.json` with its
+  URL, retrieval time and SHA-256.
+- **Output:** `data/chunks/fl-statutes-<year>.jsonl`, one JSON `Chunk` per line.
+- **One section = one chunk.** About 7% of sections run over 1,200 words; those
+  are split at subsection boundaries into pieces that share the section's
+  citation ID. `metadata.subsections` records the span, e.g. `(9)(a)7.`.
+- **Chunk text** = citation and catchline, chapter and part, the section body, and
+  any notes. Notes stay in the text because they can change what a section means.
+  Legislative history goes to `metadata.history`.
 
 ## Citation IDs
 

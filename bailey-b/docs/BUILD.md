@@ -4,7 +4,8 @@
 
 ## 1. Corpus Sources (all free, all API-accessible or downloadable)
 
-- **Florida Statutes:** Online Sunshine (flsenate.gov). Current-year searchable zip, chunked by section (each section is a natural unit with its own citation). Refresh annually when the new edition drops. Use the LegiScan free tier (10,000 queries/month) to catch interim amendments between editions.
+- **Florida Statutes:** Online Sunshine (flsenate.gov).
+  - *Implemented as:* per-chapter pages at `flsenate.gov/Laws/Statutes/<year>/Chapter<N>/All`. The Online Sunshine zip host (leg.state.fl.us) did not resolve from the build environment; the Senate pages carry the same official text with per-section markup. Current-year searchable zip, chunked by section (each section is a natural unit with its own citation). Refresh annually when the new edition drops. Use the LegiScan free tier (10,000 queries/month) to catch interim amendments between editions.
 - **Federal case law:** CourtListener API via Free Law Project LSO Group Membership (300 calls/day, unlimited docket/opinion alerts, MCP integration). Query on demand at question time; cache results in the vector store to preserve the rate limit.
 - **Florida state case law:** CourtListener is federal-heavy, so supplement with Second DCA opinions (2dca.flcourts.gov) and Florida Supreme Court opinions (supremecourt.flcourts.gov). Also Google Scholar's Florida case law filter and the Caselaw Access Project (all published US decisions through June 2018) for depth.
 
