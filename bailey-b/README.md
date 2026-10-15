@@ -12,7 +12,7 @@ verification pass, many consumers. The full spec is in [docs/BUILD.md](docs/BUIL
 | Eval harness (runs alongside step 1) | `bailey_b.evals` | harness done; **questions needed** |
 | 1. Corpus download + chunking (statutes first) | `bailey_b.corpus` | **statutes done** (1,273 sections → 1,479 chunks); case law next |
 | 2. Embedding + vector store | `bailey_b.index` | **done**: all 1,479 statute chunks embedded (24 MB in Postgres) |
-| 3. Hybrid search + reranking | `bailey_b.search` | interface only (`retrieve`) |
+| 3. Hybrid search + reranking | `bailey_b.search` | **done**; smoke recall@5 0.82 (18/22); probate terms-of-art gap open |
 | 4. Citation verification | `bailey_b.verify` | not started |
 | 5. Attorney interface (intake triage) | — | not started |
 | 6. Draft analysis | — | not started |
@@ -104,6 +104,44 @@ bailey-b index statutes --limit 50  # quick trial
 - **Incremental:** only chunks whose text or model changed are re-embedded;
   removed sections are deleted. Indexing refuses to delete more than 20% of a
   corpus (a sign of a broken download) unless `--allow-deletes` is passed.
+
+## Search: hybrid + rerank
+
+```bash
+bailey-b search "Tenant got a 3-day notice on a Friday..."   # top 5 with scores
+bailey-b eval compare evals/smoke.jsonl                      # 4 configurations side by side
+```
+
+Meaning search (40) + keyword search (40) → reciprocal rank fusion → one result
+per section → top 20 → bge-reranker-v2-m3 → best 5. Scores shown to attorneys are
+the reranker's 0–1 relevance.
+
+**Smoke results (Oct 15, 2026).** 22 plain-language questions in `evals/smoke.jsonl`,
+one expected section each, written by Claude and marked UNREVIEWED. They compare
+configurations; they do not replace the attorney-reviewed eval set.
+
+| Configuration | Found in top 5 | Recall@5 | MRR |
+|---|---|---|---|
+| Meaning only | 16/22 | 0.73 | 0.56 |
+| Keywords only | 12/22 | 0.55 | 0.36 |
+| Hybrid (RRF) | 16/22 | 0.73 | 0.54 |
+| Hybrid + rerank | **18/22** | **0.82** | 0.55 |
+
+- Reranking fixed the defective-notice question (§ 83.60, now #1) and the
+  collector-remedies question (§ 559.77, missing from every other configuration).
+- **All 4 misses are probate/guardianship, and all are vocabulary gaps**: everyday
+  words vs. terms of art ("widow … without a will" vs. "surviving spouse …
+  intestate"; "wife claim a share" vs. "elective share"; "manage his affairs" vs.
+  "incapacity"; "simpler than probate" vs. "summary administration"). Three of the
+  four were among the 20 candidates but the general-purpose reranker scored them
+  near zero; § 735.201 never reached the candidates.
+- **Next fix, to be measured on the attorney eval set (not tuned to these 22):** an
+  attorney-maintained glossary that expands plain words to Florida terms of art
+  before searching, and blending the fusion rank into the final order so the
+  reranker cannot bury a strong candidate. The attorney feedback loop (roadmap
+  10.3) is the long-term fix for the reranker itself.
+- **Speed:** search without reranking is under 1 s; the reranker takes ~55 s per
+  question on this 4-core CPU. Production needs a GPU for it, or `rerank=false`.
 
 ## Citation IDs
 
