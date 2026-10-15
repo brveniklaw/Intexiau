@@ -83,6 +83,68 @@ def _index_statutes(args: argparse.Namespace) -> int:
     return 0
 
 
+def _search(args: argparse.Namespace) -> int:
+    from bailey_b.search import Mode, default_retriever
+
+    retriever = default_retriever()
+    results = retriever.retrieve(
+        args.question, top_n=args.n, mode=Mode(args.mode), rerank=not args.no_rerank
+    )
+    for r in results:
+        c = r.chunk
+        piece = f"  [{c.metadata['subsections']}]" if c.metadata.get("subsections") else ""
+        print(f"{r.rank}. {c.display_citation}  {c.title}{piece}")
+        dense = f"{r.dense_score:.3f}" if r.dense_score is not None else "-"
+        sparse = f"{r.sparse_score:.3f}" if r.sparse_score is not None else "-"
+        print(f"   score {r.score:.3f}  (meaning {dense}, keywords {sparse})  {c.source_url}")
+    return 0
+
+
+def _eval_compare(args: argparse.Namespace) -> int:
+    import time
+
+    from bailey_b.search import Mode, default_retriever
+
+    questions = load_eval_set(args.path)
+    retriever = default_retriever()
+    configs = [
+        ("meaning only", Mode.DENSE, False),
+        ("keywords only", Mode.SPARSE, False),
+        ("hybrid (RRF)", Mode.HYBRID, False),
+    ]
+    if not args.no_rerank:
+        configs.append(("hybrid + rerank", Mode.HYBRID, True))
+    reports = {}
+    for name, mode, rerank in configs:
+        started = time.monotonic()
+        reports[name] = run_eval(
+            questions,
+            lambda q, mode=mode, rerank=rerank: retriever.retrieve(
+                q, top_n=args.k, mode=mode, rerank=rerank
+            ),
+            k=args.k,
+        )
+        per_q = (time.monotonic() - started) / max(len(questions), 1)
+        print(f"  ran {name}: {per_q:.1f}s per question", file=sys.stderr, flush=True)
+
+    print(f"\n{len(questions)} questions, k={args.k}\n")
+    print(f"{'configuration':<18}{'recall@k':>10}{'MRR':>8}  found")
+    for name, rep in reports.items():
+        found = sum(1 for r in rep.results if not r.missed)
+        print(f"{name:<18}{rep.mean_recall_at_k:>10.2f}{rep.mrr:>8.2f}  {found}/{rep.n}")
+    best = list(reports.values())[-1]
+    misses = [r for r in best.results if r.missed]
+    if misses:
+        print(f"\nmissed by {list(reports)[-1]}:")
+        for r in misses:
+            print(f"  {r.id}: wanted {', '.join(r.missed)}; got {', '.join(r.retrieved)}")
+    if args.json:
+        args.json.write_text(
+            json.dumps({n: r.model_dump(mode="json") for n, r in reports.items()}, indent=2)
+        )
+    return 0
+
+
 def _eval_validate(args: argparse.Namespace) -> int:
     try:
         questions = load_eval_set(args.path)
@@ -133,6 +195,13 @@ def main(argv: list[str] | None = None) -> int:
     )
     ixs.set_defaults(func=_index_statutes)
 
+    se = sub.add_parser("search", help="search the corpus for one question")
+    se.add_argument("question")
+    se.add_argument("-n", type=int, default=5, help="results to show")
+    se.add_argument("--mode", choices=["hybrid", "dense", "sparse"], default="hybrid")
+    se.add_argument("--no-rerank", action="store_true", help="skip the cross-encoder")
+    se.set_defaults(func=_search)
+
     ev = sub.add_parser("eval", help="retrieval eval set").add_subparsers(
         dest="eval_command", required=True
     )
@@ -143,6 +212,12 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument("path", type=Path)
     r.add_argument("-k", type=int, default=None, help="cutoff (default: search.top_n)")
     r.set_defaults(func=_eval_run)
+    cmp = ev.add_parser("compare", help="score dense, sparse, hybrid and reranked side by side")
+    cmp.add_argument("path", type=Path)
+    cmp.add_argument("-k", type=int, default=5, help="cutoff (default 5)")
+    cmp.add_argument("--no-rerank", action="store_true", help="skip the slow reranked run")
+    cmp.add_argument("--json", type=Path, help="write full per-question results here")
+    cmp.set_defaults(func=_eval_compare)
 
     args = parser.parse_args(argv)
     return args.func(args)

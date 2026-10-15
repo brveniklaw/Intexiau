@@ -116,3 +116,22 @@ def test_vectors_round_trip(store):
     dense, sparse = store.conn.execute(f"SELECT dense, sparse FROM {store.table}").fetchone()
     assert dense.to_list() == pytest.approx(expected.dense, rel=1e-6)
     assert dict(zip(sparse.indices(), sparse.values(), strict=True)) == expected.sparse
+
+
+def test_search_dense_sparse_and_citation_ids(store):
+    emb = HashEmbedder()
+    chunks = [chunk("83.56", "termination"), chunk("83.60", "defenses"), chunk("83.62", "writ")]
+    index_chunks(chunks, corpus="fl-statutes", store=store, embedder=emb)
+    (q,) = emb.encode(["defenses"])
+
+    dense = store.search_dense(q.dense, 3)
+    assert dense[0][0].chunk_id == "fl-stat:83.60#0"
+    assert dense[0][1] == pytest.approx(1.0, abs=1e-5)  # identical vector
+    assert dense[0][0].metadata == {"chapter": "83"}
+
+    sparse = store.search_sparse(q.sparse, 3)
+    assert sparse[0][0].chunk_id == "fl-stat:83.60#0"
+    assert all(score > 0 for _, score in sparse)  # non-matching chunks are left out
+    assert store.search_sparse({}, 3) == []
+
+    assert store.citation_ids() == {"fl-stat:83.56", "fl-stat:83.60", "fl-stat:83.62"}

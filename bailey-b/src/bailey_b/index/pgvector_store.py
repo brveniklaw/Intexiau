@@ -187,3 +187,54 @@ class PgVectorStore:
     def drop(self) -> None:
         with self.conn.transaction():
             self.conn.execute(f"DROP TABLE IF EXISTS {self.table}")
+
+    # --- Search (step 3) -------------------------------------------------------
+
+    _CHUNK_COLUMNS = (
+        "chunk_id, citation_id, display_citation, title, text, source_url, "
+        "effective_date, retrieved_at, metadata"
+    )
+
+    @staticmethod
+    def _chunk(row: tuple) -> Chunk:
+        cid, cite, display, title, text, url, eff, ret, meta = row
+        return Chunk(
+            chunk_id=cid,
+            citation_id=cite,
+            display_citation=display,
+            title=title,
+            text=text,
+            source_url=url,
+            effective_date=eff,
+            retrieved_at=ret,
+            metadata=meta or {},
+        )
+
+    def search_dense(self, vector: list[float], limit: int) -> list[tuple[Chunk, float]]:
+        """Nearest chunks by meaning: ``(chunk, cosine similarity)``, best first."""
+        rows = self.conn.execute(
+            f"SELECT {self._CHUNK_COLUMNS}, 1 - (dense <=> %s::vector) FROM {self.table} "
+            "ORDER BY dense <=> %s::vector LIMIT %s",
+            (vector, vector, limit),
+        ).fetchall()
+        self.conn.commit()
+        return [(self._chunk(r[:-1]), float(r[-1])) for r in rows]
+
+    def search_sparse(self, weights: dict[int, float], limit: int) -> list[tuple[Chunk, float]]:
+        """Best keyword matches: ``(chunk, inner product of token weights)``, best first."""
+        if not weights:
+            return []
+        query = SparseVector(weights, self.sparse_dim)
+        rows = self.conn.execute(
+            f"SELECT {self._CHUNK_COLUMNS}, -(sparse <#> %s) FROM {self.table} "
+            "WHERE -(sparse <#> %s) > 0 ORDER BY sparse <#> %s LIMIT %s",
+            (query, query, query, limit),
+        ).fetchall()
+        self.conn.commit()
+        return [(self._chunk(r[:-1]), float(r[-1])) for r in rows]
+
+    def citation_ids(self) -> set[str]:
+        """Every citation in the store; the closed world that verification (step 4) checks."""
+        rows = self.conn.execute(f"SELECT DISTINCT citation_id FROM {self.table}").fetchall()
+        self.conn.commit()
+        return {r[0] for r in rows}

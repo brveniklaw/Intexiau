@@ -85,7 +85,14 @@ class SearchSettings(BaseModel):
     # Query path (build doc section 3): hybrid search -> top_k candidates -> rerank -> top_n.
     top_k: int = 20
     top_n: int = 5
+    # Chunks fetched from each of dense and sparse search before fusion.
+    pool: int = 40
+    # Reciprocal rank fusion constant (the standard 60): higher flattens rank differences.
+    rrf_k: int = 60
     reranker_model: str = "BAAI/bge-reranker-v2-m3"
+    # Tokens of question + section the reranker reads. Longer sections are truncated.
+    rerank_max_tokens: int = 1024
+    rerank: bool = True
 
 
 class Settings(BaseSettings):
