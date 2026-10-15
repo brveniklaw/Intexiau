@@ -178,6 +178,23 @@ weighted to family law (10) and eviction (8), plus probate/guardianship (6),
 consumer (4) and foreclosure (2). Each has expected sections and a short answer
 citing the statute, and `reviewed_by: "PENDING"`. A BALS attorney should confirm or
 fix each one and put their initials in `reviewed_by`; add, remove or rewrite freely.
+**First scores (Oct 15, 2026), right section in the top 5:**
+
+| Configuration | Smoke set (22) | Draft eval set (30) |
+|---|---|---|
+| Meaning only | 16 | **26** |
+| Keywords only | 12 | 14 |
+| Hybrid (RRF) | 16 | 18 |
+| Hybrid + rerank | **18** | 24 |
+
+Diagnosis: the 20-candidate shortlist almost always contains the right section
+(21/22 and 29/30), so fusion is not losing answers. The general-purpose reranker
+is: it demotes correct sections that meaning search ranked well. Candidate fixes, to
+be chosen on attorney-reviewed questions: blend the reranker score with the fusion
+rank instead of replacing it; a legal-domain reranker; the attorney feedback loop.
+Both question sets were written by Claude from the statute text, which may favor
+meaning search; attorney-written questions are the real test.
+
 Known gap: domestic violence injunctions (ch. 741) and eviction service (ch. 48) are
 not in the indexed chapters, so questions on them cannot be answered from the corpus.
 
