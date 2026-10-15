@@ -11,7 +11,7 @@ verification pass, many consumers. The full spec is in [docs/BUILD.md](docs/BUIL
 | 0. Scaffold: layout, deps, config | — | done |
 | Eval harness (runs alongside step 1) | `bailey_b.evals` | harness done; **questions needed** |
 | 1. Corpus download + chunking (statutes first) | `bailey_b.corpus` | **statutes done** (1,273 sections → 1,479 chunks); case law next |
-| 2. Embedding + vector store | `bailey_b.index` | indexing + pgvector store done; **full bge-m3 run pending** |
+| 2. Embedding + vector store | `bailey_b.index` | **done**: all 1,479 statute chunks embedded (24 MB in Postgres) |
 | 3. Hybrid search + reranking | `bailey_b.search` | interface only (`retrieve`) |
 | 4. Citation verification | `bailey_b.verify` | not started |
 | 5. Attorney interface (intake triage) | — | not started |
@@ -95,6 +95,12 @@ bailey-b index statutes --limit 50  # quick trial
   token-weight vector (hybrid search in step 3).
 - **Table:** `bailey_b_chunks`: chunk fields + `dense vector(1024)` (HNSW,
   cosine) + `sparse sparsevec(250002)` (exact inner product).
+- **First full run:** about 2.5 hours on 4 CPU cores, no GPU (~0.15 chunks/s). A GPU
+  cuts this to minutes; after that, refreshes only touch changed sections.
+- **Notes for step 3** from spot checks: dedupe pieces of the same section in
+  results (one § 61.13 question returned three pieces of it), and check that
+  remedy sections surface (a "what can she sue for" question found § 559.72 but
+  not § 559.77).
 - **Incremental:** only chunks whose text or model changed are re-embedded;
   removed sections are deleted. Indexing refuses to delete more than 20% of a
   corpus (a sign of a broken download) unless `--allow-deletes` is passed.
