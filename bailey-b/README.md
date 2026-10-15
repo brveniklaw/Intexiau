@@ -9,11 +9,11 @@ verification pass, many consumers. The full spec is in [docs/BUILD.md](docs/BUIL
 | Build step | Package | Status |
 |---|---|---|
 | 0. Scaffold: layout, deps, config | — | done |
-| Eval harness (runs alongside step 1) | `bailey_b.evals` | harness done; **questions needed** |
+| Eval harness (runs alongside step 1) | `bailey_b.evals` | harness done; **30 draft questions awaiting attorney review** |
 | 1. Corpus download + chunking (statutes first) | `bailey_b.corpus` | **statutes done** (1,273 sections → 1,479 chunks); case law next |
 | 2. Embedding + vector store | `bailey_b.index` | **done**: all 1,479 statute chunks embedded (24 MB in Postgres) |
 | 3. Hybrid search + reranking | `bailey_b.search` | **done**; smoke recall@5 0.82 (18/22); probate terms-of-art gap open |
-| 4. Citation verification | `bailey_b.verify` | not started |
+| 4. Citation verification | `bailey_b.verify` | **done**: 0 wrong calls on 3,031 real statute cross-references |
 | 5. Attorney interface (intake triage) | — | not started |
 | 6. Draft analysis | — | not started |
 | 7. Roadmap (deadline tracking first) | — | not started |
@@ -142,6 +142,44 @@ configurations; they do not replace the attorney-reviewed eval set.
   10.3) is the long-term fix for the reranker itself.
 - **Speed:** search without reranking is under 1 s; the reranker takes ~55 s per
   question on this 4-core CPU. Production needs a GPU for it, or `rerank=false`.
+
+## Verify: citation checking
+
+```bash
+bailey-b verify "Under § 83.60(2) ... see also § 83.66."      # exit code 1 if anything is flagged
+bailey-b verify --file draft.txt --sources 83.60,83.56          # also flag cites not in the sources
+```
+
+Every citation in model-written text gets one of five results:
+
+| Result | Meaning | Blocks the text? |
+|---|---|---|
+| verified | Section (and subsection, if cited) exists in the corpus | no |
+| subsection_missing | Section exists, cited subsection does not | **yes** |
+| not_found | Section is in an indexed chapter but does not exist (confabulation) | **yes** |
+| outside_corpus | Florida statute in a chapter not indexed yet; not checked | no, shown as unchecked |
+| unverifiable | Case law, court rules, federal statutes; not in the corpus yet | no, shown as unchecked |
+
+When the retrieved sources are given, a real citation the model was *not* given is
+also flagged: the model should cite only what retrieval handed it.
+
+**Validated on real data:** run over every cross-reference inside the 2026 statutes
+themselves (3,031 citations), it verified 1,684, reported 1,108 as outside the
+indexed chapters, and flagged 239, every one a "Former s. …" note pointing at a
+renumbered or repealed section. No live cross-reference was wrongly flagged.
+
+It catches invented and mistyped citations. It does **not** catch a real section
+cited for something it does not say; that stays with the attorney.
+
+## Eval set (draft)
+
+`evals/questions.jsonl`: 30 questions written by Claude from the 2026 statute text,
+weighted to family law (10) and eviction (8), plus probate/guardianship (6),
+consumer (4) and foreclosure (2). Each has expected sections and a short answer
+citing the statute, and `reviewed_by: "PENDING"`. A BALS attorney should confirm or
+fix each one and put their initials in `reviewed_by`; add, remove or rewrite freely.
+Known gap: domestic violence injunctions (ch. 741) and eviction service (ch. 48) are
+not in the indexed chapters, so questions on them cannot be answered from the corpus.
 
 ## Citation IDs
 

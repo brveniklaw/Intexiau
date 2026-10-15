@@ -145,6 +145,35 @@ def _eval_compare(args: argparse.Namespace) -> int:
     return 0
 
 
+def _verify(args: argparse.Namespace) -> int:
+    from bailey_b.corpus import statutes
+    from bailey_b.verify import CorpusIndex, Status, verify
+
+    settings = get_settings().corpus
+    text = args.file.read_text(encoding="utf-8") if args.file else args.text
+    if not text:
+        print("give the text to check, or --file", file=sys.stderr)
+        return 2
+    corpus = CorpusIndex.from_chunks(
+        statutes.read_chunks(statutes.chunks_path(settings)), year=settings.statutes_year
+    )
+    sources = [f"fl-stat:{s}" for s in args.sources.split(",")] if args.sources else None
+    report = verify(text, corpus, sources=sources)
+    marks = {
+        Status.VERIFIED: "OK  ",
+        Status.SUBSECTION_MISSING: "FLAG",
+        Status.NOT_FOUND: "FLAG",
+        Status.OUTSIDE_CORPUS: "??  ",
+        Status.UNVERIFIABLE: "??  ",
+    }
+    for c in report.checks:
+        mark = "FLAG" if c.in_sources is False else marks[c.status]
+        print(f"{mark}  {c.raw:<28} {c.message}")
+    n = len(report.flagged)
+    print(f"\n{len(report.checks)} citations; {n} flagged" + ("" if n else "; nothing flagged"))
+    return 1 if n else 0
+
+
 def _eval_validate(args: argparse.Namespace) -> int:
     try:
         questions = load_eval_set(args.path)
@@ -201,6 +230,12 @@ def main(argv: list[str] | None = None) -> int:
     se.add_argument("--mode", choices=["hybrid", "dense", "sparse"], default="hybrid")
     se.add_argument("--no-rerank", action="store_true", help="skip the cross-encoder")
     se.set_defaults(func=_search)
+
+    vf = sub.add_parser("verify", help="check every citation in a piece of text")
+    vf.add_argument("text", nargs="?", default="")
+    vf.add_argument("--file", type=Path, help="read the text from a file")
+    vf.add_argument("--sources", help="comma-separated sections the answer was based on")
+    vf.set_defaults(func=_verify)
 
     ev = sub.add_parser("eval", help="retrieval eval set").add_subparsers(
         dest="eval_command", required=True
