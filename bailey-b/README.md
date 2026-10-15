@@ -11,7 +11,7 @@ verification pass, many consumers. The full spec is in [docs/BUILD.md](docs/BUIL
 | 0. Scaffold: layout, deps, config | — | done |
 | Eval harness (runs alongside step 1) | `bailey_b.evals` | harness done; **questions needed** |
 | 1. Corpus download + chunking (statutes first) | `bailey_b.corpus` | **statutes done** (1,273 sections → 1,479 chunks); case law next |
-| 2. Embedding + vector store | `bailey_b.index` | not started |
+| 2. Embedding + vector store | `bailey_b.index` | indexing + pgvector store done; **full bge-m3 run pending** |
 | 3. Hybrid search + reranking | `bailey_b.search` | interface only (`retrieve`) |
 | 4. Citation verification | `bailey_b.verify` | not started |
 | 5. Attorney interface (intake triage) | — | not started |
@@ -49,8 +49,12 @@ uv pip install -e ".[corpus]"               # step 1
 uv pip install -e ".[embed,pgvector]"       # steps 2-3
 cp .env.example .env                        # add CourtListener / LegiScan keys
 docker compose --profile pgvector up -d     # local stand-in for Supabase
-pytest
+pytest                                      # DB tests need BAILEY_TEST_POSTGRES_DSN
 ```
+
+The database tests create and drop their own table. Point them at a dev database:
+`BAILEY_TEST_POSTGRES_DSN=postgresql://bailey:bailey@localhost:5432/bailey_b pytest`.
+pgvector must be 0.7 or newer (sparse vectors); Ubuntu's packaged 0.6 is too old.
 
 ## Hosting
 
@@ -79,6 +83,21 @@ bailey-b corpus statutes --force    # re-download (annual refresh)
 - **Chunk text** = citation and catchline, chapter and part, the section body, and
   any notes. Notes stay in the text because they can change what a section means.
   Legislative history goes to `metadata.history`.
+
+## Index: embeddings + pgvector
+
+```bash
+bailey-b index statutes             # embed new/changed chunks into Postgres
+bailey-b index statutes --limit 50  # quick trial
+```
+
+- **Model:** bge-m3, one pass giving a 1,024-dim dense vector and a sparse
+  token-weight vector (hybrid search in step 3).
+- **Table:** `bailey_b_chunks`: chunk fields + `dense vector(1024)` (HNSW,
+  cosine) + `sparse sparsevec(250002)` (exact inner product).
+- **Incremental:** only chunks whose text or model changed are re-embedded;
+  removed sections are deleted. Indexing refuses to delete more than 20% of a
+  corpus (a sign of a broken download) unless `--allow-deletes` is passed.
 
 ## Citation IDs
 
