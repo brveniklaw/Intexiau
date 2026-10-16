@@ -165,7 +165,7 @@ def _eval_blend(args: argparse.Namespace) -> int:
             want = set(q.expected_citations)
             retriever.settings = base
             top = [c.chunk.citation_id for c in retriever.candidates(q.question, Mode.DENSE)]
-            dense_only[set_name] = dense_only.get(set_name, 0) + want <= set(top[: args.k])
+            dense_only[set_name] = dense_only.get(set_name, 0) + (want <= set(top[: args.k]))
             for sw in sparse_weights:
                 retriever.settings = base.model_copy(update={"sparse_weight": sw})
                 cands = retriever.candidates(q.question)
