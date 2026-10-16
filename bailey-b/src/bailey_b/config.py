@@ -108,6 +108,22 @@ class SearchSettings(BaseModel):
     rerank_weight: float = 0.75
 
 
+class AnswerSettings(BaseModel):
+    # Off by default: turning it on sends the question and the retrieved statute
+    # text to the Claude API. Enable only under a BALS agreement with Anthropic
+    # that covers client information (BAILEY_ANSWER__ENABLED=true).
+    enabled: bool = False
+    model: str = "claude-opus-5-5"
+    effort: str = "high"
+    max_tokens: int = 4000
+
+
+class WebSettings(BaseModel):
+    # Localhost only until the app sits behind BALS single sign-on.
+    host: str = "127.0.0.1"
+    port: int = 8000
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_prefix="BAILEY_",
@@ -122,6 +138,8 @@ class Settings(BaseSettings):
     embed: EmbedSettings = EmbedSettings()
     vector_store: VectorStoreSettings = VectorStoreSettings()
     search: SearchSettings = SearchSettings()
+    answer: AnswerSettings = AnswerSettings()
+    web: WebSettings = WebSettings()
 
 
 @lru_cache

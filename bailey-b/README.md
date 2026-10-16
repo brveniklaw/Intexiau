@@ -14,7 +14,7 @@ verification pass, many consumers. The full spec is in [docs/BUILD.md](docs/BUIL
 | 2. Embedding + vector store | `bailey_b.index` | **done**: all 1,600 statute chunks embedded |
 | 3. Hybrid search + reranking | `bailey_b.search` | **done**, tuned Oct 16: 48/55 test questions in top 5 (was 45) |
 | 4. Citation verification | `bailey_b.verify` | **done**: 0 wrong calls on 3,031 real statute cross-references |
-| 5. Attorney interface (intake triage) | — | not started |
+| 5. Attorney interface (intake triage) | `bailey_b.web` | **done**: local web app; draft answers built, off until BALS has a Claude API agreement |
 | 6. Draft analysis | — | not started |
 | 7. Roadmap (deadline tracking first) | — | not started |
 
@@ -220,6 +220,42 @@ meaning search; attorney-written questions are the real test.
 
 Chapters 741, 48 and 95 were added on Oct 16 after these questions exposed the gap;
 bals-031 to bals-033 cover them.
+
+## Attorney interface: intake triage
+
+```bash
+uv pip install -e ".[web]"          # plus ".[llm]" for draft answers
+bailey-b serve                      # http://127.0.0.1:8000, localhost only
+```
+
+![Intake triage](docs/screenshots/intake-triage.png)
+
+- **Question in, top 5 sections out**, each with its reranker score, the passage that
+  best matches the question (not just the start of the section), its chapter and
+  part, a link to the official text, and Useful / Not relevant buttons.
+- **Feedback** (roadmap 10.3) is stored in `bailey_b_feedback` with the question,
+  section, rank and score. It contains client facts, so it stays in the BALS database.
+- **Draft answers (optional, off by default).** With `BAILEY_ANSWER__ENABLED=true`
+  and Claude API credentials, Claude Opus 5.5 drafts numbered points from the 5
+  retrieved sections only, citing a section for each. Every citation in the draft
+  then goes through `verify` with those 5 as the allowed sources; anything
+  invented, mistyped or not among the sources is flagged on screen. Policy declines
+  are retried server-side on Anthropic's default fallback model
+  (`fallbacks: "default"`). **Turning this on sends the question and the statute
+  text to Anthropic**, so enable it only under a BALS agreement covering client
+  information. It has been tested against a stand-in, not the live API; no
+  credentials were available in the build environment.
+- **Speed on the 4-core CPU dev box:** models load at startup (~90 s, `/api/health`
+  reports `ready`); each search with reranking takes ~55-60 s. "Rerank" can be
+  unticked for sub-second searches. A GPU server brings reranking under a second.
+- **No login yet.** The server binds to 127.0.0.1 and warns if started on another
+  address. It must sit behind BALS single sign-on before anyone else can reach it,
+  and it serializes requests (one database connection, one model instance), which
+  is fine for a pilot, not for an office.
+
+Seen in testing, worth an eval question each: "keep the whole deposit for normal
+wear" ranks § 83.491 (fee in lieu of deposit) above § 83.49; a temporary
+protective-order question finds § 741.30 first but with low scores (0.28).
 
 ## Citation IDs
 

@@ -248,6 +248,43 @@ def _verify(args: argparse.Namespace) -> int:
     return 1 if n else 0
 
 
+def _serve(args: argparse.Namespace) -> int:
+    import uvicorn
+
+    from bailey_b.answer import ClaudeAnswerer, DisabledAnswerer
+    from bailey_b.corpus import statutes
+    from bailey_b.feedback import FeedbackStore
+    from bailey_b.search import default_retriever
+    from bailey_b.verify import CorpusIndex
+    from bailey_b.web import create_app
+
+    settings = get_settings()
+    host = args.host or settings.web.host
+    if host not in ("127.0.0.1", "localhost", "::1"):
+        print(
+            f"warning: serving on {host} with no login. Put this behind BALS single sign-on "
+            "before anyone else can reach it.",
+            file=sys.stderr,
+        )
+    corpus = CorpusIndex.from_chunks(
+        statutes.read_chunks(statutes.chunks_path(settings.corpus)),
+        year=settings.corpus.statutes_year,
+    )
+    retriever = default_retriever()
+    answerer = ClaudeAnswerer(settings.answer) if settings.answer.enabled else DisabledAnswerer()
+    feedback = FeedbackStore(
+        settings.vector_store.postgres_dsn.get_secret_value(), settings.vector_store.collection
+    )
+    app = create_app(retriever, corpus, answerer=answerer, feedback=feedback, warm_up=True)
+    print(
+        "loading models in the background; /api/health shows ready=true when done",
+        file=sys.stderr,
+        flush=True,
+    )
+    uvicorn.run(app, host=host, port=args.port or settings.web.port, log_level="info")
+    return 0
+
+
 def _eval_validate(args: argparse.Namespace) -> int:
     try:
         questions = load_eval_set(args.path)
@@ -310,6 +347,11 @@ def main(argv: list[str] | None = None) -> int:
     vf.add_argument("--file", type=Path, help="read the text from a file")
     vf.add_argument("--sources", help="comma-separated sections the answer was based on")
     vf.set_defaults(func=_verify)
+
+    sv = sub.add_parser("serve", help="run the attorney web interface")
+    sv.add_argument("--host", default=None, help="default 127.0.0.1 (localhost only)")
+    sv.add_argument("--port", type=int, default=None, help="default 8000")
+    sv.set_defaults(func=_serve)
 
     ev = sub.add_parser("eval", help="retrieval eval set").add_subparsers(
         dest="eval_command", required=True

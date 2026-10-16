@@ -171,6 +171,9 @@ class CorpusIndex:
         texts = {cid: "\n".join(t for _, t in sorted(ps)) for cid, ps in pieces.items()}
         return cls(texts, year=year)
 
+    def __len__(self) -> int:
+        return len(self._texts)
+
     def has(self, citation_id: str) -> bool:
         return citation_id in self._texts
 

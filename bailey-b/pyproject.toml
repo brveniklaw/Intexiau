@@ -28,6 +28,13 @@ pgvector = [
     "psycopg[binary]>=3.2",
     "pgvector>=0.3",
 ]
+# Step 5: attorney web interface.
+web = [
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+]
+# Draft answers written from retrieved sources (Claude API). Optional.
+llm = ["anthropic>=1.0"]
 dev = [
     "pytest>=8.2",
     "ruff>=0.5",
