@@ -118,3 +118,25 @@ def test_reranker_sees_at_most_top_k(parts):
     reranker = FakeReranker({})
     Retriever(store, emb, reranker, SearchSettings(top_k=2)).retrieve("q")
     assert len(reranker.seen[0]) == 2
+
+
+def test_sparse_weight_scales_keyword_vote():
+    a, b = chunk("83.56"), chunk("83.60")
+    # a: dense #2 only; b: sparse #1 only.
+    dense, sparse = [(chunk("83.49"), 0.9), (a, 0.8)], [(b, 0.5)]
+    assert fuse(dense, sparse, sparse_weight=1.0)[1].chunk is b
+    assert fuse(dense, sparse, sparse_weight=0.5)[1].chunk is a
+
+
+def test_blend_protects_strong_fusion_candidates():
+    from bailey_b.search import Candidate, blend
+
+    cands = [Candidate(chunk(s)) for s in ("83.56", "83.60", "83.49")]
+    for cand, score in zip(cands, (0.10, 0.20, 0.90), strict=True):
+        cand.rerank = score
+    assert [c.chunk.citation_id for c in blend(cands, 1.0)][0] == "fl-stat:83.49"
+    # Half weight: 83.49 = .5*.9 + .5*(1/3) = .62; 83.56 = .5*.1 + .5*1 = .55; 83.60 = .43.
+    order = [c.chunk.citation_id for c in blend(cands, 0.5)]
+    assert order == ["fl-stat:83.49", "fl-stat:83.56", "fl-stat:83.60"]
+    order = [c.chunk.citation_id for c in blend(cands, 0.0)]
+    assert order == ["fl-stat:83.56", "fl-stat:83.60", "fl-stat:83.49"]

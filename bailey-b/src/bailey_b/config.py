@@ -32,8 +32,8 @@ class CorpusSettings(BaseModel):
     # fmt: off
     statute_chapters: list[str] = Field(
         default_factory=lambda: [
-            # Family
-            "39", "61", "742", "743",
+            # Family (741: domestic violence injunctions)
+            "39", "61", "741", "742", "743",
             # Eviction / landlord-tenant
             "83",
             # Consumer
@@ -42,6 +42,9 @@ class CorpusSettings(BaseModel):
             "702",
             # Probate / guardianship
             "731", "732", "733", "734", "735", "736", "744",
+            # Procedure across practice areas: service of process (48),
+            # limitations of actions (95, needed for deadline tracking)
+            "48", "95",
         ]
     )
     # fmt: on
@@ -89,10 +92,15 @@ class SearchSettings(BaseModel):
     pool: int = 40
     # Reciprocal rank fusion constant (the standard 60): higher flattens rank differences.
     rrf_k: int = 60
+    # Keyword search's vote in fusion relative to meaning search (1.0 = equal).
+    sparse_weight: float = 1.0
     reranker_model: str = "BAAI/bge-reranker-v2-m3"
     # Tokens of question + section the reranker reads. Longer sections are truncated.
     rerank_max_tokens: int = 1024
     rerank: bool = True
+    # Final order = rerank_weight * reranker score + (1 - rerank_weight) * fusion-rank
+    # score (1.0 for the top candidate down to near 0 for the last). 1.0 = reranker only.
+    rerank_weight: float = 1.0
 
 
 class Settings(BaseSettings):

@@ -145,6 +145,80 @@ def _eval_compare(args: argparse.Namespace) -> int:
     return 0
 
 
+def _eval_blend(args: argparse.Namespace) -> int:
+    """Grid over keyword weight x reranker weight, reranking each candidate only once."""
+    from bailey_b.search import Mode, blend, default_retriever
+
+    retriever = default_retriever()
+    base = retriever.settings
+    cache_path = get_settings().corpus.data_dir / "rerank-cache.json"
+    cache = json.loads(cache_path.read_text()) if cache_path.exists() else {}
+    sparse_weights = [float(x) for x in args.sparse_weights.split(",")]
+    rerank_weights = [float(x) for x in args.rerank_weights.split(",")]
+    sets = {p.stem: load_eval_set(p) for p in args.paths}
+    hits: dict[tuple[str, float, float], int] = {}
+    dense_only: dict[str, int] = {}
+
+    for set_name, questions in sets.items():
+        for qi, q in enumerate(questions, 1):
+            print(f"  {set_name} {qi}/{len(questions)}", file=sys.stderr, flush=True)
+            want = set(q.expected_citations)
+            retriever.settings = base
+            top = [c.chunk.citation_id for c in retriever.candidates(q.question, Mode.DENSE)]
+            dense_only[set_name] = dense_only.get(set_name, 0) + want <= set(top[: args.k])
+            for sw in sparse_weights:
+                retriever.settings = base.model_copy(update={"sparse_weight": sw})
+                cands = retriever.candidates(q.question)
+                scores = cache.setdefault(q.question, {})
+                todo = [c for c in cands if c.chunk.chunk_id not in scores]
+                if todo:
+                    for c, sc in zip(
+                        todo,
+                        retriever.reranker.score(q.question, [c.chunk.text for c in todo]),
+                        strict=True,
+                    ):
+                        scores[c.chunk.chunk_id] = sc
+                    cache_path.write_text(json.dumps(cache))
+                for c in cands:
+                    c.rerank = scores[c.chunk.chunk_id]
+                for rw in rerank_weights:
+                    order = [c.chunk.citation_id for c in blend(list(cands), rw)]
+                    key = (set_name, sw, rw)
+                    hits[key] = hits.get(key, 0) + (want <= set(order[: args.k]))
+    retriever.settings = base
+
+    total = sum(len(qs) for qs in sets.values())
+    names = list(sets)
+    print(
+        f"\nRight section(s) in the top {args.k}. Rows: keyword weight; columns: reranker weight."
+    )
+    print(
+        "dense only (no keywords, no reranker): "
+        + ", ".join(f"{n} {dense_only[n]}/{len(sets[n])}" for n in names)
+        + f", all {sum(dense_only.values())}/{total}"
+    )
+    header = "kw weight " + "".join(f"{'rr ' + str(rw):>12}" for rw in rerank_weights)
+    print(header)
+    for sw in sparse_weights:
+        cells = []
+        for rw in rerank_weights:
+            n = sum(hits[(name, sw, rw)] for name in names)
+            cells.append(f"{n:>9}/{total}")
+        print(f"{sw:<10}" + "".join(f"{c:>12}" for c in cells))
+    if len(names) > 1:
+        for name in names:
+            print(f"\n{name}:")
+            for sw in sparse_weights:
+                print(
+                    f"{sw:<10}"
+                    + "".join(
+                        f"{hits[(name, sw, rw)]:>9}/{len(sets[name])}" + " " * 2
+                        for rw in rerank_weights
+                    )
+                )
+    return 0
+
+
 def _verify(args: argparse.Namespace) -> int:
     from bailey_b.corpus import statutes
     from bailey_b.verify import CorpusIndex, Status, verify
@@ -253,6 +327,12 @@ def main(argv: list[str] | None = None) -> int:
     cmp.add_argument("--no-rerank", action="store_true", help="skip the slow reranked run")
     cmp.add_argument("--json", type=Path, help="write full per-question results here")
     cmp.set_defaults(func=_eval_compare)
+    bl = ev.add_parser("blend", help="grid over keyword weight and reranker weight")
+    bl.add_argument("paths", type=Path, nargs="+")
+    bl.add_argument("-k", type=int, default=5)
+    bl.add_argument("--sparse-weights", default="1.0,0.5,0.25,0.0")
+    bl.add_argument("--rerank-weights", default="1.0,0.75,0.5,0.25,0.0")
+    bl.set_defaults(func=_eval_blend)
 
     args = parser.parse_args(argv)
     return args.func(args)

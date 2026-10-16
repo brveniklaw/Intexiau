@@ -41,6 +41,8 @@ class Candidate:
     dense: float | None = None
     sparse: float | None = None
     rerank: float | None = None
+    # Blended rerank + fusion-rank score that sets the final order (see blend()).
+    final: float | None = None
     # Distinct pieces of the same section that matched (a split section counts once).
     pieces: list[str] = field(default_factory=list)
 
@@ -50,13 +52,14 @@ def fuse(
     sparse: Sequence[tuple[Chunk, float]],
     *,
     rrf_k: int = 60,
+    sparse_weight: float = 1.0,
 ) -> list[Candidate]:
     """Reciprocal rank fusion of two ranked lists, best first."""
     by_id: dict[str, Candidate] = {}
-    for results, attr in ((dense, "dense"), (sparse, "sparse")):
+    for results, attr, weight in ((dense, "dense", 1.0), (sparse, "sparse", sparse_weight)):
         for rank, (chunk, score) in enumerate(results, start=1):
             cand = by_id.setdefault(chunk.chunk_id, Candidate(chunk))
-            cand.fused += 1.0 / (rrf_k + rank)
+            cand.fused += weight / (rrf_k + rank)
             setattr(cand, attr, score)
     return sorted(by_id.values(), key=lambda c: c.fused, reverse=True)
 
@@ -72,6 +75,20 @@ def collapse(candidates: Sequence[Candidate]) -> list[Candidate]:
             cand.pieces = [cand.chunk.chunk_id]
             out[cite] = cand
     return list(out.values())
+
+
+def blend(candidates: Sequence[Candidate], rerank_weight: float) -> list[Candidate]:
+    """Order reranked candidates by a mix of reranker score and fusion rank.
+
+    ``candidates`` must be in fusion order with ``rerank`` set. The fusion-rank
+    score runs linearly from 1.0 (first) toward 0, so a weight below 1.0 keeps
+    the reranker from burying a candidate both searches ranked highly.
+    """
+    n = len(candidates)
+    for i, cand in enumerate(candidates):
+        rank_score = 1.0 - i / n
+        cand.final = rerank_weight * (cand.rerank or 0.0) + (1 - rerank_weight) * rank_score
+    return sorted(candidates, key=lambda c: c.final, reverse=True)
 
 
 class Retriever:
@@ -100,7 +117,8 @@ class Retriever:
             self._embedded[question] = emb
         dense = self.store.search_dense(emb.dense, s.pool) if mode != Mode.SPARSE else []
         sparse = self.store.search_sparse(emb.sparse, s.pool) if mode != Mode.DENSE else []
-        return collapse(fuse(dense, sparse, rrf_k=s.rrf_k))[: s.top_k]
+        fused = fuse(dense, sparse, rrf_k=s.rrf_k, sparse_weight=s.sparse_weight)
+        return collapse(fused)[: s.top_k]
 
     def retrieve(
         self,
@@ -117,12 +135,12 @@ class Retriever:
             scores = self.reranker.score(question, [c.chunk.text for c in cands])
             for cand, score in zip(cands, scores, strict=True):
                 cand.rerank = score
-            cands.sort(key=lambda c: c.rerank, reverse=True)
+            cands = blend(cands, self.settings.rerank_weight)
         return [
             RetrievedChunk(
                 chunk=c.chunk,
                 rank=i,
-                score=c.rerank if c.rerank is not None else c.fused,
+                score=c.final if c.final is not None else c.fused,
                 dense_score=c.dense,
                 sparse_score=c.sparse,
             )
@@ -161,7 +179,8 @@ def retrieve(
 ) -> list[RetrievedChunk]:
     """Return the best ``top_n`` chunks for ``question``, ranked, with citations.
 
-    Scores are reranker relevance (0 to 1) when reranking is on, else the fused
-    rank score. Each result is a distinct citation.
+    With reranking on, scores run 0 to 1 (reranker relevance, blended with the
+    fusion rank when ``rerank_weight`` < 1); otherwise they are fused rank scores.
+    Each result is a distinct citation.
     """
     return default_retriever(settings).retrieve(question, top_n=top_n)
