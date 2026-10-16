@@ -93,14 +93,19 @@ class SearchSettings(BaseModel):
     # Reciprocal rank fusion constant (the standard 60): higher flattens rank differences.
     rrf_k: int = 60
     # Keyword search's vote in fusion relative to meaning search (1.0 = equal).
-    sparse_weight: float = 1.0
+    # 0.0 for plain-language questions: on the Oct 2026 grid (55 questions) keyword
+    # votes only pushed good meaning-search candidates down. Questions that contain
+    # a statute citation use sparse_weight_with_citation, where exact matching matters.
+    sparse_weight: float = 0.0
+    sparse_weight_with_citation: float = 1.0
     reranker_model: str = "BAAI/bge-reranker-v2-m3"
     # Tokens of question + section the reranker reads. Longer sections are truncated.
     rerank_max_tokens: int = 1024
     rerank: bool = True
     # Final order = rerank_weight * reranker score + (1 - rerank_weight) * fusion-rank
     # score (1.0 for the top candidate down to near 0 for the last). 1.0 = reranker only.
-    rerank_weight: float = 1.0
+    # 0.75 was best on the Oct 2026 grid (48/55 vs 45/55 for reranker-only).
+    rerank_weight: float = 0.75
 
 
 class Settings(BaseSettings):

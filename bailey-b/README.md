@@ -9,10 +9,10 @@ verification pass, many consumers. The full spec is in [docs/BUILD.md](docs/BUIL
 | Build step | Package | Status |
 |---|---|---|
 | 0. Scaffold: layout, deps, config | — | done |
-| Eval harness (runs alongside step 1) | `bailey_b.evals` | harness done; **30 draft questions awaiting attorney review** |
-| 1. Corpus download + chunking (statutes first) | `bailey_b.corpus` | **statutes done** (1,273 sections → 1,479 chunks); case law next |
-| 2. Embedding + vector store | `bailey_b.index` | **done**: all 1,479 statute chunks embedded (24 MB in Postgres) |
-| 3. Hybrid search + reranking | `bailey_b.search` | **done**; smoke recall@5 0.82 (18/22); probate terms-of-art gap open |
+| Eval harness (runs alongside step 1) | `bailey_b.evals` | harness done; **33 draft questions awaiting attorney review** |
+| 1. Corpus download + chunking (statutes first) | `bailey_b.corpus` | **statutes done**: 19 chapters, 1,383 sections → 1,600 chunks; case law next |
+| 2. Embedding + vector store | `bailey_b.index` | **done**: all 1,600 statute chunks embedded |
+| 3. Hybrid search + reranking | `bailey_b.search` | **done**, tuned Oct 16: 48/55 test questions in top 5 (was 45) |
 | 4. Citation verification | `bailey_b.verify` | **done**: 0 wrong calls on 3,031 real statute cross-references |
 | 5. Attorney interface (intake triage) | — | not started |
 | 6. Draft analysis | — | not started |
@@ -143,6 +143,29 @@ configurations; they do not replace the attorney-reviewed eval set.
 - **Speed:** search without reranking is under 1 s; the reranker takes ~55 s per
   question on this 4-core CPU. Production needs a GPU for it, or `rerank=false`.
 
+**Tuning (Oct 16, 2026).** `bailey-b eval blend` scored every combination of keyword
+weight in fusion × reranker weight on all 55 questions (22 smoke + 33 draft); the
+cell is how many had the right section(s) in the top 5:
+
+| keyword weight ↓ / reranker weight → | 1.0 | 0.75 | 0.5 | 0.25 | 0.0 |
+|---|---|---|---|---|---|
+| 1.0 | 45 | 38 | 37 | 36 | 36 |
+| 0.5 | 44 | 39 | 37 | 37 | 37 |
+| 0.25 | 44 | 43 | 39 | 39 | 40 |
+| 0.0 | 44 | **48** | 45 | 44 | 45 |
+
+New defaults: keyword weight 0 and reranker weight 0.75 (75% reranker score, 25%
+meaning-search rank), which improved both sets (smoke 18→19, draft 27→29). Keyword
+search is switched back on at full weight whenever the question itself cites a
+statute section, where exact matching matters; the questions above are all
+plain-language, so that case is not measured by this grid. With 20 settings
+tried on 55 self-written questions, treat the +3 as a direction, and re-run
+`bailey-b eval blend` on the attorney-reviewed set before relying on it.
+
+Corpus additions: ch. 741 (domestic violence injunctions), ch. 48 (service of
+process, incl. § 48.183 posting in evictions) and ch. 95 (limitations of actions,
+needed for deadline tracking).
+
 ## Verify: citation checking
 
 ```bash
@@ -195,8 +218,8 @@ rank instead of replacing it; a legal-domain reranker; the attorney feedback loo
 Both question sets were written by Claude from the statute text, which may favor
 meaning search; attorney-written questions are the real test.
 
-Known gap: domestic violence injunctions (ch. 741) and eviction service (ch. 48) are
-not in the indexed chapters, so questions on them cannot be answered from the corpus.
+Chapters 741, 48 and 95 were added on Oct 16 after these questions exposed the gap;
+bals-031 to bals-033 cover them.
 
 ## Citation IDs
 

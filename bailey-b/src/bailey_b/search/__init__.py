@@ -11,9 +11,12 @@ Query path:
 3. Fuse the two lists with reciprocal rank fusion (RRF): each list contributes
    ``1 / (rrf_k + rank)``, so the very different score scales never need
    reconciling, and a chunk both lists like rises to the top.
+   Keyword votes are weighted by ``sparse_weight`` (0 for plain-language
+   questions) or ``sparse_weight_with_citation`` when the question cites a section.
 4. Collapse to one chunk per citation (a long section split into pieces counts
    once, represented by its best-ranked piece), keep the top ``top_k``.
-5. Rerank those with a cross-encoder; return the best ``top_n``.
+5. Rerank those with a cross-encoder, blend with the fusion rank
+   (``rerank_weight``), and return the best ``top_n``.
 """
 
 from __future__ import annotations
@@ -26,6 +29,13 @@ from bailey_b.config import SearchSettings, Settings, get_settings
 from bailey_b.index.embedder import Embedder
 from bailey_b.models import Chunk, RetrievedChunk
 from bailey_b.search.reranker import Reranker
+
+
+def cites_statute(text: str) -> bool:
+    """True when the question names a statute section ("§ 83.60(2)", "s. 61.13")."""
+    from bailey_b.verify import _statute_spans
+
+    return bool(_statute_spans(text))
 
 
 class Mode(StrEnum):
@@ -115,9 +125,14 @@ class Retriever:
             if len(self._embedded) > 256:
                 self._embedded.clear()
             self._embedded[question] = emb
+        weight = s.sparse_weight_with_citation if cites_statute(question) else s.sparse_weight
+        if mode == Mode.SPARSE:
+            weight = 1.0
+        elif mode == Mode.DENSE:
+            weight = 0.0
         dense = self.store.search_dense(emb.dense, s.pool) if mode != Mode.SPARSE else []
-        sparse = self.store.search_sparse(emb.sparse, s.pool) if mode != Mode.DENSE else []
-        fused = fuse(dense, sparse, rrf_k=s.rrf_k, sparse_weight=s.sparse_weight)
+        sparse = self.store.search_sparse(emb.sparse, s.pool) if weight > 0 else []
+        fused = fuse(dense, sparse, rrf_k=s.rrf_k, sparse_weight=weight)
         return collapse(fused)[: s.top_k]
 
     def retrieve(

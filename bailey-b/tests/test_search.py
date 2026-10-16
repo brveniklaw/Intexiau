@@ -84,7 +84,12 @@ def parts():
 def test_retrieve_reranks_and_cuts(parts):
     store, emb = parts
     reranker = FakeReranker({"83.60": 0.95, "83.56": 0.7, "83.49": 0.1, "83.62": 0.2})
-    r = Retriever(store, emb, reranker, SearchSettings(top_k=20, top_n=2))
+    r = Retriever(
+        store,
+        emb,
+        reranker,
+        SearchSettings(top_k=20, top_n=2, sparse_weight=1.0, rerank_weight=1.0),
+    )
     out = r.retrieve("question")
     assert [x.chunk.citation_id for x in out] == ["fl-stat:83.60", "fl-stat:83.56"]
     assert [x.rank for x in out] == [1, 2]
@@ -94,7 +99,9 @@ def test_retrieve_reranks_and_cuts(parts):
 
 def test_retrieve_without_rerank_uses_fusion_order(parts):
     store, emb = parts
-    r = Retriever(store, emb, FakeReranker({}), SearchSettings(top_n=3, rerank=False))
+    r = Retriever(
+        store, emb, FakeReranker({}), SearchSettings(top_n=3, rerank=False, sparse_weight=1.0)
+    )
     out = r.retrieve("question")
     assert out[0].chunk.citation_id == "fl-stat:83.56"  # in both lists
 
@@ -140,3 +147,12 @@ def test_blend_protects_strong_fusion_candidates():
     assert order == ["fl-stat:83.49", "fl-stat:83.56", "fl-stat:83.60"]
     order = [c.chunk.citation_id for c in blend(cands, 0.0)]
     assert order == ["fl-stat:83.56", "fl-stat:83.60", "fl-stat:83.49"]
+
+
+def test_keywords_only_count_when_the_question_cites_a_statute(parts):
+    store, emb = parts
+    r = Retriever(store, emb, None, SearchSettings(top_n=5, rerank=False))
+    plain = {x.chunk.citation_id for x in r.retrieve("can the landlord evict her?")}
+    cited = {x.chunk.citation_id for x in r.retrieve("what does § 83.60(2) require?")}
+    assert "fl-stat:83.60" not in plain  # keyword-only hit ignored by default
+    assert "fl-stat:83.60" in cited
