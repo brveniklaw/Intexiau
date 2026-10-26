@@ -11,7 +11,7 @@ The company runs three engines: education (the IntexiaU Institute), platforms (I
 
 ## Platforms
 
-- [BriefConsiliar](https://www.briefconsiliar.com): AI-powered legal information tools for businesses, landlords, and professionals (GC Consiliar, Landlord Consiliar; more verticals in development). Legal information, not legal advice.
+- [BriefConsiliar](https://www.briefconsiliar.com): a Super Intelligence (AI) platform for law firms. Each firm gets its own branded client self-help desk, a staff help desk, AI agents and law alerts, designed around ABA Formal Opinion 512 and state bar guidance. A one-time build the firm owns outright, with no subscription: Self-Help Desk $15,000 to $25,000, Full Platform $35,000 to $60,000, Multi-office from $75,000; optional support $750 to $2,500 a month. Software for licensed attorneys, not a law firm, and not legal advice.
 - [Voices Across History](https://voicesacrosshistory.intexiau.com): AI conversations with founders, philosophers, and inventors, grounded in primary sources. One subscription, $9.99 per month, with a 7-day free trial.
 - [VictoryRevConnect](https://www.victoryrevconnect.com): a multi-vertical enthusiast community for automotive, boating, golf carts, and more.
 - Coming soon: Victoria's Compass (AI life coaching), Agentic Workforce Intelligence, and a Health and Wellness platform.
