@@ -1,0 +1,25 @@
+# IntexiaU Institute and Innovation Center
+
+> The AI training and credentials division of IntexiaU Corp (Florida, USA). Hands-on programs with verifiable certificates and digital badges, plus physical Innovation Centers. Not a university, not degree-granting and not accredited. Founded by Andrea Brvenik, with co-founder Chris Bibbo.
+
+## Programs
+
+All programs run on the AI Training Academy and are free during launch. Team and enterprise options are available on request.
+
+- [AI for Everyone](https://academy.intexiau.com/programs/community-ai): Anyone who wants everyday confidence with AI: safety, scams, writing, money, learning and work. 30 days, about 25 minutes a day. Earns: AI Fluency Badge.
+- [Board-Ready AI](https://academy.intexiau.com/programs/board-ready-ai): Trustees and directors of colleges and universities: AI governance, risk and hands-on fluency. 30 days, about 35 minutes a day. Earns: Certificate of Completion.
+- [Foundation Board AI](https://academy.intexiau.com/programs/foundation-board): Foundation directors: donor privacy, gift intent, fundraising ethics and investment oversight. 30 days, about 35 minutes a day. Earns: Certificate of Completion.
+- [Founder AI](https://academy.intexiau.com/programs/founder-ai): Entrepreneurs and business owners: validate, market, sell and operate leaner with AI. 30 days, about 35 minutes a day. Earns: Certificate of Completion.
+- [Workforce AI](https://academy.intexiau.com/programs/workforce-ai): Employees and teams: practical upskilling within your employer's rules, with measured results. 30 days, about 30 minutes a day. Earns: Certificate of Completion.
+- [Student AI](https://academy.intexiau.com/programs/student-ai): College and early-career learners (18+): learn faster with AI, honestly, and get career-ready. 30 days, about 25 minutes a day. Earns: AI Fluency Certificate.
+- [Prompt Architecture](https://academy.intexiau.com/programs/prompt-architecture): Students, professionals and entrepreneurs: design reliable AI systems you own, from prompts to agents. 8 modules, about 75 minutes each. Earns: Certificate of Completion.
+- AI Agent Trainer (coming soon): build and deploy your own grounded AI tutor for a class, board or business.
+
+## How to enrol
+
+Create a free account at [academy.intexiau.com](https://academy.intexiau.com/), pick a program and start the same day. Certificates can be checked at [academy.intexiau.com/verify](https://academy.intexiau.com/verify).
+
+## Contact
+
+- andreabrvenik@intexiau.com
+- Parent company: [IntexiaU Corp](https://www.intexiau.com/)
