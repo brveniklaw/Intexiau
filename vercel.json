@@ -1,14 +1,14 @@
 {
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "has": [
         {
           "type": "host",
           "value": "intexiau.com"
         }
       ],
-      "destination": "https://www.intexiau.com/:path*",
+      "destination": "https://www.intexiau.com/$1",
       "permanent": true
     },
     {
