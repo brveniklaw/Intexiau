@@ -2,7 +2,7 @@
 
 > IntexiaU Corp (Florida, USA) builds AI-native platforms, programs, and media that help people become the authors of their economic lives. Its founding principle, Economic Authorship, holds that every person has the right to be an active author of their economic life, not a passive spectator, in education, in work, or in life. Founder and CEO: Andrea Brvenik.
 
-The company runs three engines: education (the IntexiaU Institute), platforms (IntexiaU Ventures), and media (The Brvenik Brief). The name comes from the Latin "intexere", to weave together. IntexiaU builds its platforms with Claude, Anthropic's AI model, and develops them with Claude Code.
+The company runs three engines: education (the IntexiaU Institute), platforms (IntexiaU Ventures), and media (The Brvenik Brief). The name comes from the Latin "intexere", to weave together.
 
 ## Education
 
