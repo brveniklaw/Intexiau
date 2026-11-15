@@ -195,6 +195,31 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
   nav::-webkit-scrollbar{display:none}
 }
 
+/* Partnership value and conversion path, Nov 15 (D-014) */
+.value-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.value{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px;min-width:0}
+.value p{color:var(--muted);font-size:15px}
+.value.wide{grid-column:1/-1;background:var(--cream)}
+.value-band{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;margin-top:24px;padding:22px 24px;border-radius:14px;background:linear-gradient(160deg,#0c1f34 0%,#173a5e 100%);color:#cdd8e3;box-shadow:var(--shadow)}
+.value-band h2{color:#fff;font-size:22px}
+.value-band ul{margin:6px 0 0;padding-left:18px}
+.value-band a{font-weight:700;font-size:14px;border-radius:8px;padding:12px 20px;text-decoration:none;background:var(--gold);color:#0f2740;white-space:nowrap}
+.value-band a:hover,.value-band a:focus-visible{filter:brightness(1.08);outline:2px solid var(--gold2);outline-offset:2px}
+.journey{display:flex;flex-direction:column;gap:16px;counter-reset:jstep}
+.jstep{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:20px 22px;display:grid;grid-template-columns:44px minmax(0,1fr);gap:6px 16px}
+.jstep::before{counter-increment:jstep;content:counter(jstep);grid-row:1/span 6;width:40px;height:40px;border-radius:50%;background:var(--navy);color:var(--gold2);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:18px}
+.jstep>*{grid-column:2}
+.jstep .lbl{font-weight:700;color:var(--ink)}
+.jstep p{color:var(--muted)}
+.jstep p .lbl{color:var(--ink)}
+.jstep .cta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:4px}
+.jstep .cta a{font-weight:700;font-size:14px;border-radius:8px;padding:10px 16px;text-decoration:none;background:var(--navy);color:#fff}
+.jstep .cta a.alt{background:transparent;color:var(--sea);border:1px solid var(--line)}
+.jstep.s3{border-color:var(--gold)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .jstep .cta a:not(.alt){background:var(--gold);color:#0f2740}}
+:root[data-theme="dark"] .jstep .cta a:not(.alt){background:var(--gold);color:#0f2740}
+@media (max-width:560px){.jstep{grid-template-columns:1fr}.jstep::before{grid-row:auto}.jstep>*{grid-column:1}}
+
 /* Free self-assessment (D-011) */
 .sectors{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
 .sector{display:flex;flex-direction:column;gap:4px;text-align:left;padding:16px;border-radius:14px;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}
@@ -308,7 +333,7 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
       <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm-3 0-2 6 5-2 5 2-2-6"/></svg></span>
       <p class="eyebrow">For teachers, faculty and staff</p>
       <h2>Short trainings, with a badge</h2>
-      <ul><li>Six self-paced modules, 20 to 40 minutes each</li><li>A short knowledge check</li><li>A printable completion certificate</li></ul>
+      <ul><li>Six self-paced modules, 20 to 40 minutes each</li><li>A short knowledge check</li><li>A printable badge</li></ul>
       <span class="go">See the badges →</span>
     </a>
   </div>
@@ -318,6 +343,11 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
     <div><div class="n">Jul 1, 2027</div><div class="l">District and charter policies adopted and in use</div></div>
     <div><div class="n">18</div><div class="l">Minimum policy elements in (3)(e)</div></div>
     <div><div class="n">30 days</div><div class="l">Minimum time schools keep AI interaction records</div></div>
+  </div>
+  <div class="value-band">
+    <div><p class="eyebrow" style="color:var(--gold2)">IntexiaU Institute partnerships</p><h2>What IntexiaU Institute brings to your school</h2>
+    <ul><li>Florida-specific guidance, kept current</li><li>Staff AI training with printable badges</li><li>Ready-to-use policy and syllabus templates</li><li>An innovation partner after the basics</li></ul></div>
+    <a href="#partner">See what a partnership includes →</a>
   </div>
 </div></section>
 
@@ -443,7 +473,7 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
   <div class="stack" style="gap:10px">
     <p class="eyebrow">For teachers, faculty and staff</p>
     <h1>AI classroom training badges</h1>
-    <p class="lede">Short self-paced modules built from the K-12, college and university toolkits. Finish the lessons and the knowledge check, and print your completion certificate.</p>
+    <p class="lede">Short self-paced modules built from the K-12, college and university toolkits. Finish the lessons and the knowledge check, and print your badge.</p>
   </div>
   <div class="grid3" id="badgelist"></div>
   <p class="toast" id="b-toast" role="status"></p>
@@ -458,18 +488,52 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
     <h1>Partner with IntexiaU Institute</h1>
     <p class="lede">The toolkits and parent guide are free. Schools that want more can make IntexiaU Institute their AI implementation partner: a compliant platform of their own, their wider AI buildout, and training for their staff.</p>
   </div>
-  <div class="stack" style="gap:14px"><h2>How a partnership grows</h2><div class="ladder">
+  <div class="stack" style="gap:14px" id="value">
+    <h2>What IntexiaU Institute brings to your school</h2>
+    <div class="value-grid">
+      <div class="value"><h3>Florida-specific guidance, kept current</h3><p>Our toolkits and parent guide are built on the actual text of Rule 6A-1.0957, Rule 6A-14.0719 and Board of Governors Regulation 1.001(3)(o). Each page cites the rule section it comes from and shows when we last checked it. When the State Board or the Board of Governors changes a rule, we review the materials against the new text.</p></div>
+      <div class="value"><h3>Staff AI training with printable badges</h3><p>Short, self-paced modules for teachers, faculty and administrators, built from the same toolkits your policy uses. Staff finish the lessons and a knowledge check, then print a badge. A badge shows completed training. It is not college credit, a professional license or continuing education credit.</p></div>
+      <div class="value"><h3>Ready-to-use policy and syllabus templates</h3><p>Editable documents for K-12 districts and charters, state colleges and state universities. Each one is mapped to the policy elements or areas it covers, so your board counsel or general counsel starts from a draft instead of a blank page.</p></div>
+      <div class="value"><h3>An innovation partner after the basics</h3><p>Once your policy is in place, we can pilot a compliant AI platform built for your school or campus, then support your wider AI rollout. Any pilot starts with a written student privacy plan your counsel can review.</p></div>
+      <div class="value wide"><h3>One place for all of it</h3><p>Rule guidance, policy templates, parent notices, staff training and pilots all come from one partner. You don't have to piece them together from separate vendors and documents.</p></div>
+    </div>
+    <p class="notice"><em>General information about Florida rules, not legal advice. Have your board counsel or general counsel review any policy before adoption.</em></p>
+  </div>
+  <div class="stack" style="gap:14px" id="path">
+    <h2>From self-assessment to partnership</h2>
+    <div class="journey">
+      <div class="jstep">
+        <h3>Step 1: Free self-assessment and toolkit</h3>
+        <p><span class="lbl">What you get:</span> Fifteen questions across six areas, worded for your sector's rule, and a printable report showing what's done, partly done or not yet started. You also get free access to the toolkit for your sector: policy templates, notices and checklists.</p>
+        <p><span class="lbl">What we ask:</span> Nothing. There's no account, and your answers stay in your browser.</p>
+        <div class="cta"><a href="#self-assessment">Start the self-assessment</a></div>
+      </div>
+      <div class="jstep">
+        <h3>Step 2: Readiness review</h3>
+        <p><span class="lbl">What you get:</span> A short look, with our team, at where your AI policy, notices and approved tools stand, plus clear next steps for your rule and timeline.</p>
+        <p><span class="lbl">What we ask:</span> Your school, district or campus name, a contact person, and your current policy drafts, notices and list of AI tools, if you have them. A printed self-assessment report is a helpful starting point. We don't need any student or parent data. We schedule a limited number of readiness reviews each week.</p>
+        <div class="cta"><a href="mailto:partnerships@intexiau.com?subject=Readiness%20review%20request">Request a readiness review</a><span class="cite">Email partnerships@intexiau.com with your school or campus name and what you're working on.</span></div>
+      </div>
+      <div class="jstep s3">
+        <h3>Step 3: Make IntexiaU Institute your AI implementation partner</h3>
+        <p>The partnership grows in steps, at your pace:</p>
+      </div>
+    </div>
+  </div>
+  <div class="stack" style="gap:14px"><h3>How a partnership grows</h3><div class="ladder">
     <div class="step free"><span class="pill">Free</span><h3>Toolkit</h3><p>Policy templates, notices and checklists for your rule.</p></div>
     <div class="step"><h3>Readiness review</h3><p>A short look at where your AI policy, notices and approved tools stand.</p></div>
     <div class="step"><h3>Platform pilot</h3><p>A compliant AI platform built for your school or campus.</p></div>
     <div class="step"><h3>Training and buildout</h3><p>Staff badges, then your wider AI rollout.</p></div>
   </div></div>
   <div class="privacy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3Z"/><path d="M9 12l2 2 4-4"/></svg><div class="stack" style="gap:4px"><h3>Student data comes first</h3><span>The first release stores no student or parent data. Any pilot starts with a written student privacy plan your counsel can review.</span></div></div>
+  <h3>What you get, by sector</h3>
   <div class="grid3">
     <div class="doc"><p class="eyebrow">School districts and charters</p><h3>District partnership</h3><p style="color:var(--muted)">Staff badges for teachers and administrators, toolkit support through July 1, 2027, and a co-branded edition later.</p></div>
     <div class="doc"><p class="eyebrow">State colleges</p><h3>College partnership</h3><p style="color:var(--muted)">Faculty and staff badges, policy support across the six areas, and parent notice support for dual enrollment students.</p></div>
     <div class="doc"><p class="eyebrow">State universities</p><h3>University partnership</h3><p style="color:var(--muted)">Faculty training on AI in the syllabus, a statement library, and support for trustee policy work.</p></div>
   </div>
+  <div class="panel"><h3>What we ask</h3><span>A named lead on your side, agreed goals for the pilot or training rollout, and counsel review of the written student privacy plan before any pilot starts.</span></div>
   <div class="panel"><h3>Start a conversation</h3><span>Email <strong>partnerships@intexiau.com</strong> with your school or campus name and what you're working on. <button type="button" id="p-btn">Contact partnerships</button> <button type="button" id="w-btn">Request a 20-minute walkthrough</button></span></div>
   <p class="toast" id="p-toast" role="status"></p>
   <p class="notice">Partnership details are set by IntexiaU Institute. Badges show completed training, not college credit.</p>
@@ -645,7 +709,7 @@ function saRenderReport(c){
   ${open.length?`<div class="stack" style="gap:8px"><h3>What's still open</h3><ol class="r-list">${open.map(([id,ai,w])=>{const a=sa.a[sec][id]||{};return `<li><strong>${a.s?ANS[a.s]:"Unanswered"}:</strong> ${esc(w[sec][0])}${a.x?`<br><span class="r-note">Note: ${esc(a.x)}</span>`:""}</li>`}).join("")}</ol></div>`:`<p><strong>Every item is marked done.</strong> Keep this report with your policy records and check again when your rule or tools change.</p>`}
   <div class="stack" style="gap:10px"><h3>Two ways to close the gaps</h3><div class="paths">
     <div class="path"><span class="pl">Path A</span><h3>Do it yourself with this guide</h3><p>Use the ${esc(S.toolkitName)}: templates and checklists mapped to your rule, plus short staff trainings with printable badges.</p><p class="no-print"><a href="#${S.toolkit}">Open the ${esc(S.toolkitName)}</a> · <a href="#badges">See the staff badges</a></p></div>
-    <div class="path"><span class="pl">Path B</span><h3>Book a 30-minute readiness review</h3><p>Walk through this report with IntexiaU Institute and agree on what to do first. We hold at most two reviews a week.</p><p><a href="mailto:partnerships@intexiau.com?subject=Readiness%20review%20request">Email partnerships@intexiau.com</a> to ask for a time.</p></div>
+    <div class="path"><span class="pl">Path B</span><h3>Book a 30-minute readiness review</h3><p>Walk through this report with IntexiaU Institute and agree on what to do first. We schedule a limited number of readiness reviews each week.</p><p><a href="mailto:partnerships@intexiau.com?subject=Readiness%20review%20request">Email partnerships@intexiau.com</a> to ask for a time.</p></div>
   </div></div>
   <p class="notice">This report is general information about Florida rules, based only on your own answers. It is not legal advice and not a legal review of your policy. Have your board counsel or general counsel review any policy before adoption.</p>
   <p class="cite print-only">Printed from the Florida AI Classroom Guide, an IntexiaU Institute project. Your answers were stored only in your browser.</p>`;
