@@ -254,7 +254,7 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
 <div class="draft"><div class="wrap"><b>Preview</b> An IntexiaU Institute project. Working name and draft content for review. Content may change.</div></div>
 
 <header class="top"><div class="wrap">
-  <a class="brand" href="#home"><img class="seal" src="../assets/logo-1.jpg" alt="IntexiaU Institute seal" width="42" height="42"><span class="brand-text"><span class="brand-org">IntexiaU Institute</span>Florida AI Classroom Guide</span></a>
+  <a class="brand" href="#home"><img class="seal" src="/assets/seal-192.jpg" alt="IntexiaU Institute seal" width="42" height="42"><span class="brand-text"><span class="brand-org">IntexiaU Institute</span>Florida AI Classroom Guide</span></a>
   <nav aria-label="Main">
     <a href="#parents" data-nav="parents">For parents</a>
     <a href="#districts" data-nav="districts">For districts</a>
@@ -519,7 +519,7 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
 </main>
 
 <footer><div class="wrap">
-  <div class="foot-row"><img class="foot-seal" src="../assets/logo-1.jpg" alt="" width="40" height="40"><span>Florida AI Classroom Guide (working name), an IntexiaU Institute project · Preview, Nov 14, 2026</span></div>
+  <div class="foot-row"><img class="foot-seal" src="/assets/seal-192.jpg" alt="" width="40" height="40"><span>Florida AI Classroom Guide (working name), an IntexiaU Institute project · Updated Nov 15, 2026</span></div>
   <span>General information about Rule 6A-1.0957, F.A.C. Not legal advice. Stores no student or parent information.</span>
 </div></footer>
 
@@ -638,7 +638,7 @@ function saRenderReport(c){
   const today=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
   const open=SA_QS.filter(([id])=>(sa.a[sec][id]?.s||"")!=="done");
   $("#sa-report").innerHTML=`
-  <div class="report-head"><img src="../assets/logo-1.jpg" alt="" width="48" height="48"><div class="stack" style="gap:2px"><p class="eyebrow">IntexiaU Institute · Florida AI Classroom Guide</p><h2>AI readiness self-assessment</h2></div></div>
+  <div class="report-head"><img src="/assets/seal-192.jpg" alt="" width="48" height="48"><div class="stack" style="gap:2px"><p class="eyebrow">IntexiaU Institute · Florida AI Classroom Guide</p><h2>AI readiness self-assessment</h2></div></div>
   <p class="cite">${sa.school?`<strong>${esc(sa.school)}</strong> · `:""}${esc(S.name)} · ${esc(S.rule)} · ${today} · ${c.done} of ${SA_QS.length} done${c.none?`, ${c.none} unanswered`:""}</p>
   <div class="scores">${SA_AREAS.map((name,ai)=>{const [l,cls]=SCORE[areaScore(sec,ai)];return `<div class="score"><span class="st ${cls}">${l}</span><b>${ai+1}. ${name}</b></div>`}).join("")}</div>
   <p class="legend">Done: every item in the area is done. Next steps: nothing is "not yet", but some items are partly done. Gaps: at least one item is not yet done or unanswered.</p>
