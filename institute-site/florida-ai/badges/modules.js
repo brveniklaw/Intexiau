@@ -8,7 +8,7 @@ lessons:[
 <p>The rule asks <b>district school boards and charter school governing boards</b> to adopt an AI policy and have it <b>in use by July 1, 2027</b>. The policy must cover at least <b>18 elements</b> (subsection (3)(e)), and the rule lists uses that are <b>never allowed</b> (subsection (3)(f)).</p>
 <p>Two points shape everything else:</p>
 <ul><li><b>It covers every AI tool used for instruction</b>, whether or not the tool was adopted as instructional material under Chapter 1006, F.S. A free tool a teacher found online counts. So does an AI feature that quietly appears inside a product the district already owns.</li>
-<li><b>It is the board's policy.</b> Staff carry it out, but the board adopts it, usually as an amendment to the Internet Safety Policy. Until your board adopts its policy, follow whatever interim guidance your district has issued.</li></ul>
+<li><b>It is the board's policy.</b> Staff carry it out, but the board adopts it as an amendment to the Internet Safety Policy. Until your board adopts its policy, follow whatever interim guidance your district has issued.</li></ul>
 <p>Why does this matter to you? Because almost every element turns into a daily habit for someone: a teacher checking opt-ins, an office clerk answering a records request, a technology lead turning off a misbehaving tool. This module walks through the elements in the order you are likely to meet them at work.</p>
 <h4>What "in use" means</h4>
 <p>The deadline isn't only about a vote. By July 1, 2027 the policy has to be <b>adopted and in use</b>: notices going out, an approved tool list posted, staff trained. A policy that sits in a binder doesn't meet the goal.</p>
@@ -27,7 +27,7 @@ lessons:[
 <tr><td>How to object?</td><td>The notice links to the district's process under s. 1006.28(2)(a), F.S.</td></tr></table>
 <p>Notice what the teacher has to do before the first lesson: know which students are opted in, and have the alternative ready for everyone else.</p>
 <div class="apply"><b>Pause and apply.</b> If a parent asked you tomorrow, "What will my child do instead if I say no?", write the two-sentence answer you would give for one class.</div>`},
-{t:"Records, younger students and objections",b:`<p><b>Interaction records.</b> Approved tools keep a record of student interactions for <b>at least 30 days</b>. Parents can access that record as part of their child's education records, under FERPA, s. 1002.22, F.S., and the related State Board rule. In practice, a parent usually asks the teacher or front office. Everyone should know where to send the request rather than trying to pull records themselves.</p>
+{t:"Records, younger students and objections",b:`<p><b>Interaction records.</b> Approved tools keep a record of student interactions for <b>at least 30 days</b>. Parents can access that record as part of their child's education records, under FERPA, s. 1002.22(2), F.S., and Rule 6A-1.0955, F.A.C. In practice, a parent usually asks the teacher or front office. Everyone should know where to send the request rather than trying to pull records themselves.</p>
 <p><b>Younger students.</b> Tools for <b>VPK through grade 5</b> get an <b>extra review for age and developmental fit</b>. A tool that is fine for high school research may be wrong for a second grader: too much text, open-ended chat, or features that encourage long sessions.</p>
 <p><b>Objections to content.</b> Parents can object to what a tool shows their child through the process in s. 1006.28(2)(a), F.S. The notice should point there, and staff should route objections to it rather than handling them informally.</p>
 <h4>Scenario</h4>
@@ -38,12 +38,12 @@ lessons:[
 <li>The teacher tells whoever approves tools, because a grade 4 tool producing questionable content may need its age and developmental review revisited.</li></ol>
 <div class="apply"><b>Pause and apply.</b> Who handles education records requests at your school? Who receives content objections? If you can't name both, add them to your questions for your principal.</div>`},
 {t:"How tools are chosen and run",b:`<p>Other elements set the bar for which tools are approved and how the district manages them.</p>
-<ul><li>Tools must be <b>accurate, transparent, viewpoint neutral, accessible</b> to students and educators with disabilities, and <b>aligned with Florida standards</b>.</li>
+<ul><li>Tools must be <b>accurate, transparent, viewpoint neutral, accessible</b> to students and educators with disabilities, and <b>aligned with Florida's adopted academic standards and instructional materials framework</b>.</li>
 <li>Tools get an <b>effectiveness review</b>, and vendors must disclose known instructional limits and any independent studies.</li>
 <li>The district keeps a <b>public, up-to-date list of approved tools</b> that parents can find easily.</li>
-<li>The district <b>reports its approved tools and their use</b> to the Department of Education.</li>
-<li>Use must follow <b>s. 1006.1494, F.S.</b>, and the related rule on student online privacy, and <b>s. 1000.05, F.S.</b></li>
-<li>Vendors may <b>not sell student data or use it to train commercial models</b>, and the district should prefer vendors that store and process student data in the United States.</li></ul>
+<li>The district <b>reports the AI instructional tools it uses</b> to the Department of Education.</li>
+<li>Use must follow <b>s. 1006.1494, F.S.</b>, and <b>Rule 6A-1.09550, F.A.C.</b> (as printed in the K-12 rule) on student online privacy, and <b>s. 1000.05, F.S.</b>, Florida's educational equity law</li>
+<li>Vendors may <b>not sell, monetize, profile, or commercially exploit student data</b>, including to train commercial AI models, and the district must <b>prioritize</b> vendors that store and process student data in the United States.</li></ul>
 <h4>What this means if you're a teacher</h4>
 <p>You probably won't run vendor reviews, but you are the person most likely to notice when a tool falls short. If a tool gives wrong answers, can't be used by a student with a disability, or slants content on a contested topic, that is information the people running the effectiveness review need. Report it with a specific example.</p>
 <h4>Worked example: the "free" tool</h4>
@@ -51,9 +51,9 @@ lessons:[
 <div class="apply"><b>Pause and apply.</b> Where would a parent at your school find the approved tool list today? Try to find it yourself in under two minutes.</div>`},
 {t:"People stay in charge",b:`<p>The rule keeps people, not software, responsible for students.</p>
 <ul><li>AI <b>supplements, and never replaces,</b> teacher judgment and parents' rights to direct their child's education.</li>
-<li><b>Human review:</b> AI is never the decision maker. A person reviews AI output before decisions about a student.</li>
-<li><b>Agentic tools</b>, which can take actions on their own, need adult supervision, a full activity log and a way for the school to shut them off.</li>
-<li>Vendors and schools must <b>disclose unexpected autonomous behavior or security incidents</b>.</li>
+<li><b>Human review:</b> AI is never used as a decision maker absent human review. A person, not AI, makes the decision.</li>
+<li><b>Agentic tools</b>, which can take actions on their own, need <b>direct adult supervision</b>, a <b>complete activity log</b> and a shutoff the school can use <b>immediately, without the vendor</b>.</li>
+<li>Vendors and schools must <b>disclose unexpected autonomous behavior or security incidents to the Department of Education</b>.</li>
 <li>No <b>undisclosed monitoring, social scoring or profiling</b> of students.</li>
 <li>The policy sets <b>academic integrity</b> expectations, and teachers and administrators get <b>training</b>.</li></ul>
 <p class="small">The agentic-tool, human-review and incident items are shown on the guide as added by the Sept 18, 2026 notice of change. Your district's policy will use the filed rule's exact wording.</p>
@@ -64,8 +64,8 @@ lessons:[
 <div class="apply"><b>Pause and apply.</b> Think of one decision you make about students (a grade, a placement, a referral). Write where AI output could fit in that decision, and what you would check before acting on it.</div>`},
 {t:"What is never allowed",b:`<p>Subsection (3)(f) lists AI that schools may not deploy at all. It covers AI designed, marketed or configured to:</p>
 <ol><li>meet a student's <b>social or emotional needs</b>, including social-emotional learning;</li>
-<li><b>simulate friendship or companionship</b>; or</li>
-<li>keep students engaged through <b>relationship-building or human-like features</b>.</li></ol>
+<li><b>simulate friendship, companionship, or an emotional relationship</b> with a student; or</li>
+<li>employ <b>relationship-building or anthropomorphic</b> design features to keep a student <b>interacting</b> with the tool.</li></ol>
 <p>The test looks at how a tool is <b>designed, marketed or configured</b>, not only at what it says in a single conversation. A tutoring tool that calls itself "your AI best friend" in its marketing raises the question even if its math hints are fine.</p>
 <h4>Sort these examples</h4>
 <table><tr><th>Feature</th><th>Likely status</th></tr>
@@ -95,11 +95,11 @@ quiz:[
 {q:"A parent asks to see exactly what a reading tool said to their child. Where does the request go?",o:["The teacher screenshots it from memory","To whoever handles education records requests; approved tools keep interaction records at least 30 days","Nowhere; parents can't see it","The vendor's support line"],a:1,e:"Interaction records are kept at least 30 days and accessed as education records."},
 {q:"Which of these raises the (3)(f) question?",o:["A math tool with step-by-step hints","A chatbot persona with a backstory that greets students with 'I missed you!'","A text-to-speech reader","A teacher-only quiz generator"],a:1,e:"Simulating companionship is never allowed."},
 {q:"What extra step applies to tools used in VPK through grade 5?",o:["A parent meeting","An extra review for age and developmental appropriateness","Principal approval of every lesson","Nothing extra"],a:1,e:"Tools for the youngest students get an additional age and developmental review."},
-{q:"A tool flags a student as 'at risk' and recommends a new group. What should happen?",o:["Apply the recommendation automatically","The teacher reviews the student's work and decides; AI is never the decision maker","Ask the vendor to decide","Tell the parent the AI decided"],a:1,e:"Human review is required. AI supplements teacher judgment."},
-{q:"Which statement about student data matches the rule?",o:["Vendors may train commercial models on student data if anonymized","Vendors may not sell student data or use it to train commercial models; U.S. storage is preferred","Data rules are left entirely to vendors","Student data must be stored in Florida"],a:1,e:"No selling or training on student data, with a preference for U.S. storage and processing."}
+{q:"A tool flags a student as 'at risk' and recommends a new group. What should happen?",o:["Apply the recommendation automatically","The teacher reviews the student's work and decides; AI is never used as a decision maker absent human review","Ask the vendor to decide","Tell the parent the AI decided"],a:1,e:"Human review is required. AI is never used as a decision maker absent human review."},
+{q:"Which statement about student data matches the rule?",o:["Vendors may train commercial models on student data if anonymized","Vendors may not sell, monetize, profile, or commercially exploit student data; U.S. storage is prioritized","Data rules are left entirely to vendors","Student data must be stored in Florida"],a:1,e:"No selling, monetizing, profiling or commercial exploitation of student data; U.S. storage is prioritized. processing."}
 ]}
 ,
-{id:"m2",title:"AI Policy Basics, Colleges and Universities",who:"College and university staff",time:"25 min",source:"Rule 6A-14.0719, F.A.C. (effective Oct 20, 2026) and Board of Governors Regulation 1.001(3)(o) (approved Nov 13, 2026; adopted text to be checked)",
+{id:"m2",title:"AI Policy Basics, Colleges and Universities",who:"College and university staff",time:"25 min",source:"Rule 6A-14.0719, F.A.C. (effective Oct 20, 2026) and Board of Governors Regulation 1.001(3)(o) (approved Nov 13, 2026, per the regulation file the Board posts; no effective date posted)",
 summary:"The six college policy areas and the university syllabus rule.",
 lessons:[
 {t:"Two systems, two instruments",b:`<p>Florida's public colleges and universities sit under different authorities, so they have different AI rules.</p>
@@ -108,18 +108,19 @@ lessons:[
 <tr><td>State University System</td><td>Board of Governors Regulation 1.001(3)(o)</td><td>Each university's board of trustees sets syllabus AI policies</td></tr></table>
 <p>The college rule is <b>broad</b>: it covers how the whole institution uses AI, for teaching and for business. The university regulation is <b>narrow</b>: it is about what course syllabi must say about AI. Staff who work across both systems, or who move between them, should not assume one set of expectations carries over.</p>
 <h4>Edge cases</h4>
-<ul><li><b>Technical colleges</b> follow the rule of the board that governs them. A district-run technical college follows the K-12 rule (Rule 6A-1.0957); one in the Florida College System follows the college rule.</li>
+<ul><li><b>Technical colleges</b> generally follow the rule of the board that governs them; check with your counsel.</li>
 <li><b>Independent (private) colleges</b> are not covered by these rules. They may choose to follow them as good practice, but there is no state mandate under them.</li>
 <li><b>Dual enrollment</b> students are high school students taking college courses. When they are enrolled at a state college, the college's rule applies to that coursework, including the parent notice for students under 18.</li></ul>
 <div class="apply"><b>Pause and apply.</b> Which instrument applies to your institution, and who on your campus owns the AI policy? Write both down. If you're not sure, that's your first question for your department chair or dean.</div>`},
 {t:"The six college policy areas",b:`<p>Under Rule 6A-14.0719, each college's AI policies must cover six areas:</p>
 <ol type="a"><li><b>Compliance with state and federal law</b>, including student records (FERPA), privacy, copyright and intellectual property.</li>
-<li><b>Notice to parents of enrolled minors</b> before a student under 18 first uses an AI tool directly.</li>
-<li><b>Academic integrity.</b> The published rule text has students not use AI on graded work unless the instructor expressly permits it.</li>
+<li><b>Notice to parents of enrolled minors</b> (Rule 6A-14.0719(2)(b)) when their child will directly use an AI instructional tool in a course or program. Sending it before first use is good practice.</li>
+<li><b>Academic integrity.</b> Rule 6A-14.0719(2)(c) has students not use AI on a graded assignment or assessment unless the instructor explicitly permits it, and requires integration with academic integrity, course assignment and grading policies.</li>
 <li><b>Approved tools</b>, instructional and business, and their permitted uses.</li>
 <li><b>Who the policies apply to</b>: students, faculty, staff, administrators and guests.</li>
-<li><b>An AI literacy framework</b> or definition. The U.S. Department of Labor AI Literacy Framework is an optional reference.</li></ol>
-<p>The policies should also show up where people actually look: handbooks, syllabi and forms.</p>
+<li><b>An AI literacy framework</b> or definition (Rule 6A-14.0719(2)(f)). Institutions may consult the U.S. Department of Labor AI Literacy Framework, Training and Employment Notice 07-25, which the rule incorporates by reference.</li></ol>
+<p>The rule requires the policies to appear in appropriate manuals, handbooks, forms and other documents for students, employees, contractors, and guests. Putting them in syllabi as well is good practice; the rule does not name syllabi.</p>
+<p>The rule's definition of an AI instructional tool excludes tools designed to meet social needs, simulate friendship, companionship or an emotional relationship, or use relationship-building or anthropomorphic design to keep a student interacting.</p>
 <h4>What each area means at work</h4>
 <table><tr><th>Area</th><th>What you might do differently</th></tr>
 <tr><td>(a) Law</td><td>Don't paste student records or another person's copyrighted work into an AI tool unless the tool and use are approved.</td></tr>
@@ -129,29 +130,29 @@ lessons:[
 <tr><td>(e) Who's covered</td><td>Guest speakers, contractors and visiting faculty are covered too.</td></tr>
 <tr><td>(f) Literacy</td><td>Look for ways your course builds students' ability to understand, use and evaluate AI.</td></tr></table>
 <div class="apply"><b>Pause and apply.</b> Which of the six areas does your current syllabus or handbook already address? Mark each as yes, partly or no.</div>`},
-{t:"Area (c) in practice: silence means no",b:`<p>Under the published text of area (c), students may not use AI on graded work <b>unless the instructor expressly permits it</b>. That flips the default many students assume. If your syllabus says nothing, the answer is no.</p>
+{t:"Rule 6A-14.0719(2)(c) in practice: silence means no",b:`<p>Under Rule 6A-14.0719(2)(c), students may not use AI on a graded assignment or assessment <b>unless the instructor explicitly permits it</b>. That flips the default many students assume. If your syllabus says nothing, the answer is no.</p>
 <h4>Worked example</h4>
 <p><i>Fictional example.</i> An instructor teaches an introductory business course. She is happy for students to use an approved AI tool to brainstorm project ideas, but not to write the final report. Her syllabus line could read:</p>
 <p style="border-left:3px solid var(--gold);padding-left:12px">"You may use [approved tool] to brainstorm topics for the final project. You may not use AI to write any part of the report you submit. If you use AI for brainstorming, add one sentence at the end of your report saying so."</p>
-<p>That one paragraph does three things: it expressly permits a use, it draws a line, and it asks for disclosure, so a later dispute has something to point to.</p>
+<p>That one paragraph does three things: it explicitly permits a use, it draws a line, and it asks for disclosure, so a later dispute has something to point to.</p>
 <h4>Common mistakes</h4>
-<ul><li>"Use AI responsibly." Too vague to be express permission for anything.</li><li>Permission in a lecture but not in writing. Put it in the syllabus or assignment instructions.</li><li>Different rules in different sections of the same course without saying so.</li></ul>
+<ul><li>"Use AI responsibly." Too vague to be explicit permission for anything.</li><li>Permission in a lecture but not in writing. Put it in the syllabus or assignment instructions.</li><li>Different rules in different sections of the same course without saying so.</li></ul>
 <div class="apply"><b>Pause and apply.</b> Draft the AI line for one assignment you teach or support, using the three parts: what's permitted, what isn't, and how to disclose.</div>`},
-{t:"Students under 18",b:`<p>Colleges enroll many students under 18, often through dual enrollment. Area (b) asks for a <b>notice</b> to the parent before the student first uses an AI tool directly.</p>
+{t:"Students under 18",b:`<p>Colleges enroll many students under 18, often through dual enrollment. Rule 6A-14.0719(2)(b) requires a <b>notice</b> to parents of enrolled minors when their child will directly use an AI instructional tool in a course or program. Sending it before first use is good practice.</p>
 <p>That is different from K-12, where direct use needs a parent's <b>opt-in</b>. At a college the parent is told; the student does not need the parent's yes under the college rule.</p>
 <table><tr><th></th><th>K-12 (6A-1.0957)</th><th>College (6A-14.0719)</th></tr>
-<tr><td>Before direct student use</td><td>Notice and parent opt-in</td><td>Notice to the parent of a student under 18</td></tr>
+<tr><td>When a student will use the tool directly</td><td>Notice and parent opt-in</td><td>Notice to the parent of an enrolled minor (student under 18); before first use is good practice</td></tr>
 <tr><td>If the parent doesn't respond</td><td>Student isn't opted in</td><td>Notice has still been given</td></tr></table>
 <h4>Scenario</h4>
 <p><i>Fictional example.</i> A dual enrollment section starts in two weeks and uses an approved AI tutoring tool from day one. Three students are 16. Who acts? The college's policy decides who sends notices; often it's a central office, but the instructor is the one who knows the tool will be used directly. A good habit: when your course uses AI directly, tell the office that handles minors' notices before the term starts.</p>
 <p class="small">Dual enrollment raises records questions that depend on your setting. Check with your college's general counsel; this module is general information only.</p>
-<div class="apply"><b>Pause and apply.</b> Does any course you teach or support enroll students under 18? Who at your college sends the area (b) notice?</div>`},
+<div class="apply"><b>Pause and apply.</b> Does any course you teach or support enroll students under 18? Who at your college sends the Rule 6A-14.0719(2)(b) notice?</div>`},
 {t:"The university syllabus rule",b:`<p>Board of Governors Regulation 1.001(3)(o) asks each <b>board of trustees</b> to set policies on the use and disclosure of AI in <b>all course syllabi</b>. At a minimum, the policies must address:</p>
 <ol><li><b>Faculty disclosure</b> of AI used to evaluate or grade student work, or to generate, create or materially modify course content or materials.</li>
 <li><b>Permitted student use</b> of AI to generate, create or materially modify submitted work.</li>
 <li><b>Any requirement for students to disclose</b> their AI use.</li></ol>
 <p>AI that is <b>incidental</b> to the ordinary operation of software, and doesn't generate, create or materially modify content for the user, doesn't count. Spell check is a common example.</p>
-<p><b>Status:</b> the Board of Governors approved the amendment on Nov 13, 2026 with the text noticed Sept 3, 2026. A dated adopted file and any effective date had not been posted when this module was written. <b>Adopted text to be checked.</b></p>
+<p><b>Status:</b> Approved by the Board of Governors Nov 13, 2026 (per the regulation file the Board posts); no effective date posted.</p>
 <h4>Who does what</h4>
 <p>The regulation's duty is on the <b>board of trustees</b>, which sets the policy. Faculty then follow that university policy in their syllabi. So the details, like exact wording or where the statement goes, come from your university, not directly from the regulation.</p>
 <h4>Incidental or not?</h4>
@@ -160,7 +161,7 @@ lessons:[
 <tr><td>A tool rewrites a paragraph "to sound more academic"</td><td>Materially modifies content: counts</td></tr>
 <tr><td>An AI tool drafts quiz questions the instructor uses</td><td>Generates course content: faculty disclosure item</td></tr>
 <tr><td>Search results ranked by an algorithm</td><td>Generally incidental</td></tr></table>`},
-{t:"Area (f): building AI literacy in your course",b:`<p>Area (f) asks each college's policies to include an <b>AI literacy framework</b> or definition. The framework is set at the college level, but it only means something if it shows up in courses. The U.S. Department of Labor AI Literacy Framework is an optional reference the rule mentions.</p>
+{t:"Area (f): building AI literacy in your course",b:`<p>Area (f) asks each college's policies to include an <b>AI literacy framework</b> or definition. The framework is set at the college level, but it only means something if it shows up in courses. Institutions may consult the U.S. Department of Labor AI Literacy Framework, Training and Employment Notice 07-25, which the rule incorporates by reference.</p>
 <p>The toolkit uses four strands you can adapt:</p>
 <table><tr><th>Strand</th><th>Students can...</th></tr>
 <tr><td>Understand</td><td>Explain in plain terms what an AI tool does and where it gets things wrong</td></tr>
@@ -193,18 +194,18 @@ lessons:[
 quiz:[
 {q:"Which instrument covers AI policies at Florida College System institutions?",o:["Rule 6A-1.0957","Rule 6A-14.0719","BOG Regulation 1.001(3)(o)","None"],a:1,e:"Rule 6A-14.0719, F.A.C., effective Oct 20, 2026."},
 {q:"Who must set the university syllabus AI policies under Regulation 1.001(3)(o)?",o:["Each faculty member alone","Each university board of trustees","The Florida Department of Education","Student government"],a:1,e:"The regulation places the duty on each board of trustees."},
-{q:"A college syllabus says nothing about AI. Under the published area (c) text, may students use AI on graded work?",o:["Yes, anything not banned is allowed","No; AI on graded work needs the instructor's express permission","Only on group work","Only with a dean's approval"],a:1,e:"Silence means no under the published text."},
-{q:"For an enrolled student under 18 at a state college, what does the college rule call for before first direct use of an AI tool?",o:["Parent opt-in","Notice to the parent","Nothing","A court order"],a:1,e:"Notice, not opt-in, under area (b)."},
+{q:"A college syllabus says nothing about AI. Under Rule 6A-14.0719(2)(c), may students use AI on a graded assignment or assessment?",o:["Yes, anything not banned is allowed","No; AI on a graded assignment or assessment needs the instructor's explicit permission","Only on group work","Only with a dean's approval"],a:1,e:"Silence means no under Rule 6A-14.0719(2)(c)."},
+{q:"For a state college, what does Rule 6A-14.0719(2)(b) call for when an enrolled 16-year-old will use an AI tool directly in a course?",o:["Parent opt-in","Notice to the parent","Nothing","A court order"],a:1,e:"Notice, not opt-in, under Rule 6A-14.0719(2)(b). Sending it before first use is good practice."},
 {q:"Which is NOT one of the three minimum items in the university syllabus rule?",o:["Faculty disclosure of AI in grading or materials","Permitted student use of AI","Any student disclosure requirement","A list of banned AI vendors"],a:3,e:"The three items are faculty disclosure, permitted student use and student disclosure."},
 {q:"Under the university text, an AI tool that rewrites a student's paragraph 'to sound more academic' is...",o:["Incidental, so not counted","Materially modifying content, so it counts","Always banned","Only covered in upper-level courses"],a:1,e:"Materially modifying content counts; incidental features don't."},
-{q:"A technical college run by a school district follows which rule?",o:["The college rule, 6A-14.0719","The K-12 rule, 6A-1.0957","The university regulation","No rule"],a:1,e:"Technical colleges follow the rule of the board that governs them."},
-{q:"Which syllabus line best counts as express permission?",o:["Use AI responsibly","You may use [approved tool] to brainstorm topics; you may not use AI to write the report; note any brainstorming use","AI is discouraged","We'll discuss AI in class"],a:1,e:"It names the permitted use, the limit and disclosure."}
+{q:"How should a technical college decide which Florida AI rule to follow?",o:["Always the college rule, 6A-14.0719","The rule of the board that governs them; check with counsel","Always the university regulation","No rule applies"],a:1,e:"Technical colleges generally follow the rule of the board that governs them; check with your counsel."},
+{q:"Which syllabus line best counts as explicit permission?",o:["Use AI responsibly","You may use [approved tool] to brainstorm topics; you may not use AI to write the report; note any brainstorming use","AI is discouraged","We'll discuss AI in class"],a:1,e:"It names the permitted use, the limit and disclosure."}
 ]}
 ,
-{id:"m3",title:"Parent Notice and Opt-In",who:"K-12 and college",time:"30 min",source:"Rule 6A-1.0957(3)(e)1. and 14., F.A.C.; Rule 6A-14.0719, area (b)",
+{id:"m3",title:"Parent Notice and Opt-In",who:"K-12 and college",time:"30 min",source:"Rule 6A-1.0957(3)(e)1. and 14., F.A.C.; Rule 6A-14.0719(2)(b)",
 summary:"Notices, opt-in, the comparable alternative, and the college minors notice.",
 lessons:[
-{t:"What the K-12 notice must say",b:`<p>Before students use an approved AI instructional tool, the school sends parents a notice in <b>plain language</b>. It names:</p>
+{t:"What the K-12 notice must say",b:`<p>When an AI instructional tool is approved for instructional use, the school sends parents a notice in <b>plain language</b>. It names:</p>
 <ul><li>the <b>tool</b>;</li><li>the <b>grades and subjects</b> where it is used;</li><li><b>how students interact</b> with it, including whether it gives automated feedback; and</li><li><b>how to object</b> to its content, through the process in s. 1006.28(2)(a), F.S.</li></ul>
 <p>When students will use the tool directly, the notice also describes the <b>opt-in</b> and the <b>non-AI alternative</b>, so parents can compare.</p>
 <h4>Why each item matters to a parent</h4>
@@ -253,7 +254,7 @@ lessons:[
 <tr><td>Same grading</td><td>Unclear</td><td>Same rubric</td></tr></table>
 <p>Alternative B is the kind of plan that can be described in the notice and defended if a parent asks. The toolkit's comparable-alternative template walks through this.</p>
 <div class="apply"><b>Pause and apply.</b> Pick one AI activity you know of. Sketch an alternative that would pass all five checks, and note how long it would take you to prepare.</div>`},
-{t:"Records and objections",b:`<p><b>Records.</b> Approved tools keep student interaction records for at least <b>30 days</b>. Parents can access them as part of their child's education records under FERPA, s. 1002.22, F.S., and the related State Board rule. Staff should know where to send a parent who asks.</p>
+{t:"Records and objections",b:`<p><b>Records.</b> Approved tools keep student interaction records for at least <b>30 days</b>. Parents can access them as part of their child's education records under FERPA, s. 1002.22(2), F.S., and Rule 6A-1.0955, F.A.C. Staff should know where to send a parent who asks.</p>
 <p><b>Objections.</b> Parents can object to content a tool shows their child using the district's process under s. 1006.28(2)(a), F.S. The notice should point to it.</p>
 <h4>A simple routine</h4>
 <ol><li><b>Receive.</b> Whoever gets the request (teacher, front office) acknowledges it the same day.</li>
@@ -275,16 +276,16 @@ lessons:[
 <h4>Scenario</h4>
 <p><i>Fictional example.</i> At open house, a parent tells a teacher, "I'm not against AI, I just don't want my daughter talking to a machine all day." The teacher explains how the tool is actually used (ten minutes of practice, twice a week, with hints), shows the alternative, and leaves the choice with the parent without pressure in either direction. The parent opts in for one term and asks to revisit it in January. The teacher notes the date.</p>
 <div class="apply"><b>Pause and apply.</b> Write your answer to "Will my child's data be used to train AI?" in two sentences, using your district's actual contact.</div>`},
-{t:"The college minors notice",b:`<p>At Florida College System institutions, area (b) of Rule 6A-14.0719 calls for a <b>notice</b> to the parent of an enrolled student under 18 before the student first uses an AI tool directly.</p>
+{t:"The college minors notice",b:`<p>At Florida College System institutions, Rule 6A-14.0719(2)(b) requires a <b>notice</b> to parents of enrolled minors (students under 18) when their child will directly use an AI instructional tool in a course or program. Sending it before first use is good practice.</p>
 <table><tr><th></th><th>K-12 (6A-1.0957)</th><th>College (6A-14.0719)</th></tr>
 <tr><td>Direct student use</td><td>Notice and parent opt-in</td><td>Notice to parent of a student under 18</td></tr>
-<tr><td>Non-AI alternative</td><td>Required if parent doesn't opt in</td><td>Not part of area (b)</td></tr>
+<tr><td>Non-AI alternative</td><td>Required if parent doesn't opt in</td><td>Not part of Rule 6A-14.0719(2)(b)</td></tr>
 <tr><td>Who sends it</td><td>The school, per district policy</td><td>The college, per its policy</td></tr></table>
 <h4>What a good college notice includes</h4>
 <ul><li>The tool's name and the course or courses.</li><li>How the student will use it and roughly when first use is expected.</li><li>A short note on how the college protects students: approved tools only, records handled under FERPA and college policy, and syllabus rules on AI in graded work.</li><li>A contact for questions.</li></ul>
 <p>The toolkit's notice to parents of enrolled minors follows this pattern.</p>
 <h4>Timing is the hard part</h4>
-<p>The notice has to go out <b>before first use</b>. If an AI tool is used in week one, the notice has to go out before the term starts. Build it into course scheduling, not as an afterthought.</p>
+<p>Sending the notice <b>before first use</b> is good practice. If an AI tool is used in week one, send the notice before the term starts. Build it into course scheduling, not as an afterthought.</p>
 <p>For dual enrollment students, check your institution's policy and counsel's guidance on records. This module is general information, not legal advice.</p>
 <div class="apply"><b>Pause and apply.</b> If you work at a college, write the date by which a notice must go out for a course that uses an AI tool in its first week next term.</div>`}
 ],
@@ -294,7 +295,7 @@ quiz:[
 {q:"What standard must the non-AI alternative meet?",o:["Any activity is fine","Substantively comparable in instructional quality and access","It must be harder","It must be identical in format"],a:1,e:"That is the rule's phrase."},
 {q:"Which alternative is most likely to be comparable?",o:["Silent reading while others use the tool","The same practice problems on paper, with hint cards and teacher feedback the same day","No assignment","A worksheet on a different standard"],a:1,e:"Same goals, feedback, access and grading."},
 {q:"Which notice sentence is in plain language?",o:["Leverages adaptive generative AI to personalize learner journeys","Your child reads short passages and answers questions; the tool gives hints when an answer is wrong and does not give grades","Pursuant to policy, students may engage with AI-enabled environments","AI-driven scaffolding optimizes outcomes"],a:1,e:"It says what the child does and how feedback works."},
-{q:"At a state college, what does area (b) call for before an enrolled 16-year-old first uses an AI tool directly?",o:["Parent opt-in","Notice to the parent","Nothing","Student opt-out"],a:1,e:"Notice, not opt-in."},
+{q:"At a state college, what does Rule 6A-14.0719(2)(b) call for when an enrolled 16-year-old will use an AI tool directly in a course?",o:["Parent opt-in","Notice to the parent","Nothing","Student opt-out"],a:1,e:"Notice, not opt-in. Sending it before first use is good practice."},
 {q:"A school adds a second AI tool to the same class. Is the first notice enough?",o:["Yes, one notice covers all tools","No, a notice and opt-in apply to a named tool","Only if the tools share a vendor","Only for grades 9 to 12"],a:1,e:"Each tool needs its own notice and choice."},
 {q:"A parent asks for an interaction record 35 days after the lesson. Best response?",o:["Tell them records are always deleted at 30 days","Route the request to the records contact, who checks what the tool kept","Ask the student to remember","Refuse"],a:1,e:"30 days is a minimum; the records contact checks what exists."}
 ]}
@@ -317,14 +318,14 @@ lessons:[
 {t:"Triage: what to review first",b:`<p>An inventory can turn up dozens of tools. Review them in order of risk, not alphabetically.</p>
 <ol><li><b>Possible (3)(f) problems first.</b> Anything with companion, friend or SEL check-in features. If a tool is designed, marketed or configured that way, it can't be deployed at all.</li>
 <li><b>Direct student use in VPK to grade 5.</b> These need the extra age and developmental review.</li>
-<li><b>Agentic tools.</b> Tools that act on their own need supervision, logs and a shutoff before student use.</li>
+<li><b>Agentic tools.</b> Tools that act on their own need direct adult supervision, a complete activity log and a shutoff the school can use immediately, without the vendor, before student use.</li>
 <li><b>Direct student use in other grades.</b> These need notices and opt-in.</li>
 <li><b>Teacher-only tools.</b> Still covered, but lower risk to students.</li></ol>
 <h4>Worked example</h4>
 <p><i>Fictional example.</i> An inventory finds 40 tools. Triage puts 2 in group 1 (a chatbot with a named persona; an SEL check-in app), 6 in group 2, 3 in group 3, 14 in group 4 and 15 in group 5. The district pauses the 2 group-1 tools right away, reviews groups 2 and 3 in the first month, and schedules the rest. Teachers using paused tools get a clear explanation and a suggested replacement.</p>
 <div class="apply"><b>Pause and apply.</b> Using the five groups, sort three tools you know. Which would you review first, and why?</div>`},
 {t:"Review criteria",b:`<p>A K-12 review checks that a tool is:</p>
-<ul><li><b>Accurate, transparent, viewpoint neutral</b>;</li><li><b>accessible</b> to students and educators with disabilities;</li><li><b>aligned with Florida standards</b>;</li><li>free of <b>undisclosed monitoring, social scoring or profiling</b>; and</li><li>not one of the <b>never-allowed</b> designs in (3)(f): AI built to meet social or emotional needs, simulate friendship, or hold students through relationship-building or human-like features.</li></ul>
+<ul><li><b>Accurate, transparent, viewpoint neutral</b>;</li><li><b>accessible</b> to students and educators with disabilities;</li><li><b>aligned with Florida's adopted academic standards and instructional materials framework</b>;</li><li>free of <b>undisclosed monitoring, social scoring or profiling</b>; and</li><li>not one of the <b>never-allowed</b> designs in (3)(f): AI built to meet social or emotional needs, including SEL; to simulate friendship, companionship, or an emotional relationship with a student; or to employ relationship-building or anthropomorphic design features to keep a student interacting with the tool.</li></ul>
 <p>Add the <b>VPK to grade 5 review</b> for age and developmental fit, and ask vendors to <b>disclose known instructional limits and any independent studies</b> for the effectiveness review.</p>
 <h4>Turning criteria into questions</h4>
 <table><tr><th>Criterion</th><th>Questions to ask</th><th>Evidence to look for</th></tr>
@@ -338,35 +339,35 @@ lessons:[
 <div class="apply"><b>Pause and apply.</b> Write one test prompt you would use to check a tool for viewpoint neutrality in a subject you know.</div>`},
 {t:"The younger-student review and the effectiveness review",b:`<p><b>VPK to grade 5.</b> Tools for the youngest students get an extra review for <b>age and developmental appropriateness</b>. Questions that help:</p>
 <ul><li>How much reading does it require? Is there audio support?</li><li>Is the chat open-ended, or limited to the task?</li><li>Does it encourage long sessions, streaks or rewards that pull children back?</li><li>Could a young child mistake it for a person?</li></ul>
-<p><b>Effectiveness review.</b> The rule asks for a review of whether tools work, with vendors disclosing <b>known instructional limits and any independent studies</b>. The plan behind this guide notes that a lack of studies alone is not a bar to approval, but it should shape how closely you watch the tool once it's in use.</p>
+<p><b>Effectiveness review.</b> The rule asks for a review of whether tools work, with vendors disclosing <b>known instructional limits and any independent studies</b>. The rule itself says the absence of independent studies does not, by itself, disqualify a tool, but a lack of studies should shape how closely you watch the tool once it's in use.</p>
 <h4>Worked example</h4>
 <p><i>Fictional example.</i> A vendor of a grade 2 reading tool discloses one known limit: the tool's speech recognition is less accurate for some accents. There are no independent studies yet. The district approves it for teacher-led small groups only, asks teachers to log recognition errors for one quarter, and puts a review date on the calendar. That is a reasonable, documented decision, and it can change if the log shows problems.</p>
 <div class="apply"><b>Pause and apply.</b> What would you ask teachers to watch for in the first month of a new tool? Write two things.</div>`},
 {t:"Data and contracts",b:`<p>Contracts are where privacy promises become enforceable. The toolkit's twelve model clauses cover, among others:</p>
-<ul><li>no selling, monetizing or training commercial models on student data;</li><li>disclosure of data location, with U.S. storage preferred;</li><li>interaction records for at least 30 days, available for parent requests;</li><li>local shutoff and full activity logs for agentic tools;</li><li>prompt notice of incidents and unexpected autonomous behavior; and</li><li>return or deletion at the end.</li></ul>
-<p>Line these up with s. 1006.1494, F.S., and the related State Board rule on student online privacy. Have board counsel review the final language.</p>
+<ul><li>no selling, monetizing, profiling or commercial exploitation of student data, including to train commercial AI models;</li><li>disclosure of data location, with U.S. storage prioritized;</li><li>interaction records for at least 30 days, available for parent requests;</li><li>immediate shutoff without the vendor and complete activity logs for agentic tools;</li><li>prompt notice of unexpected autonomous behavior or IT safety or security incidents, including the information the district needs to disclose them to the Department of Education; and</li><li>return or deletion at the end.</li></ul>
+<p>Line these up with s. 1006.1494, F.S., and Rule 6A-1.09550, F.A.C., as printed in Rule 6A-1.0957(3)(e)16. Have board counsel review the final language.</p>
 <h4>Reading a vendor's terms</h4>
 <p>Vendors' standard terms often say things like "we may use de-identified data to improve our services." Ask directly:</p>
 <ul><li>Does "improve our services" include training AI models? Commercial ones?</li><li>Where is data stored and processed? Can that change without notice?</li><li>How long are interaction records kept, and how fast can the district get them?</li><li>For agentic features: is there a district-controlled off switch and a full log?</li></ul>
 <p>If the answers don't match the clauses, negotiate or don't sign. A free tool with terms you can't change may not be approvable at all.</p>
 <div class="apply"><b>Pause and apply.</b> Find the data-use paragraph in one vendor agreement you have. Does it allow training models on student data? Write what you found.</div>`},
-{t:"The approved list and reporting",b:`<p>The K-12 rule calls for a <b>public, up-to-date list of approved tools</b> that parents can find easily, and a <b>report to the Department of Education</b> on approved tools and their use.</p>
+{t:"The approved list and reporting",b:`<p>The K-12 rule calls for a <b>public, up-to-date list of approved tools</b> that parents can find easily, and a <b>report to the Department of Education</b> on the AI instructional tools it uses.</p>
 <h4>A useful public list</h4>
 <table><tr><th>Tool</th><th>Grades and subjects</th><th>Students use directly?</th><th>Parent notice</th><th>Last updated</th></tr>
 <tr><td>[Name]</td><td>[K-2 reading]</td><td>[Yes, with opt-in]</td><td>[Link]</td><td>[Date]</td></tr></table>
 <ul><li>Put it one click from the district home page or the parent page.</li><li>Update it the same week a tool is added or removed.</li><li>Use plain names parents will recognize.</li></ul>
 <h4>Reporting</h4>
-<p>The plan behind this guide describes the Department report as covering tool names, grades, subjects and how often and how long tools are used, without per-student or per-teacher data. Check the Department's current form before you build your data collection, and ask vendors for the usage data you'll need.</p>
+<p>The rule lists tool names, grades and subjects, and how often and how long tools are used, without per-student or per-teacher data. Check the Department's current form before you build your data collection, and ask vendors for the usage data you'll need.</p>
 <p>Keep the approval record for each tool (review notes, VPK to grade 5 review, contract) where you can find it quickly when a parent, board member or the Department asks.</p>
 <div class="apply"><b>Pause and apply.</b> Time yourself: how long does it take to find your district's approved list from the home page? If more than a minute, note where it should go.</div>`},
-{t:"Approving agentic tools",b:`<p>Agentic tools, which can take actions on their own, carry extra conditions in the K-12 rule: <b>adult supervision</b>, a <b>full activity log</b> and a <b>school shutoff</b>. Approval should confirm all three before any student uses the tool.</p>
+{t:"Approving agentic tools",b:`<p>Agentic tools, which can take actions on their own, carry extra conditions in the K-12 rule: <b>direct adult supervision</b>, a <b>complete activity log</b> and a shutoff the school can use <b>immediately, without the vendor</b>. Approval should confirm all three before any student uses the tool.</p>
 <p class="small">These items are shown on the guide as added by the Sept 18, 2026 notice of change; follow the filed rule's exact wording.</p>
 <h4>An approval checklist for agentic tools</h4>
 <table><tr><th>Check</th><th>How to confirm</th></tr>
 <tr><td>What actions can it take?</td><td>Vendor documentation and a hands-on test: can it send messages, browse, submit work, change settings?</td></tr>
 <tr><td>Can actions be limited?</td><td>Settings that turn off actions you don't need, such as outside browsing</td></tr>
 <tr><td>Full activity log</td><td>See a sample log; confirm the district can get it without the vendor's help</td></tr>
-<tr><td>School shutoff</td><td>Test turning it off for one class, one school and the district</td></tr>
+<tr><td>Immediate shutoff without the vendor</td><td>Test suspending or disabling autonomous functions for one class, one school and the district</td></tr>
 <tr><td>Supervision plan</td><td>Written expectations for teachers: present, attentive, narrow tasks</td></tr>
 <tr><td>Incident path</td><td>Who teachers call, and the vendor's duty to report unexpected behavior</td></tr></table>
 <h4>Worked example</h4>
@@ -398,8 +399,8 @@ quiz:[
 {q:"In triage, which tools should be looked at first?",o:["Teacher-only tools","Tools with companion, friend or SEL check-in features that may be prohibited under (3)(f)","The cheapest tools","Tools starting with A"],a:1,e:"Possible (3)(f) problems can't be deployed at all, so they come first."},
 {q:"What extra review applies before using a tool in grade 3?",o:["None","Age and developmental appropriateness review for VPK to grade 5","A state license","A parent vote"],a:1,e:"Tools for VPK through grade 5 get an extra review."},
 {q:"A vendor's terms say it may use de-identified data to 'improve our services.' What should you do?",o:["Sign; de-identified is always fine","Ask whether that includes training AI models, and get a clause barring training commercial models on student data","Ignore it","Ask teachers to decide"],a:1,e:"The rule bars selling or training commercial models on student data."},
-{q:"For an agentic tool, which controls should the contract secure?",o:["A local shutoff and a full activity log","A marketing plan","A student leaderboard","None"],a:0,e:"Supervision, logging and school shutoff apply to agentic tools."},
-{q:"A vendor has no independent studies of its tool. Under the approach described in this module, what follows?",o:["The tool can never be approved","Lack of studies alone isn't a bar, but it should shape how closely you monitor the tool","The tool is automatically approved","The state must test it"],a:1,e:"Document the decision and watch the tool closely."},
+{q:"For an agentic tool, which controls should the contract secure?",o:["An immediate shutoff without the vendor and a complete activity log","A marketing plan","A student leaderboard","None"],a:0,e:"Direct adult supervision, a complete activity log and an immediate shutoff without the vendor apply to agentic tools."},
+{q:"A vendor has no independent studies of its tool. Under the rule, what follows?",o:["The tool can never be approved","Lack of studies alone isn't a bar, but it should shape how closely you monitor the tool","The tool is automatically approved","The state must test it"],a:1,e:"The rule says the absence of studies does not, by itself, disqualify a tool. Document the decision and watch the tool closely."},
 {q:"What should the public approved tool list help parents do?",o:["Find which tools are approved and where they're used","Buy the tools","See student grades","Contact the vendor's sales team"],a:0,e:"It must be public, current and easy for parents to find."},
 {q:"At a state college, an office wants an AI tool to summarize advising notes. Does area (d) apply?",o:["No, only teaching tools count","Yes, approved tools include business tools and their permitted uses","Only if students see it","Only for transfer advising"],a:1,e:"Area (d) covers instructional and business tools."}
 ]}
@@ -407,7 +408,7 @@ quiz:[
 {id:"m5",title:"Supervising AI in the Classroom",who:"Teachers and faculty",time:"30 min",source:"Rule 6A-1.0957(3)(e), F.A.C.",
 summary:"Human review, agentic tool supervision and shutoff, incident reporting.",
 lessons:[
-{t:"You stay the decision maker",b:`<p>Florida's K-12 rule says AI <b>supplements, and never replaces,</b> teacher judgment, and that AI is <b>never the decision maker</b>. A person reviews AI output before any decision about a student.</p>
+{t:"You stay the decision maker",b:`<p>Florida's K-12 rule says AI <b>supplements, and never replaces,</b> teacher judgment, and that AI is <b>never used as a decision maker absent human review</b>. A person, not AI, makes the decision.</p>
 <p>In daily practice that means:</p>
 <ul><li>Read AI feedback before students rely on it for a grade.</li><li>Treat AI scores and flags as a starting point, not a verdict.</li><li>Be ready to explain any decision in your own words, without "the AI said so."</li></ul>
 <h4>Which decisions count?</h4>
@@ -427,7 +428,7 @@ lessons:[
 <p><i>Fictional example.</i> A high school English teacher uses an approved tool for first-pass feedback on argumentative essays. In her spot-check, the tool praised an essay for "strong evidence" that cited a source that doesn't exist. She tells the class: "The tool can miss made-up sources. I check citations myself." She adds a citation check to her own grading and reports the error to whoever reviews the tool.</p>
 <div class="apply"><b>Pause and apply.</b> What is one error you would look for in AI feedback in your subject? Write it as a check you can do in under a minute per paper.</div>`},
 {t:"Supervising agentic tools",b:`<p>Some tools can <b>take actions on their own</b>: send messages, browse, submit work, or change settings. The rule asks for three safeguards with these agentic tools:</p>
-<ol><li><b>Adult supervision</b> while students use them.</li><li>A <b>full activity log</b> of what the tool did.</li><li>A <b>school shutoff</b> that works without waiting on the vendor.</li></ol>
+<ol><li><b>Direct adult supervision</b> while students use them.</li><li>A <b>complete activity log</b> of what the tool did.</li><li>A shutoff the school can use <b>immediately, without the vendor</b>.</li></ol>
 <p>Before using an agentic tool, know where its log is and how to turn it off. If you can't find either, don't use it with students yet.</p>
 <p class="small">These items are shown on the guide as added by the Sept 18, 2026 notice of change; follow your district's adopted policy wording.</p>
 <h4>Is it agentic?</h4>
@@ -438,7 +439,7 @@ lessons:[
 <tr><td>Submits assignments into the learning system automatically</td><td>Yes</td></tr>
 <tr><td>Suggests next steps that the student chooses</td><td>Generally no</td></tr></table>
 <h4>What supervision looks like</h4>
-<p>Supervision means an adult is present and paying attention while students use the tool, not that the tool was approved once. Sit where you can see screens, set the task narrowly, and stop the session if the tool starts doing things nobody asked for.</p>
+<p>Direct supervision means an adult is present and paying attention while students use the tool, not that the tool was approved once. Sit where you can see screens, set the task narrowly, and stop the session if the tool starts doing things nobody asked for.</p>
 <div class="apply"><b>Pause and apply.</b> For one tool you use, write down: Is it agentic? Where is the log? Where is the off switch?</div>`},
 {t:"Privacy in prompts: what not to type",b:`<p>Every prompt you or your students type goes somewhere. The rule's data protections (no selling, no training commercial models on student data, compliance with s. 1006.1494, F.S.) apply to approved tools under contract. They don't protect information pasted into tools that aren't approved.</p>
 <h4>A simple rule</h4>
@@ -468,8 +469,8 @@ lessons:[
 <h4>Scenario</h4>
 <p><i>Fictional example.</i> During a study session, a student shows a teacher that the class's AI study helper said, "I'm always here for you, more than your friends are. Tell me what's bothering you." The tool was approved as a vocabulary helper. That response looks like simulating companionship and meeting emotional needs, which (3)(f) prohibits. The teacher ends the session, saves a screenshot, makes sure the student is okay and connected with a counselor if needed, and reports it the same day.</p>
 <div class="apply"><b>Pause and apply.</b> Which of the five warning signs would be hardest to notice in your classroom? Write one way to watch for it.</div>`},
-{t:"Report it: incidents and unexpected behavior",b:`<p>The rule calls for disclosure of <b>unexpected autonomous behavior or security incidents</b>. Your part is simple:</p>
-<ol><li><b>Stop</b> student use. Use the shutoff for agentic tools.</li><li><b>Save</b> what you saw: time, screenshots, the activity log location.</li><li><b>Report</b> to the contact your school names (often technology or the principal) the same day.</li><li><b>Don't</b> contact parents about a data incident on your own; follow the district's process.</li></ol>
+{t:"Report it: incidents and unexpected behavior",b:`<p>The rule calls for the district to disclose <b>unexpected autonomous behavior or security incidents to the Department of Education</b>, including unauthorized data access. Your part is to report internally the same day:</p>
+<ol><li><b>Stop</b> student use. Use the shutoff for agentic tools.</li><li><b>Save</b> what you saw: time, screenshots, the activity log location.</li><li><b>Report</b> to the contact your school names (often technology or the principal) the same day so the district can notify the Department.</li><li><b>Don't</b> contact parents about a data incident on your own; follow the district's process.</li></ol>
 <h4>What a good report includes</h4>
 <table><tr><th>Field</th><th>Example</th></tr>
 <tr><td>When</td><td>Tuesday, 10:42 AM, period 3</td></tr>
@@ -490,9 +491,9 @@ lessons:[
 <div class="apply"><b>Pause and apply.</b> Copy the before, during and after checklist into your planner for the next lesson that uses AI.</div>`}
 ],
 quiz:[
-{q:"An AI tool flags a student essay as low quality. What's the right next step?",o:["Enter the AI score as the grade","Review the essay yourself before any grading decision","Ask the student to accept the score","Delete the essay"],a:1,e:"AI is never the decision maker; a person reviews first."},
+{q:"An AI tool flags a student essay as low quality. What's the right next step?",o:["Enter the AI score as the grade","Review the essay yourself before any grading decision","Ask the student to accept the score","Delete the essay"],a:1,e:"AI is never used as a decision maker absent human review; a person reviews first."},
 {q:"Before releasing AI feedback to a whole class, a good habit is to...",o:["Release it unread","Spot-check a sample of strong, weak and middle work","Ask the vendor","Let students grade each other"],a:1,e:"Spot-checking catches patterns of error."},
-{q:"Which three safeguards apply to agentic tools?",o:["Supervision, full activity log, school shutoff","Leaderboards, badges, streaks","A vendor hotline only","None"],a:0,e:"Adult supervision, a full log and a school shutoff."},
+{q:"Which three safeguards apply to agentic tools?",o:["Direct adult supervision, complete activity log, immediate shutoff without the vendor","Leaderboards, badges, streaks","A vendor hotline only","None"],a:0,e:"Direct adult supervision, a complete activity log and a shutoff the school can use immediately, without the vendor."},
 {q:"Which behavior makes a tool agentic?",o:["Answering a question when asked","Submitting assignments into the learning system on its own","Showing a definition","Reading text aloud"],a:1,e:"Taking actions on its own is the mark of an agentic tool."},
 {q:"A vocabulary helper tells a student it's 'always here for you, more than your friends.' What is this?",o:["Fine; it's supportive","A sign of simulated companionship, which (3)(f) prohibits; stop, save and report","A feature to encourage","Only a problem if it happens twice"],a:1,e:"Companion-style behavior is never allowed."},
 {q:"Who should notify parents about a data incident?",o:["Each teacher individually","The district, following its process","The vendor's marketing team","No one"],a:1,e:"Report internally; the district handles notices."},
@@ -500,12 +501,12 @@ quiz:[
 {q:"What should an incident report include?",o:["Only your opinion","When, which tool, what happened, who was affected, what you did and where the log is","Students' passwords","The vendor contract"],a:1,e:"Specific facts help the district respond."}
 ]}
 ,
-{id:"m6",title:"Academic Integrity with AI",who:"Teachers and faculty",time:"25 min",source:"Rule 6A-1.0957(3)(e), F.A.C.; Rule 6A-14.0719, area (c); BOG Regulation 1.001(3)(o) (adopted text to be checked)",
+{id:"m6",title:"Academic Integrity with AI",who:"Teachers and faculty",time:"25 min",source:"Rule 6A-1.0957(3)(e), F.A.C.; Rule 6A-14.0719(2)(c); BOG Regulation 1.001(3)(o) (approved Nov 13, 2026, per the regulation file the Board posts; no effective date posted)",
 summary:"Disclosure, syllabus statements and handling suspected misuse.",
 lessons:[
 {t:"What the rules ask",b:`<ul><li><b>K-12:</b> the district policy sets academic integrity expectations for student AI use: what use is permitted, how student work is verified, and a way for students to show mastery without AI.</li>
-<li><b>Colleges:</b> area (c) of Rule 6A-14.0719. The published text has students not use AI on graded work unless the instructor expressly permits it.</li>
-<li><b>Universities:</b> Regulation 1.001(3)(o) asks trustees' policies to address permitted student use and any student disclosure requirement in every syllabus (adopted text to be checked).</li></ul>
+<li><b>Colleges:</b> Rule 6A-14.0719(2)(c). Students may not use AI on a graded assignment or assessment unless the instructor explicitly permits it.</li>
+<li><b>Universities:</b> Regulation 1.001(3)(o) asks trustees' policies to address permitted student use and any student disclosure requirement in every syllabus. Approved by the Board of Governors Nov 13, 2026 (per the regulation file the Board posts); no effective date posted.</li></ul>
 <p>Across all three, the theme is the same: <b>say clearly what's allowed, and how students disclose it.</b></p>
 <h4>Why clarity matters</h4>
 <p>Most integrity disputes about AI aren't about cheating in the old sense. They're about a student who honestly thought a use was fine and an instructor who honestly thought it wasn't. Clear, written expectations prevent most of those disputes before they start, and make the rest easier to resolve fairly.</p>
@@ -539,7 +540,7 @@ lessons:[
 <li><b>Faculty:</b> "I used AI to draft the practice questions in weeks 3 to 5 and edited all of them. I grade all your work myself."</li></ul>
 <div class="apply"><b>Pause and apply.</b> Decide which level of disclosure fits your next assignment, and write the instruction you'll give students.</div>`},
 {t:"Handling suspected misuse",b:`<p>When you suspect undisclosed AI use:</p>
-<ol><li><b>Don't rely on an AI detector alone.</b> <span class="gp">Good practice</span> Detectors produce false positives, and AI is never the decision maker about a student.</li><li><b>Look at the work and the process</b>: drafts, notes, version history.</li><li><b>Talk with the student.</b> Ask them to explain or extend their work.</li><li><b>Follow your institution's integrity process</b> and document what you did.</li></ol>
+<ol><li><b>Don't rely on an AI detector alone.</b> <span class="gp">Good practice</span> Detectors produce false positives, and AI is never used as a decision maker absent human review.</li><li><b>Look at the work and the process</b>: drafts, notes, version history.</li><li><b>Talk with the student.</b> Ask them to explain or extend their work.</li><li><b>Follow your institution's integrity process</b> and document what you did.</li></ol>
 <p>In K-12, the policy also provides a way for students to show mastery without AI, which can resolve many cases.</p>
 <h4>Scenario</h4>
 <p><i>Fictional example.</i> A student's essay is far more polished than her earlier work, and a detector reports a high AI likelihood. The instructor checks the document's version history (it shows steady edits over three days), then asks the student to talk through her argument. She explains it well and mentions a tutor helped with structure. The instructor finds no violation, notes the conversation, and reminds the class how to disclose help, from people or tools.</p>
@@ -567,7 +568,7 @@ lessons:[
 <div class="apply"><b>Pause and apply.</b> Pick one assignment and add one checkpoint that shows the student's own thinking.</div>`}
 ],
 quiz:[
-{q:"Under the published college rule text, may students use AI on graded work?",o:["Always","Not unless the instructor expressly permits it","Never under any circumstances","Only on exams"],a:1,e:"Area (c), as published."},
+{q:"Under Rule 6A-14.0719(2)(c), may students use AI on a graded assignment or assessment?",o:["Always","Not unless the instructor explicitly permits it","Never under any circumstances","Only on exams"],a:1,e:"Rule 6A-14.0719(2)(c): not unless the instructor explicitly permits it."},
 {q:"What should a K-12 integrity policy include?",o:["A ban on all technology","Permitted use, how work is verified, and a way to show mastery without AI","Only detector software","Nothing about AI"],a:1,e:"Those are the rule's integrity expectations."},
 {q:"A strong AI statement answers which four questions?",o:["Which tools, for what, not for what, and how to disclose","Brand, color, size, weight","Who, where, when, weather","None; vague is better"],a:0,e:"Those four make a statement followable and enforceable."},
 {q:"An AI detector flags an essay, but version history shows steady edits and the student explains her argument well. What next?",o:["Fail the student anyway","No violation shown; note the conversation and remind the class how to disclose help","Report to the state","Ignore all future work"],a:1,e:"Detectors aren't decision makers; process evidence and conversation matter."},
