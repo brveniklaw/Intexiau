@@ -32,9 +32,6 @@
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
 .wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.draft{background:var(--citrus-soft);color:var(--ink);font-size:13px}
-.draft .wrap{padding-block:8px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.draft b{color:var(--citrus)}
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
 header.top .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-block:12px}
 .brand{font-family:var(--display);font-weight:700;font-size:19px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px;margin-right:auto}
@@ -121,8 +118,6 @@ footer .wrap{padding-block:20px;display:flex;flex-direction:column;gap:6px;font-
 
 /* Visual pass, Nov 14: IntexiaU Institute navy and gold, modernized */
 :root{--navy:#0f2740;--navy2:#173a5e;--gold:#c8952b;--gold2:#d9ad4e}
-.draft{background:var(--navy);color:#cdd8e3;border-bottom:1px solid rgba(255,255,255,.08)}
-.draft b{color:var(--gold2)}
 header.top{background:rgba(15,39,64,.97);border-bottom:0;backdrop-filter:saturate(1.2) blur(6px)}
 body::before{background:var(--navy)}
 .brand{color:#fff}
@@ -267,7 +262,7 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
   @page{margin:16mm}
   :root{--bg:#fff;--surface:#fff;--ink:#111;--muted:#444;--line:#bbb;--cream:#f4f1ea}
   body{background:#fff;color:#111;font-size:12pt}
-  body::before,.draft,header.top,footer,.view:not(#v-self-assessment),#v-self-assessment>.wrap>:not(#sa-report-wrap),.no-print{display:none!important}
+  body::before,header.top,footer,.view:not(#v-self-assessment),#v-self-assessment>.wrap>:not(#sa-report-wrap),.no-print{display:none!important}
   main .wrap{padding:0}
   .report{box-shadow:none;border:0;padding:0}
   .score,.path{break-inside:avoid}
@@ -276,8 +271,6 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
   a{color:#111}
 }
 </style>
-
-<div class="draft"><div class="wrap"><b>Preview</b> An IntexiaU Institute project. Working name and draft content for review. Content may change.</div></div>
 
 <header class="top"><div class="wrap">
   <a class="brand" href="#home"><img class="seal" src="/assets/seal-192.jpg" alt="IntexiaU Institute seal" width="42" height="42"><span class="brand-text"><span class="brand-org">IntexiaU Institute</span>Florida AI Classroom Guide</span></a>

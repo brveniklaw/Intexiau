@@ -11,7 +11,6 @@
 --display:"Source Serif 4",Georgia,serif;--body:"Atkinson Hyperlegible",system-ui,sans-serif;--shadow:0 1px 2px rgba(15,39,64,.05),0 10px 30px rgba(15,39,64,.08)}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6}
 a{color:var(--navy2)}
-.draft{background:var(--navy);color:#cdd8e3;font-size:13px}.draft .wrap{padding-block:8px}.draft b{color:var(--gold2)}
 header{background:rgba(15,39,64,.97);position:sticky;top:0;z-index:5}header .wrap{display:flex;align-items:center;gap:14px;padding-block:12px;flex-wrap:wrap}
 .brand{display:flex;gap:10px;align-items:center;color:#fff;text-decoration:none;font-family:var(--display);font-weight:700;font-size:18px;margin-right:auto}
 .brand img{width:42px;height:42px;border-radius:50%;box-shadow:0 0 0 1.5px rgba(200,149,43,.6)}
@@ -50,9 +49,8 @@ button:focus-visible,.btn:focus-visible,input:focus-visible{outline:2px solid va
 .badge-print h2{font-size:30px}.badge-print .nm{font-family:var(--display);font-size:28px;font-weight:700;color:var(--navy);border-bottom:2px solid var(--gold);padding:0 18px 4px;min-width:60%}
 .badge-print .fine{font-size:13px;color:var(--muted);max-width:60ch}
 footer{background:#0a1826;color:#9fb0c1;font-size:13px}footer .wrap{padding-block:20px;display:flex;flex-direction:column;gap:6px}
-@media print{@page{margin:14mm}header,.draft,footer,.no-print{display:none!important}body{background:#fff}main .wrap{padding:0}.panel{box-shadow:none;border:0;padding:0}.badge-print{break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{@page{margin:14mm}header,footer,.no-print{display:none!important}body{background:#fff}main .wrap{padding:0}.panel{box-shadow:none;border:0;padding:0}.badge-print{break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
-<div class="draft"><div class="wrap"><b>Preview</b> An IntexiaU Institute project. Content may change.</div></div>
 <header><div class="wrap"><a class="brand" href="/florida-ai"><img src="/assets/seal-192.jpg" alt="IntexiaU Institute seal" width="42" height="42"><span><small>IntexiaU Institute</small>Florida AI Classroom Guide</span></a>
 <nav><a href="/florida-ai#badges">All badges</a><a href="/florida-ai">Guide home</a></nav></div></header>
 <main><div class="wrap" id="app"></div></main>
