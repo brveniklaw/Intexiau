@@ -460,7 +460,7 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
   </div>
   <div class="stack" style="gap:14px"><h2>How a partnership grows</h2><div class="ladder">
     <div class="step free"><span class="pill">Free</span><h3>Toolkit</h3><p>Policy templates, notices and checklists for your rule.</p></div>
-    <div class="step"><h3>Readiness review</h3><p>A short look at where your AI policy, notices and approved tools stand.</p></div>
+    <div class="step free"><span class="pill">Free</span><h3>Readiness review</h3><p>A short look at where your AI policy, notices and approved tools stand.</p></div>
     <div class="step"><h3>Platform pilot</h3><p>A compliant AI platform built for your school or campus.</p></div>
     <div class="step"><h3>Training and buildout</h3><p>Staff badges, then your wider AI rollout.</p></div>
   </div></div>
@@ -470,7 +470,7 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
     <div class="doc"><p class="eyebrow">State colleges</p><h3>College partnership</h3><p style="color:var(--muted)">Faculty and staff badges, policy support across the six areas, and parent notice support for dual enrollment students.</p></div>
     <div class="doc"><p class="eyebrow">State universities</p><h3>University partnership</h3><p style="color:var(--muted)">Faculty training on AI in the syllabus, a statement library, and support for trustee policy work.</p></div>
   </div>
-  <div class="panel"><h3>Start a conversation</h3><span>Email <strong>partnerships@intexiau.com</strong> with your school or campus name and what you're working on. <button type="button" id="p-btn">Contact partnerships</button> <button type="button" id="w-btn">Request a 20-minute walkthrough</button></span></div>
+  <div class="panel"><h3>Start a conversation</h3><span>Email <strong>partnerships@intexiau.com</strong> with your school or campus name and what you're working on. <button type="button" id="p-btn">Contact partnerships</button> <button type="button" id="w-btn">Request a free 20-minute walkthrough</button></span></div>
   <p class="toast" id="p-toast" role="status"></p>
   <p class="notice">Partnership details are set by IntexiaU Institute. Badges show completed training, not college credit.</p>
 </div></section>
@@ -645,7 +645,7 @@ function saRenderReport(c){
   ${open.length?`<div class="stack" style="gap:8px"><h3>What's still open</h3><ol class="r-list">${open.map(([id,ai,w])=>{const a=sa.a[sec][id]||{};return `<li><strong>${a.s?ANS[a.s]:"Unanswered"}:</strong> ${esc(w[sec][0])}${a.x?`<br><span class="r-note">Note: ${esc(a.x)}</span>`:""}</li>`}).join("")}</ol></div>`:`<p><strong>Every item is marked done.</strong> Keep this report with your policy records and check again when your rule or tools change.</p>`}
   <div class="stack" style="gap:10px"><h3>Two ways to close the gaps</h3><div class="paths">
     <div class="path"><span class="pl">Path A</span><h3>Do it yourself with this guide</h3><p>Use the ${esc(S.toolkitName)}: templates and checklists mapped to your rule, plus short staff trainings with printable badges.</p><p class="no-print"><a href="#${S.toolkit}">Open the ${esc(S.toolkitName)}</a> · <a href="#badges">See the staff badges</a></p></div>
-    <div class="path"><span class="pl">Path B</span><h3>Book a 30-minute readiness review</h3><p>Walk through this report with IntexiaU Institute and agree on what to do first. We hold at most two reviews a week.</p><p><a href="mailto:partnerships@intexiau.com?subject=Readiness%20review%20request">Email partnerships@intexiau.com</a> to ask for a time.</p></div>
+    <div class="path"><span class="pl">Path B</span><h3>Book a free 30-minute readiness review</h3><p>Walk through this report with IntexiaU Institute and agree on what to do first. We hold at most two reviews a week.</p><p><a href="mailto:partnerships@intexiau.com?subject=Readiness%20review%20request">Email partnerships@intexiau.com</a> to ask for a time.</p></div>
   </div></div>
   <p class="notice">This report is general information about Florida rules, based only on your own answers. It is not legal advice and not a legal review of your policy. Have your board counsel or general counsel review any policy before adoption.</p>
   <p class="cite print-only">Printed from the Florida AI Classroom Guide, an IntexiaU Institute project. Your answers were stored only in your browser.</p>`;
