@@ -162,7 +162,8 @@ h1{font-weight:700}
 .callout{border-left-color:var(--gold);background:var(--cream)}
 .tag,.cite code{background:var(--cream);color:var(--sea)}
 button,.btn{border-radius:8px;padding:10px 16px}
-button.primary{background:var(--navy);border-color:var(--navy);color:#fff}
+button.primary,a.btn.primary{background:var(--navy);border-color:var(--navy);color:#fff}
+a.btn{text-decoration:none;display:inline-block}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) button.primary{background:var(--gold);border-color:var(--gold);color:#0f2740}}
 :root[data-theme="dark"] button.primary{background:var(--gold);border-color:var(--gold);color:#0f2740}
 .el .num,td.n{color:var(--citrus)}
@@ -194,6 +195,31 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
   nav{width:100%;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px}
   nav::-webkit-scrollbar{display:none}
 }
+
+/* Partnership value and conversion path, Nov 15 (D-014) */
+.value-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:16px}
+.value{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px;min-width:0}
+.value p{color:var(--muted);font-size:15px}
+.value.wide{grid-column:1/-1;background:var(--cream)}
+.value-band{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;margin-top:24px;padding:22px 24px;border-radius:14px;background:linear-gradient(160deg,#0c1f34 0%,#173a5e 100%);color:#cdd8e3;box-shadow:var(--shadow)}
+.value-band h2{color:#fff;font-size:22px}
+.value-band ul{margin:6px 0 0;padding-left:18px}
+.value-band a{font-weight:700;font-size:14px;border-radius:8px;padding:12px 20px;text-decoration:none;background:var(--gold);color:#0f2740;white-space:nowrap}
+.value-band a:hover,.value-band a:focus-visible{filter:brightness(1.08);outline:2px solid var(--gold2);outline-offset:2px}
+.journey{display:flex;flex-direction:column;gap:16px;counter-reset:jstep}
+.jstep{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:20px 22px;display:grid;grid-template-columns:44px minmax(0,1fr);gap:6px 16px}
+.jstep::before{counter-increment:jstep;content:counter(jstep);grid-row:1/span 6;width:40px;height:40px;border-radius:50%;background:var(--navy);color:var(--gold2);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:18px}
+.jstep>*{grid-column:2}
+.jstep .lbl{font-weight:700;color:var(--ink)}
+.jstep p{color:var(--muted)}
+.jstep p .lbl{color:var(--ink)}
+.jstep .cta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:4px}
+.jstep .cta a{font-weight:700;font-size:14px;border-radius:8px;padding:10px 16px;text-decoration:none;background:var(--navy);color:#fff}
+.jstep .cta a.alt{background:transparent;color:var(--sea);border:1px solid var(--line)}
+.jstep.s3{border-color:var(--gold)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .jstep .cta a:not(.alt){background:var(--gold);color:#0f2740}}
+:root[data-theme="dark"] .jstep .cta a:not(.alt){background:var(--gold);color:#0f2740}
+@media (max-width:560px){.jstep{grid-template-columns:1fr}.jstep::before{grid-row:auto}.jstep>*{grid-column:1}}
 
 /* Free self-assessment (D-011) */
 .sectors{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
@@ -294,7 +320,7 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
       <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5L2 9Zm4 2v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg></span>
       <p class="eyebrow">For state colleges</p>
       <h2>What must our AI policies cover?</h2>
-      <ul><li>The six policy areas at a glance</li><li>Four editable college documents</li><li>Notice to parents of students under 18</li></ul>
+      <ul><li>The six policy areas at a glance</li><li>Four editable college documents</li><li>Notice to parents of enrolled minors</li></ul>
       <span class="go">Open the college toolkit →</span>
     </a>
     <a class="door" href="#universities">
@@ -308,7 +334,7 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
       <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm-3 0-2 6 5-2 5 2-2-6"/></svg></span>
       <p class="eyebrow">For teachers, faculty and staff</p>
       <h2>Short trainings, with a badge</h2>
-      <ul><li>Six self-paced modules, 20 to 40 minutes each</li><li>A short knowledge check</li><li>A printable completion certificate</li></ul>
+      <ul><li>Six self-paced modules, 20 to 40 minutes each</li><li>A short knowledge check</li><li>A printable badge</li></ul>
       <span class="go">See the badges →</span>
     </a>
   </div>
@@ -318,6 +344,11 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
     <div><div class="n">Jul 1, 2027</div><div class="l">District and charter policies adopted and in use</div></div>
     <div><div class="n">18</div><div class="l">Minimum policy elements in (3)(e)</div></div>
     <div><div class="n">30 days</div><div class="l">Minimum time schools keep AI interaction records</div></div>
+  </div>
+  <div class="value-band">
+    <div><p class="eyebrow" style="color:var(--gold2)">IntexiaU Institute partnerships</p><h2>What IntexiaU Institute brings to your school</h2>
+    <ul><li>Florida-specific guidance, checked against the rules</li><li>Staff AI training with printable badges</li><li>Ready-to-use policy and syllabus templates</li><li>An innovation partner after the basics</li></ul></div>
+    <a href="#partner">See what a partnership includes →</a>
   </div>
 </div></section>
 
@@ -335,8 +366,8 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
     <div class="q"><h3>How do I object to what a tool shows my child?</h3><p>The content objection process under s. 1006.28(2)(a), F.S.</p><span class="soon">Draft</span></div>
     <div class="q"><h3>My child is in VPK to grade 5. Is anything different?</h3><p>Extra review for age and developmental fit.</p><span class="soon">Draft</span></div>
     <div class="q"><h3>What kinds of AI can't schools use at all?</h3><p>Companion-style, SEL and "relationship-building" AI are off limits.</p><span class="soon">Draft</span></div>
-    <div class="q"><h3>Does AI grade or discipline my child?</h3><p>AI is never the decision maker without a person's review.</p><span class="soon">Draft</span></div>
-    <div class="q"><h3>My child takes college courses through dual enrollment.</h3><p>General information. State colleges must notify parents of students under 18 before they use an AI tool directly.</p><span class="soon">Draft</span></div>
+    <div class="q"><h3>Does AI grade or discipline my child?</h3><p>AI is never used as a decision maker absent human review.</p><span class="soon">Draft</span></div>
+    <div class="q"><h3>My child takes college courses through dual enrollment.</h3><p>General information. State colleges must notify parents of enrolled minors when their child will directly use an AI instructional tool in a course or program. Sending the notice before first use is good practice.</p><span class="soon">Draft</span></div>
   </div>
   <p class="notice">General information about Florida law, not legal advice about your situation.</p>
 </div></section>
@@ -354,7 +385,7 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
       <section>
         <h2>Does my child need my permission?</h2>
         <p class="answer">Yes, when your child will use the AI tool directly. Your child's school must offer you an opt-in choice, so a child uses the tool only if you say yes.</p>
-        <p>Before that, the school sends a notice in plain language. It names the tool, the grades and subjects, how students will interact with it (including whether it gives automated feedback), and how to object to its content. <span class="cite"><code>(3)(e)1.a.–e.</code></span></p>
+        <p>When a tool is approved for instructional use, the school sends a notice in plain language. It names the tool, the grades and subjects, how students will interact with it (including whether it gives automated feedback), and how to object to its content. <span class="cite"><code>(3)(e)1.a.–e.</code></span></p>
         <div class="callout">If you don't respond to the notice, your child hasn't been opted in.</div>
       </section>
 
@@ -395,7 +426,7 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
     <h2>The 18 elements at a glance</h2>
     <p class="legend">Rule 6A-1.0957(3)(e). <span>Outlined</span> items were added by the Sept 18, 2026 notice of change.</p>
     <div class="elements" id="els"></div>
-    <div class="panel"><h3>Never allowed, (3)(f)</h3><span>AI designed, marketed or configured to meet a student's social or emotional needs (including SEL), to simulate friendship or companionship, or to keep students engaged through relationship-building or human-like features.</span></div>
+    <div class="panel"><h3>Never allowed, (3)(f)</h3><span>AI designed, marketed or configured to meet a student's social or emotional needs (including SEL), to simulate friendship, companionship, or an emotional relationship with a student, or to employ relationship-building or anthropomorphic design features to keep a student interacting with the tool.</span></div>
   </div>
   <div class="panel"><h3>Partner with IntexiaU Institute</h3><span>Staff training, toolkit support and Institute programs for your school or campus. <a href="#partner">See partnership options</a>.</span></div>
 </div></section>
@@ -414,7 +445,7 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
     <p class="legend">Rule 6A-14.0719, F.A.C.</p>
     <div class="elements" id="areas"></div>
   </div>
-  <div class="panel"><h3>Technical colleges</h3><span>Technical colleges follow the rule of the board that governs them. One run by a school district uses the <a href="#districts">K-12 toolkit</a>; one in the Florida College System uses this toolkit.</span></div>
+  <div class="panel"><h3>Technical colleges</h3><span>Technical colleges generally follow the rule of the board that governs them; check with your counsel. One run by a school district typically uses the <a href="#districts">K-12 toolkit</a>; one in the Florida College System typically uses this toolkit.</span></div>
   <div class="panel"><h3>Partner with IntexiaU Institute</h3><span>Staff training, toolkit support and Institute programs for your school or campus. <a href="#partner">See partnership options</a>.</span></div>
   <p class="notice">General information about Florida rules, not legal advice. Have your general counsel review any policy before adoption.</p>
 </div></section>
@@ -430,7 +461,7 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
   <p class="toast" id="udl-toast" role="status"></p>
   <div class="stack" style="gap:12px">
     <h2>What the policies must cover</h2>
-    <p class="legend">Regulation 1.001(3)(o), as noticed Sept 3, 2026. <span class="tag">Adopted text to be checked</span></p>
+    <p class="legend">Regulation 1.001(3)(o), approved by the Board of Governors Nov 13, 2026 (per the regulation file the Board posts); no effective date posted.</p>
     <div class="elements" id="uitems"></div>
     <div class="panel"><h3>Not counted as AI use</h3><span>AI that is incidental to how software ordinarily works and doesn't generate, create or materially modify content for the user.</span></div>
   </div>
@@ -443,7 +474,7 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
   <div class="stack" style="gap:10px">
     <p class="eyebrow">For teachers, faculty and staff</p>
     <h1>AI classroom training badges</h1>
-    <p class="lede">Short self-paced modules built from the K-12, college and university toolkits. Finish the lessons and the knowledge check, and print your completion certificate.</p>
+    <p class="lede">Short self-paced modules built from the K-12, college and university toolkits. Finish the lessons and the knowledge check, and print your badge.</p>
   </div>
   <div class="grid3" id="badgelist"></div>
   <p class="toast" id="b-toast" role="status"></p>
@@ -456,21 +487,55 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
   <div class="stack" style="gap:10px">
     <p class="eyebrow">IntexiaU Institute partnerships</p>
     <h1>Partner with IntexiaU Institute</h1>
-    <p class="lede">The toolkits and parent guide are free. Schools that want more can make IntexiaU Institute their AI implementation partner: a compliant platform of their own, their wider AI buildout, and training for their staff.</p>
+    <p class="lede">The toolkits and parent guide are free. Schools that want more can make IntexiaU Institute their AI implementation partner: a platform of their own designed around their rule, their wider AI buildout, and training for their staff.</p>
   </div>
-  <div class="stack" style="gap:14px"><h2>How a partnership grows</h2><div class="ladder">
+  <div class="stack" style="gap:14px" id="value">
+    <h2>What IntexiaU Institute brings to your school</h2>
+    <div class="value-grid">
+      <div class="value"><h3>Florida-specific guidance, checked against the rules</h3><p>Our toolkits and parent guide follow the published text of Rule 6A-1.0957 and Rule 6A-14.0719, and the Regulation 1.001(3)(o) text the Board of Governors approved on Nov 13, 2026 (per the regulation file the Board posts; no effective date posted). Our guidance cites the rule section it comes from. When the State Board or the Board of Governors changes a rule, we review the materials against the new text.</p></div>
+      <div class="value"><h3>Staff AI training with printable badges</h3><p>Short, self-paced modules for teachers, faculty and administrators, built from the same toolkits your policy uses. Staff finish the lessons and a knowledge check, then print a badge. A badge shows completed training. It is not college credit, a professional license or continuing education credit.</p></div>
+      <div class="value"><h3>Ready-to-use policy and syllabus templates</h3><p>Editable documents for K-12 districts and charters, state colleges and state universities. Each one is mapped to the policy elements or areas it covers, so your board counsel or general counsel starts from a draft instead of a blank page.</p></div>
+      <div class="value"><h3>An innovation partner after the basics</h3><p>Once your policy is in place, we can pilot an AI platform designed around your rule and built for your school or campus, then support your wider AI rollout. Any pilot starts with a written student privacy plan your counsel can review.</p></div>
+      <div class="value wide"><h3>One place for all of it</h3><p>Rule guidance, policy templates, parent notices, staff training and pilots all come from one partner. You don't have to piece them together from separate vendors and documents.</p></div>
+    </div>
+    <p class="notice"><em>General information about Florida rules, not legal advice. Have your board counsel or general counsel review any policy before adoption.</em></p>
+  </div>
+  <div class="stack" style="gap:14px" id="path">
+    <h2>From self-assessment to partnership</h2>
+    <div class="journey">
+      <div class="jstep">
+        <h3>Step 1: Free self-assessment and toolkit</h3>
+        <p><span class="lbl">What you get:</span> Fifteen questions across six areas, worded for your sector's rule, and a printable report showing what's done, partly done or not yet started. You also get free access to the toolkit for your sector: policy templates, notices and checklists.</p>
+        <p><span class="lbl">What we ask:</span> Nothing. There's no account, and your answers stay in your browser.</p>
+        <div class="cta"><a href="#self-assessment">Start the self-assessment</a></div>
+      </div>
+      <div class="jstep">
+        <h3>Step 2: Free readiness review</h3>
+        <p><span class="lbl">What you get:</span> A free 20-minute walkthrough, with our team, of where your AI policy, notices and approved tools stand, plus clear next steps for your rule and timeline.</p>
+        <p><span class="lbl">What we ask:</span> Your school, district or campus name, a contact person, and your current policy drafts, notices and list of AI tools, if you have them. A printed self-assessment report is a helpful starting point. We don't need any student or parent data. We schedule a limited number of readiness reviews each week.</p>
+        <div class="cta"><a href="mailto:partnerships@intexiau.com?subject=20-minute%20walkthrough%20request">Request a free 20-minute walkthrough</a><span class="cite">Email partnerships@intexiau.com with your school or campus name and what you're working on.</span></div>
+      </div>
+      <div class="jstep s3">
+        <h3>Step 3: Make IntexiaU Institute your AI implementation partner</h3>
+        <p>The partnership grows in steps, at your pace:</p>
+      </div>
+    </div>
+  </div>
+  <div class="stack" style="gap:14px"><h3>How a partnership grows</h3><div class="ladder">
     <div class="step free"><span class="pill">Free</span><h3>Toolkit</h3><p>Policy templates, notices and checklists for your rule.</p></div>
     <div class="step free"><span class="pill">Free</span><h3>Readiness review</h3><p>A short look at where your AI policy, notices and approved tools stand.</p></div>
-    <div class="step"><h3>Platform pilot</h3><p>A compliant AI platform built for your school or campus.</p></div>
+    <div class="step"><h3>Platform pilot</h3><p>An AI platform designed around your rule, built for your school or campus.</p></div>
     <div class="step"><h3>Training and buildout</h3><p>Staff badges, then your wider AI rollout.</p></div>
   </div></div>
   <div class="privacy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3Z"/><path d="M9 12l2 2 4-4"/></svg><div class="stack" style="gap:4px"><h3>Student data comes first</h3><span>The first release stores no student or parent data. Any pilot starts with a written student privacy plan your counsel can review.</span></div></div>
+  <h3>What you get, by sector</h3>
   <div class="grid3">
     <div class="doc"><p class="eyebrow">School districts and charters</p><h3>District partnership</h3><p style="color:var(--muted)">Staff badges for teachers and administrators, toolkit support through July 1, 2027, and a co-branded edition later.</p></div>
     <div class="doc"><p class="eyebrow">State colleges</p><h3>College partnership</h3><p style="color:var(--muted)">Faculty and staff badges, policy support across the six areas, and parent notice support for dual enrollment students.</p></div>
     <div class="doc"><p class="eyebrow">State universities</p><h3>University partnership</h3><p style="color:var(--muted)">Faculty training on AI in the syllabus, a statement library, and support for trustee policy work.</p></div>
   </div>
-  <div class="panel"><h3>Start a conversation</h3><span>Email <strong>partnerships@intexiau.com</strong> with your school or campus name and what you're working on. <button type="button" id="p-btn">Contact partnerships</button> <button type="button" id="w-btn">Request a free 20-minute walkthrough</button></span></div>
+  <div class="panel"><h3>What we ask</h3><span>A named lead on your side, agreed goals for the pilot or training rollout, and counsel review of the written student privacy plan before any pilot starts.</span></div>
+  <div class="panel"><h3>Start a conversation</h3><span>Email <strong>partnerships@intexiau.com</strong> with your school or campus name and what you're working on. <a class="btn" href="mailto:partnerships@intexiau.com?subject=Partnership%20inquiry">Contact partnerships</a> <a class="btn" href="mailto:partnerships@intexiau.com?subject=20-minute%20walkthrough%20request">Request a free 20-minute walkthrough</a></span></div>
   <p class="toast" id="p-toast" role="status"></p>
   <p class="notice">Partnership details are set by IntexiaU Institute. Badges show completed training, not college credit.</p>
 </div></section>
@@ -527,22 +592,22 @@ nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
 const ELEMENTS=[
  [1,"Parent notice in plain language, with opt-in and a comparable non-AI option",0],
  [2,"Extra review for VPK to grade 5 tools",0],
- [3,"Agentic tools: adult supervision, full activity log, school shutoff",1],
+ [3,"Agentic tools: direct adult supervision, complete activity log, immediate shutoff without the vendor",1],
  [4,"AI supplements, never replaces, teacher judgment and parents' rights",0],
  [5,"Complies with s. 1000.05, F.S.",0],
  [6,"Covers every AI tool, adopted under Ch. 1006 or not",0],
  [7,"Accurate, transparent, viewpoint neutral, accessible, standards-aligned",0],
  [8,"No undisclosed monitoring, social scoring or profiling",0],
  [9,"Academic integrity expectations",0],
- [10,"Human review: AI is never the decision maker",1],
+ [10,"Human review: AI is never used as a decision maker absent human review",1],
  [11,"Teacher and administrator training",0],
  [12,"Effectiveness review and vendor disclosure of limits",0],
  [13,"Public, up-to-date list of approved tools",0],
  [14,"Student interaction records kept at least 30 days",0],
- [15,"Report tools and usage to the Department",0],
+ [15,"Report the AI instructional tools used to the Department",0],
  [16,"Complies with s. 1006.1494, F.S. and related rule",0],
- [17,"No selling or training on student data; U.S. storage preferred",0],
- [18,"Disclose unexpected autonomous behavior or security incidents",1]
+ [17,"No selling, monetizing, profiling or commercial exploitation of student data; U.S. storage prioritized",0],
+ [18,"Disclose unexpected autonomous behavior or security incidents to the Department of Education",1]
 ];
 const DOCS=[
  ["Model policy amendment","A section to add to your Internet Safety Policy, tracking all 18 elements and the (3)(f) prohibitions.","All 18"],
@@ -553,19 +618,20 @@ const DOCS=[
  ["Comparable-alternative template","A one-page form to document why the non-AI pathway matches in quality and access.","1, 7"]
 ];
 const $=s=>document.querySelector(s);
+const DL={"Model policy amendment": "k12-model-policy-amendment", "Parent notice template": "k12-parent-notice-template", "Vendor contract clauses": "k12-vendor-contract-clauses", "Staff training outline": "k12-staff-training-outline", "Checklist and timeline to July 1, 2027": "k12-checklist-and-timeline", "Comparable-alternative template": "k12-comparable-alternative-template", "Model college AI policy outline": "college-model-ai-policy-outline", "Notice to parents of enrolled minors": "college-notice-to-parents-of-minors", "Approved tool review form": "college-approved-tool-review-form", "AI literacy framework and syllabus statements": "college-ai-literacy-and-syllabus-statements", "Model trustee AI syllabus policy outline": "university-trustee-syllabus-policy-outline", "Syllabus statement library": "university-syllabus-statement-library", "Faculty disclosure checklist": "university-faculty-disclosure-checklist"};
+const dlBtns=t=>`<a class="btn" href="/florida-ai/toolkit/${DL[t]}.docx" download>Word</a><a class="btn" href="/florida-ai/toolkit/${DL[t]}.pdf" target="_blank" rel="noopener">PDF</a>`;
 $("#els").innerHTML=ELEMENTS.map(([n,t,nw])=>`<div class="el${nw?" new":""}"><span class="num">${n}</span><span>${t}</span></div>`).join("");
-$("#docs").innerHTML=DOCS.map(([t,d,e],i)=>`<div class="doc"><p class="eyebrow">Piece ${i+1}</p><h3>${t}</h3><p style="color:var(--muted)">${d}</p><div class="meta"><span class="tag">Elements ${e}</span><span class="tag">Draft</span></div><div class="btns"><button type="button" data-dl="${t}">Word</button><button type="button" data-dl="${t}">PDF</button></div></div>`).join("");
-const CDOCS=[["Model college AI policy outline","Sections for all six areas, from legal basis to the AI literacy framework.","(a) to (f)"],["Notice to parents of enrolled minors","A one-page notice sent before a student under 18 first uses an AI tool directly.","(b)"],["Approved tool review form","One page per tool: data collected, direct student use, accessibility, approval.","(d)"],["AI literacy framework and syllabus statements","Four strands plus three sample syllabus statements.","(c), (f)"]];
-const AREAS=[["a","Compliance with state and federal law"],["b","Notice to parents of enrolled minors before direct AI tool use"],["c","Academic integrity"],["d","Approved tools"],["e","Who the policies apply to"],["f","An AI literacy framework"]];
+$("#docs").innerHTML=DOCS.map(([t,d,e],i)=>`<div class="doc"><p class="eyebrow">Piece ${i+1}</p><h3>${t}</h3><p style="color:var(--muted)">${d}</p><div class="meta"><span class="tag">Elements ${e}</span><span class="tag">Version 1</span></div><div class="btns">${dlBtns(t)}</div></div>`).join("");
+const CDOCS=[["Model college AI policy outline","Sections for all six areas, from legal basis to the AI literacy framework.","6A-14.0719(2)(a)-(f)"],["Notice to parents of enrolled minors","A one-page notice when an enrolled minor will directly use an AI instructional tool; sending it before first use is good practice.","6A-14.0719(2)(b)"],["Approved tool review form","One page per tool: data collected, direct student use, accessibility, approval.","6A-14.0719(2)(d)"],["AI literacy framework and syllabus statements","Four strands plus three sample syllabus statements.","6A-14.0719(2)(c), (2)(f)"]];
+const AREAS=[["a","Compliance with state and federal law (Rule 6A-14.0719(2)(a))"],["b","Notice to parents of enrolled minors when their child will directly use an AI instructional tool (Rule 6A-14.0719(2)(b); before first use is good practice)"],["c","Academic integrity on graded assignments or assessments (Rule 6A-14.0719(2)(c))"],["d","Approved tools (Rule 6A-14.0719(2)(d))"],["e","Who the policies apply to (Rule 6A-14.0719(2)(e))"],["f","An AI literacy framework (Rule 6A-14.0719(2)(f))"]];
 const UDOCS=[["Model trustee AI syllabus policy outline","Sections for each minimum item, the incidental-AI exclusion and review.","1 to 3"],["Syllabus statement library","Statements for three course stances, with faculty and student disclosure lines.","1 to 3"],["Faculty disclosure checklist","A one-page pre-term check on AI in grading, feedback and course materials.","1"]];
 const UITEMS=[["1","Faculty disclosure when AI grades or evaluates work, or creates course content"],["2","Permitted student use of AI to create or materially modify work"],["3","Any requirement that students disclose their AI use"]];
 const BADGES=[["AI Policy Basics, K-12","The 18 elements, the prohibitions and the July 1, 2027 deadline.","K-12 staff","25 min"],["AI Policy Basics, Colleges and Universities","The six college policy areas and the university syllabus rule.","College and university staff","25 min"],["Parent Notice and Opt-In","Notices, opt-in, the comparable alternative, and the college minors notice.","K-12 and college","30 min"],["Choosing and Approving AI Tools","Vendor review, contract clauses and approved tool lists.","Administrators","35 min"],["Supervising AI in the Classroom","Human review, agentic tool supervision and shutoff, incident reporting.","Teachers and faculty","30 min"],["Academic Integrity with AI","Disclosure, syllabus statements and handling suspected misuse.","Teachers and faculty","25 min"]];
-$("#cdocs").innerHTML=CDOCS.map(([t,d,a],i)=>`<div class="doc"><p class="eyebrow">Piece C${i+1}</p><h3>${t}</h3><p style="color:var(--muted)">${d}</p><div class="meta"><span class="tag">Areas ${a}</span><span class="tag">Draft</span></div><div class="btns"><button type="button" data-dl="${t}" data-t="cdl">Word</button><button type="button" data-dl="${t}" data-t="cdl">PDF</button></div></div>`).join("");
-$("#udocs").innerHTML=UDOCS.map(([t,d,a],i)=>`<div class="doc"><p class="eyebrow">Piece U${i+1}</p><h3>${t}</h3><p style="color:var(--muted)">${d}</p><div class="meta"><span class="tag">Items ${a}</span><span class="tag">Draft</span></div><div class="btns"><button type="button" data-dl="${t}" data-t="udl">Word</button><button type="button" data-dl="${t}" data-t="udl">PDF</button></div></div>`).join("");
+$("#cdocs").innerHTML=CDOCS.map(([t,d,a],i)=>`<div class="doc"><p class="eyebrow">Piece C${i+1}</p><h3>${t}</h3><p style="color:var(--muted)">${d}</p><div class="meta"><span class="tag">${a}</span><span class="tag">Version 1</span></div><div class="btns">${dlBtns(t)}</div></div>`).join("");
+$("#udocs").innerHTML=UDOCS.map(([t,d,a],i)=>`<div class="doc"><p class="eyebrow">Piece U${i+1}</p><h3>${t}</h3><p style="color:var(--muted)">${d}</p><div class="meta"><span class="tag">Items ${a}</span><span class="tag">Version 1</span></div><div class="btns">${dlBtns(t)}</div></div>`).join("");
 $("#uitems").innerHTML=UITEMS.map(([n,t])=>`<div class="el"><span class="num">${n}</span><span>${t}</span></div>`).join("");
 $("#areas").innerHTML=AREAS.map(([n,t])=>`<div class="el"><span class="num">${n}</span><span>${t}</span></div>`).join("");
-$("#badgelist").innerHTML=BADGES.map(([t,d,w,m],i)=>`<div class="doc"><svg class="badge-seal" viewBox="0 0 64 64" aria-hidden="true"><circle class="core" cx="32" cy="32" r="26"/><circle class="ring" cx="32" cy="32" r="30"/><circle class="ring" cx="32" cy="32" r="22" stroke-dasharray="2 3"/><text x="32" y="37" text-anchor="middle" font-size="14">${i+1}</text></svg><p class="eyebrow">Badge</p><h3>${t}</h3><p style="color:var(--muted)">${d}</p><div class="meta"><span class="tag">${w}</span><span class="tag">${m}</span></div><div class="btns"><button type="button" data-start="${t}">Start module</button></div></div>`).join("");
-document.addEventListener("click",e=>{const b=e.target.closest("[data-dl]");if(b){$("#"+(b.dataset.t||"dl")+"-toast").textContent=`Preview only: “${b.dataset.dl}” downloads will work in the built site.`;}const s=e.target.closest("[data-start]");if(s){$("#b-toast").textContent=`Preview only: the “${s.dataset.start}” module will open here in the built site.`;}});
+$("#badgelist").innerHTML=BADGES.map(([t,d,w,m],i)=>`<div class="doc"><svg class="badge-seal" viewBox="0 0 64 64" aria-hidden="true"><circle class="core" cx="32" cy="32" r="26"/><circle class="ring" cx="32" cy="32" r="30"/><circle class="ring" cx="32" cy="32" r="22" stroke-dasharray="2 3"/><text x="32" y="37" text-anchor="middle" font-size="14">${i+1}</text></svg><p class="eyebrow">Badge</p><h3>${t}</h3><p style="color:var(--muted)">${d}</p><div class="meta"><span class="tag">${w}</span><span class="tag">${m}</span></div><div class="btns"><a class="btn primary" href="/florida-ai/badges/#m${i+1}">Start module</a></div></div>`).join("");
 
 // Free self-assessment (D-011). Evolved from the gap checklist (key flai-gap-v1).
 // Answers stay in this browser (localStorage). Nothing is sent anywhere.
@@ -577,19 +643,19 @@ const SA_AREAS=["AI policy","Syllabus AI statements","Staff training","Student g
 // [id, area index, {sector:[question, cite or "" for good practice]}]
 const SA_QS=[
  ["q1",0,{k12:["Your board has adopted an AI policy, or an Internet Safety Policy amendment, that covers all 18 required elements.","6A-1.0957(3)(e)"],fcs:["Your college has adopted AI policies that cover all six required areas.","6A-14.0719"],sus:["Your board of trustees has adopted, or scheduled, a policy on the use and disclosure of AI in course syllabi.","Reg. 1.001(3)(o)"]}],
- ["q2",0,{k12:["The policy bars AI designed to meet students' social or emotional needs, to simulate friendship, or to keep students engaged through relationship-building design.","6A-1.0957(3)(f)"],fcs:["The policies say who they apply to: students, faculty, staff and others who use AI for the college.","6A-14.0719, area (e)"],sus:["The policy requires faculty to disclose when AI grades or evaluates student work, or creates course content.","Reg. 1.001(3)(o)"]}],
- ["q3",0,{k12:["A named person owns the plan to have the policy adopted and in use by July 1, 2027.","6A-1.0957(3)(e)"],fcs:["The policies name the state and federal laws they follow, including student records law.","6A-14.0719, area (a)"],sus:["A named office owns the syllabus policy and reviews it at least once a year.",""]}],
+ ["q2",0,{k12:["The policy bars AI designed to meet students' social or emotional needs, to simulate friendship, companionship or an emotional relationship, or to keep students interacting through relationship-building or anthropomorphic design.","6A-1.0957(3)(f)"],fcs:["The policies say who they apply to: students, faculty, staff and others who use AI for the college.","6A-14.0719(2)(e)"],sus:["The policy requires faculty to disclose when AI grades or evaluates student work, or creates course content.","Reg. 1.001(3)(o)"]}],
+ ["q3",0,{k12:["A named person owns the plan to have the policy adopted and in use by July 1, 2027.","6A-1.0957(3)(e)"],fcs:["The policies name the state and federal laws they follow, including student records law.","6A-14.0719(2)(a)"],sus:["A named office owns the syllabus policy and reviews it at least once a year.",""]}],
  ["q4",1,{k12:["Teachers have course or classroom statements that tell students when and how they may use AI.",""],fcs:["Each syllabus states what AI use is permitted in that course.",""],sus:["Each syllabus states whether, and how, students may use AI to create or materially modify their work.","Reg. 1.001(3)(o)"]}],
  ["q5",1,{k12:["Notices and course statements say when an AI tool gives students automated feedback.","6A-1.0957(3)(e)1.c."],fcs:["Each syllabus says whether students must disclose their AI use, and how.",""],sus:["Each syllabus says whether students must disclose their AI use, and how.","Reg. 1.001(3)(o)"]}],
  ["q6",2,{k12:["Teachers and administrators have had training on the AI policy and the tools they use.","6A-1.0957(3)(e)11."],fcs:["Faculty and staff have had training on the AI policies and the approved tools.",""],sus:["Faculty know the syllabus requirement and have model statements they can use.",""]}],
  ["q7",2,{k12:["Training is tracked, and new staff are trained when they start.",""],fcs:["Training is tracked, and new faculty and staff are trained when they start.",""],sus:["Training is tracked, and new faculty are trained before their first term.",""]}],
- ["q8",3,{k12:["Parents get a plain-language notice for each AI tool students use directly, with an opt-in step.","6A-1.0957(3)(e)1."],fcs:["Parents of enrolled students under 18 are notified before the student first uses an AI tool directly.","6A-14.0719, area (b)"],sus:["Students are told what counts as incidental AI, which the syllabus policy doesn't cover.","Reg. 1.001(3)(o)"]}],
- ["q9",3,{k12:["A non-AI alternative, substantively comparable in quality and access, is ready for students who aren't opted in.","6A-1.0957(3)(e)1.e."],fcs:["Students get AI literacy guidance under the college's AI literacy framework.","6A-14.0719, area (f)"],sus:["Students get general guidance on using AI well and responsibly in their studies.",""]}],
- ["q10",3,{k12:["VPK to grade 5 tools get extra review, and any agentic tool has adult supervision, a full activity log and a school-controlled shutoff.","6A-1.0957(3)(e)2. and 3."],fcs:["Students know where to ask about AI use in a course and how to raise a concern.",""],sus:["Students know where to ask about AI use in a course and how to raise a concern.",""]}],
- ["q11",4,{k12:["Each AI tool is reviewed and approved before use, and the public list of approved tools is current.","6A-1.0957(3)(e)12. and 13."],fcs:["AI tools are reviewed and approved before use, and the approved list is current.","6A-14.0719, area (d)"],sus:["AI tools used in courses are reviewed by IT and privacy staff before use.",""]}],
+ ["q8",3,{k12:["Parents get a plain-language notice for each AI tool students use directly, with an opt-in step.","6A-1.0957(3)(e)1."],fcs:["Parents of enrolled minors are notified when their child will directly use an AI instructional tool in a course or program. Sending the notice before first use is good practice.","6A-14.0719(2)(b)"],sus:["Students are told what counts as incidental AI, which the syllabus policy doesn't cover.","Reg. 1.001(3)(o)"]}],
+ ["q9",3,{k12:["A non-AI alternative, substantively comparable in quality and access, is ready for students who aren't opted in.","6A-1.0957(3)(e)1.e."],fcs:["Students get AI literacy guidance under the college's AI literacy framework.","6A-14.0719(2)(f)"],sus:["Students get general guidance on using AI well and responsibly in their studies.",""]}],
+ ["q10",3,{k12:["VPK to grade 5 tools get extra review, and any agentic tool has direct adult supervision, a complete activity log and a shutoff the school can use immediately, without the vendor.","6A-1.0957(3)(e)2. and 3."],fcs:["Students know where to ask about AI use in a course and how to raise a concern.",""],sus:["Students know where to ask about AI use in a course and how to raise a concern.",""]}],
+ ["q11",4,{k12:["Each AI tool is reviewed and approved before use, and the public list of approved tools is current.","6A-1.0957(3)(e)12. and 13."],fcs:["AI tools are reviewed and approved before use, and the approved list is current.","6A-14.0719(2)(d)"],sus:["AI tools used in courses are reviewed by IT and privacy staff before use.",""]}],
  ["q12",4,{k12:["Vendor contracts bar selling or monetizing student data and training commercial models on it, and prefer U.S. storage.","6A-1.0957(3)(e)17."],fcs:["Vendor contracts protect student education records and bar training commercial models on student data.",""],sus:["Vendor contracts protect student education records and bar training commercial models on student data.",""]}],
  ["q13",4,{k12:["Tools keep student interaction records for at least 30 days, and unexpected autonomous behavior or security incidents are reported to the Department.","6A-1.0957(3)(e)14. and 18."],fcs:["There is a process to report and respond to AI privacy or security incidents.",""],sus:["There is a process to report and respond to AI privacy or security incidents.",""]}],
- ["q14",5,{k12:["The policy sets academic integrity expectations for student AI use.","6A-1.0957(3)(e)9."],fcs:["The policies address academic integrity and AI use.","6A-14.0719, area (c)"],sus:["The student conduct or academic integrity code addresses AI use.",""]}],
+ ["q14",5,{k12:["The policy sets academic integrity expectations for student AI use.","6A-1.0957(3)(e)9."],fcs:["The policies address academic integrity and AI use on graded assignments or assessments.","6A-14.0719(2)(c)"],sus:["The student conduct or academic integrity code addresses AI use.",""]}],
  ["q15",5,{k12:["A person always reviews AI output before any decision about a student; AI is never the sole decision maker.","6A-1.0957(3)(e)10."],fcs:["A person reviews AI output before any decision about a student's grade or conduct.",""],sus:["A person reviews AI output before any decision about a student's grade or conduct.",""]}]
 ];
 const ANS={done:"Done",partly:"Partly",notyet:"Not yet"};
@@ -645,7 +711,7 @@ function saRenderReport(c){
   ${open.length?`<div class="stack" style="gap:8px"><h3>What's still open</h3><ol class="r-list">${open.map(([id,ai,w])=>{const a=sa.a[sec][id]||{};return `<li><strong>${a.s?ANS[a.s]:"Unanswered"}:</strong> ${esc(w[sec][0])}${a.x?`<br><span class="r-note">Note: ${esc(a.x)}</span>`:""}</li>`}).join("")}</ol></div>`:`<p><strong>Every item is marked done.</strong> Keep this report with your policy records and check again when your rule or tools change.</p>`}
   <div class="stack" style="gap:10px"><h3>Two ways to close the gaps</h3><div class="paths">
     <div class="path"><span class="pl">Path A</span><h3>Do it yourself with this guide</h3><p>Use the ${esc(S.toolkitName)}: templates and checklists mapped to your rule, plus short staff trainings with printable badges.</p><p class="no-print"><a href="#${S.toolkit}">Open the ${esc(S.toolkitName)}</a> · <a href="#badges">See the staff badges</a></p></div>
-    <div class="path"><span class="pl">Path B</span><h3>Book a free 30-minute readiness review</h3><p>Walk through this report with IntexiaU Institute and agree on what to do first. We hold at most two reviews a week.</p><p><a href="mailto:partnerships@intexiau.com?subject=Readiness%20review%20request">Email partnerships@intexiau.com</a> to ask for a time.</p></div>
+    <div class="path"><span class="pl">Path B</span><h3>Book a free 20-minute walkthrough</h3><p>Walk through this report with IntexiaU Institute and agree on what to do first. We schedule a limited number of readiness reviews each week.</p><p><a href="mailto:partnerships@intexiau.com?subject=20-minute%20walkthrough%20request">Email partnerships@intexiau.com</a> to ask for a time.</p></div>
   </div></div>
   <p class="notice">This report is general information about Florida rules, based only on your own answers. It is not legal advice and not a legal review of your policy. Have your board counsel or general counsel review any policy before adoption.</p>
   <p class="cite print-only">Printed from the Florida AI Classroom Guide, an IntexiaU Institute project. Your answers were stored only in your browser.</p>`;
@@ -659,8 +725,6 @@ function saCounts(){const c={done:0,partly:0,notyet:0,none:0};SA_QS.forEach(([id
 $("#sa-print").addEventListener("click",()=>{location.hash="self-assessment";window.print();});
 $("#sa-reset").addEventListener("click",()=>{const sec=sa.sector;sa.a[sec]={};saSave();saRenderQuestions();$("#sa-toast").textContent="Answers for this sector cleared.";});
 saRenderQuestions();
-document.getElementById("w-btn").addEventListener("click",()=>{document.getElementById("p-toast").textContent="Preview only: in the built site this will open a walkthrough request to partnerships@intexiau.com.";});
-document.getElementById("p-btn").addEventListener("click",()=>{document.getElementById("p-toast").textContent="Preview only: this will open an email to partnerships@intexiau.com in the built site.";});
 
 const VIEWS=["home","parents","parent-optin","districts","colleges","universities","badges","partner","self-assessment"];
 function route(){
