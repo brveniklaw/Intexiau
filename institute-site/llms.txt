@@ -17,7 +17,12 @@ All programs run on the AI Training Academy. Team and enterprise options are ava
 
 ## How to enrol
 
-Create an account at [academy.intexiau.com](https://academy.intexiau.com/), pick a program and start the same day. Certificates can be checked at [academy.intexiau.com/verify](https://academy.intexiau.com/verify).
+Create an account at [academy.intexiau.com](https://academy.intexiau.com/), pick a program and start the same day. Get started: [Sign in or create an account](https://academy.intexiau.com/login). Certificates can be checked at [academy.intexiau.com/verify](https://academy.intexiau.com/verify).
+
+## Guides
+
+- [Florida AI Classroom Guide](https://institute.intexiau.com/florida-ai): Florida's AI classroom rules in plain language, with a parent guide, policy toolkits for districts, colleges and universities, staff training badges and a free self-assessment. Start here: [Start the self-assessment](https://institute.intexiau.com/florida-ai#self-assessment).
+- [City AI Guide](https://institute.intexiau.com/cities-ai): an AI policy toolkit for Florida city and county staff, staff training badges, and a path from policy to a city AI Innovation Center. Start here: [Start the self-assessment](https://institute.intexiau.com/cities-ai#self-assessment).
 
 ## Contact
 
