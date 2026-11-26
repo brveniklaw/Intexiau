@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>City AI Guide</title>
+<meta name="robots" content="noindex">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,600&display=swap">
+<style>
+/* Layout: civic reference site. Sticky top bar, two-door home, readable article column, working checklist. */
+:root{
+  --bg:#fffdf8; --surface:#ffffff; --ink:#1b2531; --muted:#4a5763; --line:#e6e2d7;
+  --sea:#0f2740; --sea-soft:#f3eee2; --citrus:#a8781c; --citrus-soft:#f7efdc;
+  --ok:#1d7a55; --warn:#9a6a08; --bad:#b23a2c;
+  --navy:#0f2740; --navy2:#173a5e; --gold:#c8952b; --gold2:#d9ad4e; --cream:#f7f3ea;
+  --shadow:0 1px 2px rgba(15,39,64,.05),0 10px 30px rgba(15,39,64,.08);
+  --display:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0a1726; --surface:#112338; --ink:#eef2f6; --muted:#a9b6c4; --line:#22374f;
+  --sea:#e2bd6a; --sea-soft:#1a3049; --citrus:#e2bd6a; --citrus-soft:#2c2614;
+  --ok:#5ccb8a; --warn:#e8b04a; --bad:#ef7c6c; --cream:#14283f;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.25); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0a1726; --surface:#112338; --ink:#eef2f6; --muted:#a9b6c4; --line:#22374f;
+  --sea:#e2bd6a; --sea-soft:#1a3049; --citrus:#e2bd6a; --citrus-soft:#2c2614;
+  --ok:#5ccb8a; --warn:#e8b04a; --bad:#ef7c6c; --cream:#14283f;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.25); color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.draft{background:var(--citrus-soft);color:var(--ink);font-size:13px}
+.draft .wrap{padding-block:8px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.draft b{color:var(--citrus)}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-block:12px}
+.brand{font-family:var(--display);font-weight:700;font-size:19px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px;margin-right:auto}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-org{font-family:var(--body);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.mark{width:28px;height:28px;border-radius:7px;background:var(--sea);display:grid;place-items:center;color:var(--surface);font-size:13px;font-weight:700}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:6px;font-weight:700;font-size:15px}
+nav a:hover,nav a:focus-visible{color:var(--ink);background:var(--sea-soft);outline:none}
+nav a[aria-current="page"]{color:var(--sea);background:var(--sea-soft)}
+main .wrap{padding-block:32px 56px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(30px,5vw,46px);font-weight:700;letter-spacing:-.01em}
+h2{font-size:26px;font-weight:700}
+h3{font-size:19px;font-weight:700}
+p{margin:0}
+.lede{font-size:19px;color:var(--muted);max-width:62ch}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--sea);font-weight:700}
+.stack{display:flex;flex-direction:column;gap:16px}
+.hero{display:grid;gap:18px;padding-block:8px 28px}
+.doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.door{display:flex;flex-direction:column;gap:12px;padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:12px;color:var(--ink);text-decoration:none;min-width:0}
+.door:hover,.door:focus-visible{border-color:var(--sea);outline:none}
+.door ul{margin:0;padding-left:18px;color:var(--muted)}
+.door .go{margin-top:auto;color:var(--sea);font-weight:700}
+.dates{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-top:24px;overflow:hidden}
+.dates div{padding:16px 20px;border-right:1px solid var(--line)}
+.dates div:last-child{border-right:0}
+.dates .n{font-family:var(--display);font-size:24px;font-weight:700;font-variant-numeric:tabular-nums}
+.dates .l{color:var(--muted);font-size:14px}
+.cite{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.cite code,.tag{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:var(--sea-soft);color:var(--sea);padding:1px 6px;border-radius:4px;white-space:nowrap}
+.qlist{display:grid;gap:0;border-top:1px solid var(--line)}
+.q{display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding:16px 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}
+.q:hover h3,.q:focus-visible h3{color:var(--sea)}
+.q p{grid-column:1;color:var(--muted)}
+.q .arrow{grid-row:1/3;grid-column:2;align-self:center;color:var(--sea);font-weight:700}
+.q .soon{grid-row:1/3;grid-column:2;align-self:center;font-size:12px;color:var(--muted)}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:40px;align-items:start}
+@media (max-width:820px){.cols{grid-template-columns:1fr}}
+article{max-width:68ch;display:flex;flex-direction:column;gap:28px}
+article section{display:flex;flex-direction:column;gap:10px}
+.answer{font-size:18px}
+.callout{border-left:3px solid var(--sea);background:var(--sea-soft);padding:14px 16px;border-radius:0 8px 8px 0}
+aside.side{display:flex;flex-direction:column;gap:16px;position:sticky;top:90px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.panel h3{font-size:15px}
+.panel a{color:var(--sea)}
+.crumb{font-size:14px;color:var(--muted)}
+.crumb a{color:var(--sea)}
+.notice{border:1px dashed var(--line);border-radius:10px;padding:14px 16px;color:var(--muted);font-size:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.doc{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.doc .meta{display:flex;gap:6px;flex-wrap:wrap}
+.doc .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+button,.btn{font:inherit;font-weight:700;font-size:14px;border-radius:8px;padding:8px 12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+button.primary{background:var(--sea);border-color:var(--sea);color:var(--surface)}
+button:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--citrus);outline-offset:2px}
+.toast{font-size:13px;color:var(--citrus);min-height:1em}
+.elements{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;counter-reset:none}
+.el{display:flex;gap:10px;align-items:baseline;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:8px;font-size:14px;min-width:0}
+.el .num{font-family:var(--display);font-weight:700;color:var(--sea);font-variant-numeric:tabular-nums;min-width:2ch}
+.el.new{border-color:var(--citrus)}
+.legend{font-size:13px;color:var(--muted)}
+.legend span{color:var(--citrus);font-weight:700}
+.progress{display:flex;flex-direction:column;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
+.bar{height:10px;border-radius:6px;background:var(--line);overflow:hidden;display:flex}
+.bar i{display:block;height:100%}
+.counts{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;font-variant-numeric:tabular-nums}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+tr:last-child td{border-bottom:0}
+td.n{font-family:var(--display);font-weight:700;color:var(--sea);width:44px}
+select,textarea{font:inherit;font-size:14px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);padding:6px 8px;width:100%}
+textarea{min-height:38px;resize:vertical}
+tr[data-s="in"] td.n{color:var(--ok)} tr[data-s="part"] td.n{color:var(--warn)} tr[data-s="miss"] td.n{color:var(--bad)}
+.section-row td{background:var(--sea-soft);font-weight:700;color:var(--sea)}
+footer{border-top:1px solid var(--line);background:var(--surface)}
+footer .wrap{padding-block:20px;display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.door,.q h3{transition:border-color .15s,color .15s}}
+
+/* Visual pass, Nov 14: IntexiaU Institute navy and gold, modernized */
+:root{--navy:#0f2740;--navy2:#173a5e;--gold:#c8952b;--gold2:#d9ad4e}
+.draft{background:var(--navy);color:#cdd8e3;border-bottom:1px solid rgba(255,255,255,.08)}
+.draft b{color:var(--gold2)}
+header.top{background:rgba(15,39,64,.97);border-bottom:0;backdrop-filter:saturate(1.2) blur(6px)}
+body::before{background:var(--navy)}
+.brand{color:#fff}
+.brand-org{color:var(--gold2)}
+.seal{width:42px;height:42px;border-radius:50%;flex:none;display:block;box-shadow:0 0 0 1.5px rgba(200,149,43,.6)}
+.foot-seal{width:40px;height:40px;border-radius:50%;box-shadow:0 0 0 1px rgba(200,149,43,.5)}
+footer .foot-row{display:flex;align-items:center;gap:12px}
+nav a{color:#cdd8e3}
+nav a:hover,nav a:focus-visible{color:#fff;background:rgba(255,255,255,.08)}
+nav a[aria-current="page"]{color:var(--navy);background:var(--gold2)}
+nav a[data-nav="partner"]{border:1px solid var(--gold);color:var(--gold2)}
+nav a[data-nav="partner"][aria-current="page"]{color:var(--navy)}
+h1,h2,h3{color:var(--ink);letter-spacing:-.01em}
+h1{font-weight:700}
+.eyebrow{color:var(--citrus);letter-spacing:.14em;font-size:11.5px}
+.hero{position:relative;overflow:hidden;border-radius:20px;padding:clamp(28px,6vw,64px);margin-bottom:28px;background:linear-gradient(160deg,#0c1f34 0%,#173a5e 100%);color:#fff;box-shadow:var(--shadow)}
+.hero::after{content:"";position:absolute;right:-80px;top:-80px;width:340px;height:340px;border-radius:50%;border:1px solid rgba(217,173,78,.35);box-shadow:0 0 0 40px rgba(217,173,78,.06),0 0 0 90px rgba(217,173,78,.04);pointer-events:none}
+.hero h1{color:#fff;max-width:20ch}
+.hero h1 em{color:var(--gold2);font-style:italic}
+.hero .eyebrow{color:var(--gold2)}
+.hero .lede{color:#cdd8e3}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;position:relative;z-index:1}
+.hero-cta a{font-weight:700;font-size:14px;border-radius:8px;padding:12px 20px;text-decoration:none}
+.hero-cta .gold{background:var(--gold);color:#0f2740}
+.hero-cta .ghost{border:1px solid rgba(255,255,255,.35);color:#fff}
+.hero-cta a:hover,.hero-cta a:focus-visible{filter:brightness(1.08);outline:2px solid var(--gold2);outline-offset:2px}
+.door{border-radius:14px;border-top:4px solid var(--gold);box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s,border-color .15s}
+.door:hover,.door:focus-visible{transform:translateY(-2px);border-color:var(--gold);border-top-color:var(--gold)}
+.door .ic{width:40px;height:40px;border-radius:10px;background:var(--cream);display:grid;place-items:center;color:var(--citrus)}
+.door .ic svg{width:22px;height:22px}
+.door .go{color:var(--citrus)}
+.dates{background:var(--cream);border-color:var(--line);border-radius:14px}
+.dates .n{color:var(--sea);font-family:var(--display)}
+.dates div{border-right-color:var(--line)}
+.doc,.panel,.progress,.table-wrap{border-radius:14px;box-shadow:var(--shadow)}
+.doc{border-top:3px solid var(--gold)}
+.callout{border-left-color:var(--gold);background:var(--cream)}
+.tag,.cite code{background:var(--cream);color:var(--sea)}
+button,.btn{border-radius:8px;padding:10px 16px}
+button.primary,a.btn.primary{background:var(--navy);border-color:var(--navy);color:#fff}
+a.btn{text-decoration:none;display:inline-block}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) button.primary{background:var(--gold);border-color:var(--gold);color:#0f2740}}
+:root[data-theme="dark"] button.primary{background:var(--gold);border-color:var(--gold);color:#0f2740}
+.el .num,td.n{color:var(--citrus)}
+.section-row td{background:var(--cream);color:var(--sea)}
+.badge-seal{width:64px;height:64px}
+.badge-seal .ring{fill:none;stroke:var(--gold);stroke-width:2}
+.badge-seal .core{fill:var(--navy)}
+.badge-seal text{fill:var(--gold2);font-family:var(--display);font-weight:700}
+.ladder{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;counter-reset:step;position:relative}
+.step{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 18px 18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px}
+.step::before{counter-increment:step;content:counter(step);width:34px;height:34px;border-radius:50%;background:var(--navy);color:var(--gold2);display:grid;place-items:center;font-family:var(--display);font-weight:700;margin-bottom:6px}
+.step p{color:var(--muted);font-size:15px}
+.step.free{border-color:var(--gold)}
+.step .pill{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--citrus-soft);color:var(--citrus);padding:2px 8px;border-radius:999px}
+.privacy{display:flex;gap:14px;align-items:flex-start;background:var(--cream);border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:14px;padding:18px}
+.privacy svg{flex:none;width:28px;height:28px;color:var(--citrus)}
+footer{background:#0a1826;border-top:0}
+footer .wrap{color:#9fb0c1}
+
+/* Header fix, Nov 15: one line at 1280px and up; below that the nav gets its own scrolling row */
+header.top .wrap{max-width:1280px;flex-wrap:nowrap;gap:20px}
+.brand{flex:none}
+nav{flex-wrap:nowrap;gap:2px;min-width:0;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{white-space:nowrap;font-size:14.5px;padding:6px 8px;flex:none}
+.brand{font-size:18px}
+@media (max-width:1219px){
+  header.top .wrap{flex-wrap:wrap;row-gap:8px;padding-bottom:8px}
+  nav{width:100%;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px}
+  nav::-webkit-scrollbar{display:none}
+}
+
+/* Partnership value and conversion path, Nov 15 (D-014) */
+.value-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:16px}
+.value{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px;min-width:0}
+.value p{color:var(--muted);font-size:15px}
+.value.wide{grid-column:1/-1;background:var(--cream)}
+.value-band{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;margin-top:24px;padding:22px 24px;border-radius:14px;background:linear-gradient(160deg,#0c1f34 0%,#173a5e 100%);color:#cdd8e3;box-shadow:var(--shadow)}
+.value-band h2{color:#fff;font-size:22px}
+.value-band ul{margin:6px 0 0;padding-left:18px}
+.value-band a{font-weight:700;font-size:14px;border-radius:8px;padding:12px 20px;text-decoration:none;background:var(--gold);color:#0f2740;white-space:nowrap}
+.value-band a:hover,.value-band a:focus-visible{filter:brightness(1.08);outline:2px solid var(--gold2);outline-offset:2px}
+.journey{display:flex;flex-direction:column;gap:16px;counter-reset:jstep}
+.jstep{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:20px 22px;display:grid;grid-template-columns:44px minmax(0,1fr);gap:6px 16px}
+.jstep::before{counter-increment:jstep;content:counter(jstep);grid-row:1/span 6;width:40px;height:40px;border-radius:50%;background:var(--navy);color:var(--gold2);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:18px}
+.jstep>*{grid-column:2}
+.jstep .lbl{font-weight:700;color:var(--ink)}
+.jstep p{color:var(--muted)}
+.jstep p .lbl{color:var(--ink)}
+.jstep .cta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:4px}
+.jstep .cta a{font-weight:700;font-size:14px;border-radius:8px;padding:10px 16px;text-decoration:none;background:var(--navy);color:#fff}
+.jstep .cta a.alt{background:transparent;color:var(--sea);border:1px solid var(--line)}
+.jstep.s3{border-color:var(--gold)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .jstep .cta a:not(.alt){background:var(--gold);color:#0f2740}}
+:root[data-theme="dark"] .jstep .cta a:not(.alt){background:var(--gold);color:#0f2740}
+@media (max-width:560px){.jstep{grid-template-columns:1fr}.jstep::before{grid-row:auto}.jstep>*{grid-column:1}}
+
+/* Free self-assessment (D-011) */
+.sectors{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.sector{display:flex;flex-direction:column;gap:4px;text-align:left;padding:16px;border-radius:14px;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}
+.sector span{font-weight:400;color:var(--muted);font-size:14px}
+.sector[aria-pressed="true"]{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset,var(--shadow)}
+.field{display:flex;flex-direction:column;gap:6px;max-width:460px;font-weight:700;font-size:14px}
+.field input{font:inherit;font-weight:400;font-size:15px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);padding:8px 10px}
+.field input:focus-visible{outline:2px solid var(--citrus);outline-offset:2px}
+.sa-area{display:flex;flex-direction:column;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.sa-area>h2{font-size:20px;padding:14px 18px;background:var(--cream);border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:baseline}
+.sa-area>h2 .num{color:var(--citrus);font-variant-numeric:tabular-nums}
+.sa-q{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 18px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.sa-q:last-child{border-bottom:0}
+.sa-q .qt{font-weight:700}
+.sa-q .cite{grid-column:1}
+.sa-q textarea{grid-column:1/-1}
+.choice{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;align-self:start}
+.choice label{position:relative;cursor:pointer}
+.choice input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.choice span{display:block;padding:7px 14px;font-size:13.5px;font-weight:700;color:var(--muted);white-space:nowrap}
+.choice label+label span{border-left:1px solid var(--line)}
+.choice input:focus-visible+span{outline:2px solid var(--citrus);outline-offset:-2px}
+.choice input[value="done"]:checked+span{background:var(--ok);color:#fff}
+.choice input[value="partly"]:checked+span{background:var(--warn);color:#fff}
+.choice input[value="notyet"]:checked+span{background:var(--bad);color:#fff}
+@media (max-width:640px){.sa-q{grid-template-columns:1fr}.choice{justify-self:start}}
+.gp{font-family:var(--body);font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:1px 7px}
+.report{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--gold);border-radius:14px;box-shadow:var(--shadow);padding:clamp(18px,4vw,32px);display:flex;flex-direction:column;gap:18px}
+.report-head{display:flex;gap:14px;align-items:center}
+.report-head img{width:48px;height:48px;border-radius:50%;flex:none}
+.scores{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.score{border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:4px;background:var(--bg)}
+.score b{font-size:15px}
+.score .st{align-self:flex-start;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:999px;color:#fff}
+.st-done{background:var(--ok)} .st-next{background:var(--warn)} .st-gaps{background:var(--bad)}
+.r-list{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.r-list .r-note{color:var(--muted);font-size:14px}
+.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.path{border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.path a{color:var(--sea);font-weight:700}
+.path .pl{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--citrus)}
+.print-only{display:none}
+@media print{
+  @page{margin:16mm}
+  :root{--bg:#fff;--surface:#fff;--ink:#111;--muted:#444;--line:#bbb;--cream:#f4f1ea}
+  body{background:#fff;color:#111;font-size:12pt}
+  body::before,.draft,header.top,footer,.view:not(#v-self-assessment),#v-self-assessment>.wrap>:not(#sa-report-wrap),.no-print{display:none!important}
+  main .wrap{padding:0}
+  .report{box-shadow:none;border:0;padding:0}
+  .score,.path{break-inside:avoid}
+  .print-only{display:block}
+  .score .st,.st-done,.st-next,.st-gaps{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  a{color:#111}
+}
+</style>
+
+
+<header class="top"><div class="wrap">
+  <a class="brand" href="#home"><img class="seal" src="/assets/seal-192.jpg" alt="IntexiaU Institute seal" width="42" height="42"><span class="brand-text"><span class="brand-org">IntexiaU Institute</span>City AI Guide</span></a>
+  <nav aria-label="Main">
+    <a href="#cities" data-nav="cities">For cities</a>
+    <a href="#innovation-center" data-nav="innovation-center">Innovation Center</a>
+    <a href="#residents" data-nav="residents">For residents</a>
+    <a href="#business" data-nav="business">For businesses</a>
+    <a href="#courses" data-nav="courses">Courses</a>
+    <a href="#badges" data-nav="badges">Staff badges</a>
+    <a href="#partner" data-nav="partner">Partner with us</a>
+    <a href="#self-assessment" data-nav="self-assessment">Self-assessment</a>
+  </nav>
+</div></header>
+
+<main>
+<!-- HOME -->
+<section id="v-home" class="view"><div class="wrap">
+  <div class="hero">
+    <p class="eyebrow">Florida cities and counties</p>
+    <h1>AI rules for your city, <em>and a way forward for the people they touch.</em></h1>
+    <p class="lede">Florida has no statewide law on how cities use AI, so each city writes its own rules. This guide starts with a Florida-ready policy toolkit for city staff, and leads to an AI Innovation Center for the city: a place that helps residents into the new AI economy, helps businesses stay competitive, and draws new talent.</p>
+    <div class="hero-cta"><a class="gold" href="#cities">Open the city toolkit</a><a class="ghost" href="#innovation-center">See the Innovation Center path</a><a class="ghost" href="#courses">Browse the courses</a></div>
+  </div>
+  <div class="doors">
+    <a class="door" href="#cities">
+      <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg></span>
+      <p class="eyebrow">For city and county staff</p>
+      <h2>What should our AI policy cover?</h2>
+      <ul><li>Twelve policy areas mapped to Florida law</li><li>Six toolkit documents to adapt</li><li>Public records and Sunshine Law guidance</li></ul>
+      <span class="go">Open the city toolkit →</span>
+    </a>
+    <a class="door" href="#innovation-center">
+      <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3Z"/></svg></span>
+      <p class="eyebrow">For city leaders</p>
+      <h2>Could our city have an AI Innovation Center?</h2>
+      <ul><li>Built on the policy work</li><li>Help for displaced workers and new businesses</li><li>A draw for talent</li></ul>
+      <span class="go">See the path →</span>
+    </a>
+    <a class="door" href="#courses">
+      <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7l10-4 10 4-10 4L2 7Zm4 2v5c0 1.7 2.7 3 6 3s6-1.3 6-3V9"/></svg></span>
+      <p class="eyebrow">For everyone</p>
+      <h2>Which AI course fits me?</h2>
+      <ul><li>Seven IntexiaU Institute courses</li><li>Residents, founders, employees, boards and students</li><li>A badge when you finish</li></ul>
+      <span class="go">Browse the courses →</span>
+    </a>
+    <a class="door" href="#residents">
+      <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-7 8a7 7 0 0 1 14 0"/></svg></span>
+      <p class="eyebrow">For residents</p>
+      <h2>Is AI changing my job?</h2>
+      <ul><li>Everyday AI skills in short daily lessons</li><li>A plan for your next job or business</li><li>Where to get local help</li></ul>
+      <span class="go">See the Own Your Future path →</span>
+    </a>
+    <a class="door" href="#business">
+      <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v13H3zM8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg></span>
+      <p class="eyebrow">For small businesses</p>
+      <h2>Where does AI fit in my business?</h2>
+      <ul><li>A short transition review</li><li>What to hand to AI, how to check it, what to tell people</li><li>Training for owners and teams</li></ul>
+      <span class="go">Start the business review →</span>
+    </a>
+    <a class="door" href="#badges">
+      <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm-3 0-2 6 5-2 5 2-2-6"/></svg></span>
+      <p class="eyebrow">For staff and elected officials</p>
+      <h2>Short trainings, with a badge</h2>
+      <ul><li>Six self-paced modules</li><li>A briefing for elected officials</li><li>A printable badge</li></ul>
+      <span class="go">See the badges →</span>
+    </a>
+  </div>
+  <div class="dates">
+    <div><div class="n">2026</div><div class="l">Florida passed no comprehensive law on government AI use</div></div>
+    <div><div class="n">Ch. 119</div><div class="l">A prompt on city business can be a public record</div></div>
+    <div><div class="n">Apr 26, 2027</div><div class="l">Web accessibility deadline, cities of 50,000 or more</div></div>
+    <div><div class="n">Apr 2028</div><div class="l">Deadline for smaller cities and special districts</div></div>
+  </div>
+  <div class="value-band">
+    <div><p class="eyebrow" style="color:var(--gold2)">IntexiaU Institute partnerships</p><h2>What IntexiaU Institute brings to your city</h2>
+    <ul><li>Florida-specific guidance on records, Sunshine and accessibility</li><li>Staff and elected official training with printable badges</li><li>Programs for residents and businesses facing AI change</li><li>An implementation partner after the basics</li></ul></div>
+    <a href="#partner">See what a partnership includes →</a>
+    <a href="#courses">Browse the IntexiaU Institute courses →</a>
+  </div>
+</div></section>
+
+<!-- CITIES -->
+<section id="v-cities" class="view" hidden><div class="wrap stack" style="gap:32px">
+  <div class="stack" style="gap:10px">
+    <p class="eyebrow">For city and county staff</p>
+    <h1>City AI Policy Toolkit</h1>
+    <p class="lede">Six documents to adapt for your city, each mapped to the policy areas it covers. Download, edit and have your city attorney review.</p>
+  </div>
+  <div class="grid3" id="docs"></div>
+  <div class="stack" style="gap:12px">
+    <h2>Twelve areas a Florida city AI policy should cover</h2>
+    <p class="legend">No Florida statute requires a city AI policy. These areas come from the laws that already apply to city work and from Florida League of Cities guidance. <span>Outlined</span> items carry a specific Florida or federal requirement.</p>
+    <div class="elements" id="els"></div>
+  </div>
+  <div class="panel"><h3>Building on what's already out there</h3><span>The Florida League of Cities AI Hub offers guides and checklists, and the GovAI Coalition shares free policy templates. This toolkit turns that guidance into Florida-ready documents a city can adopt.</span></div>
+  <div class="panel"><h3>Partner with IntexiaU Institute</h3><span>Staff training, toolkit support and programs for your residents and businesses. <a href="#partner">See partnership options</a>.</span></div>
+  <p class="notice">General information about Florida law, not legal advice. Have your city attorney review any policy before adoption.</p>
+</div></section>
+
+<!-- INNOVATION CENTER -->
+<section id="v-innovation-center" class="view" hidden><div class="wrap stack" style="gap:32px">
+  <div class="stack" style="gap:10px">
+    <p class="eyebrow">For city leaders</p>
+    <h1>From AI policy to a city AI Innovation Center</h1>
+    <p class="lede">A policy keeps city hall safe. An Innovation Center puts AI to work for the whole city: a better quality of life, help for people whose jobs are changing, new businesses, established businesses that need to shift to stay competitive, and talent that wants to live where the future is being built.</p>
+  </div>
+  <div class="stack" style="gap:14px">
+    <h2>Four steps, at your city's pace</h2>
+    <div class="journey">
+      <div class="jstep"><h3>Step 1: Set the rules</h3><p>Adopt a city AI policy with the toolkit and the self-assessment, so staff use AI safely and within Florida's public records and Sunshine laws.</p><div class="cta"><a href="#cities">Open the city toolkit</a></div></div>
+      <div class="jstep"><h3>Step 2: Train city hall</h3><p>Staff take short badge trainings, and the commission takes Board-Ready AI, so the city leads by example.</p><div class="cta"><a href="#badges">See the staff badges</a><a href="https://academy.intexiau.com/programs/board-ready-ai">See Board-Ready AI</a></div></div>
+      <div class="jstep"><h3>Step 3: Open the courses to residents and businesses</h3><p>Run a first cohort of AI for Everyone and Workforce AI for residents, and Founder AI for local business owners, at a library, community center or partner space.</p><div class="cta"><a href="#courses">Browse the courses</a></div></div>
+      <div class="jstep s3"><h3>Step 4: Launch the city's AI Innovation Center</h3><p>Make the cohorts permanent, in a home the city already has, with local partners.</p></div>
+    </div>
+  </div>
+  <div class="stack" style="gap:12px">
+    <h2>What the Innovation Center does</h2>
+    <div class="value-grid">
+      <div class="value"><h3>Residents whose work is changing</h3><p>AI for Everyone and Workforce AI, then a plan for the next job or business that each person writes themselves, connected to the local career center.</p></div>
+      <div class="value"><h3>New businesses</h3><p>Founder AI and a studio where founders use AI to test an idea, find customers and launch with less money and fewer hires.</p></div>
+      <div class="value"><h3>Businesses that need to shift</h3><p>The AI transition review and Workforce AI for teams, so local employers stay competitive and bring their staff with them.</p></div>
+      <div class="value"><h3>Talent</h3><p>A visible reason for remote workers, founders and graduates to choose your city, Prompt Architecture for those who build, and a place to meet once they arrive.</p></div>
+      <div class="value wide"><h3>Quality of life</h3><p>An AI help desk where residents can ask how to spot a scam, use a city service online, or help a parent with a new tool, plus clearer and faster city services as staff put AI to good use.</p></div>
+    </div>
+  </div>
+  <div class="panel"><h3>Built for cities without an innovation center</h3><span>Many Florida cities have no innovation center of their own. The Innovation Center doesn't need a new building: it can start at city hall, a library, a college or a partner's space, and grow with what the city's college, workforce board, chamber and small business center already offer.</span></div>
+  <div class="panel"><h3>How a city starts</h3><span>A city partnership starts with the city AI policy and grows step by step toward the city's own AI Innovation Center. <a href="#partner">See partnership options</a>.</span></div>
+  <p class="notice">A working concept for discussion. What a city's Innovation Center offers, where it sits and who runs it are set with the city and its partners.</p>
+</div></section>
+
+<!-- COURSES -->
+<section id="v-courses" class="view" hidden><div class="wrap stack" style="gap:32px">
+  <div class="stack" style="gap:10px">
+    <p class="eyebrow">IntexiaU Institute courses</p>
+    <h1>AI courses for everyone in your city</h1>
+    <p class="lede">Seven self-paced IntexiaU Institute courses, most in short daily lessons over 30 days. Pick the one that fits you, finish the final assessment and earn a badge.</p>
+  </div>
+  <div class="grid3" id="courselist"></div>
+  <div class="panel"><h3>Cities and partners</h3><span>Your city, library, career center or chamber can sponsor a cohort and host sessions. <a href="#partner">See partnership options</a>.</span></div>
+  <p class="notice">Badges show completed training. They are not college credit, a degree or a professional license.</p>
+</div></section>
+
+<!-- RESIDENTS -->
+<section id="v-residents" class="view" hidden><div class="wrap stack" style="gap:32px">
+  <div class="stack" style="gap:10px">
+    <p class="eyebrow">For residents</p>
+    <h1>Own Your Future: a path into the AI economy</h1>
+    <p class="lede">For anyone whose job is changing because of AI, who has lost work, or who wants to move into AI work. You build everyday skills first, then a plan for your next job or business that you write yourself.</p>
+  </div>
+  <div class="journey" id="rpath"></div>
+  <div class="panel"><h3>Already laid off?</h3><span>Your local CareerSource career center runs federally funded services for dislocated workers, including job search help and training. Federal guidance now lets that funding cover AI skills. Ask them what you qualify for.</span></div>
+  <div class="panel"><h3>Not sure where to start?</h3><span>Compare all seven courses side by side. <a href="#courses">Browse the courses</a>.</span></div>
+  <div class="panel"><h3>Cities and counties</h3><span>Your city can sponsor this path for residents and host sessions at libraries and community centers. <a href="#partner">See partnership options</a>.</span></div>
+  <p class="notice">Badges and certificates show completed training. They are not college credit, a degree or a professional license.</p>
+</div></section>
+
+<!-- BUSINESS -->
+<section id="v-business" class="view" hidden><div class="wrap stack" style="gap:32px">
+  <div class="stack" style="gap:10px">
+    <p class="eyebrow">For small businesses</p>
+    <h1>AI transition review for local businesses</h1>
+    <p class="lede">Three questions sort out where AI fits in your business: what you hand to AI, how you check its work, and what you tell customers and staff. Work through them, then train your team.</p>
+  </div>
+  <div class="value-grid" id="ledgers"></div>
+  <div class="stack" style="gap:12px">
+    <h2>Training for owners and teams</h2>
+    <div class="grid3" id="bprog"></div>
+  </div>
+  <div class="panel"><h3>Local help</h3><span>Florida's Small Business Development Centers offer no-cost advising, and several now run AI workshops. Your county economic development office can point you to the nearest one.</span></div>
+  <p class="notice">General information, not legal, tax or employment advice.</p>
+</div></section>
+
+<!-- BADGES -->
+<section id="v-badges" class="view" hidden><div class="wrap stack" style="gap:32px">
+  <div class="stack" style="gap:10px">
+    <p class="eyebrow">For staff and elected officials</p>
+    <h1>City AI training badges</h1>
+    <p class="lede">Short self-paced modules built from the city toolkit. Finish the lessons and the knowledge check, and print your badge.</p>
+  </div>
+  <div class="grid3" id="badgelist"></div>
+  <div class="panel"><h3>What a badge is, and isn't</h3><span>An IntexiaU Institute badge shows that you completed a training. It is not college credit, a professional license or continuing education credit, and it carries no state approval.</span></div>
+  <div class="panel"><h3>Want the full course?</h3><span>Board-Ready AI is a 30-day IntexiaU Institute course for public and private governing boards, a good next step for commissioners and advisory board members. <a href="https://academy.intexiau.com/programs/board-ready-ai">See Board-Ready AI</a> or <a href="#courses">browse all courses</a>.</span></div>
+  <div class="panel"><h3>Elected officials and the Sunshine Law</h3><span>The briefing for elected officials is taken individually. Members shouldn't discuss official business with each other through the course or a shared AI workspace.</span></div>
+</div></section>
+
+<!-- PARTNER -->
+<section id="v-partner" class="view" hidden><div class="wrap stack" style="gap:32px">
+  <div class="stack" style="gap:10px">
+    <p class="eyebrow">IntexiaU Institute partnerships</p>
+    <h1>Partner with IntexiaU Institute</h1>
+    <p class="lede">The toolkit is free. Cities that want more can make IntexiaU Institute their AI implementation partner: policy rollout, staff training, courses that help residents and businesses through the change, and in time a city AI Innovation Center.</p>
+  </div>
+  <div class="panel"><h3>A city partnership</h3><span>A city partnership puts a city AI policy in place, runs a resident and small business course cohort alongside it, and grows toward the city's own <a href="#innovation-center">AI Innovation Center</a>.</span></div>
+  <div class="stack" style="gap:14px">
+    <h2>From self-assessment to partnership</h2>
+    <div class="journey">
+      <div class="jstep">
+        <h3>Step 1: Free self-assessment and toolkit</h3>
+        <p><span class="lbl">What you get:</span> Fifteen questions across six areas and a printable report showing what's done, partly done or not yet started, plus the city toolkit.</p>
+        <p><span class="lbl">What we ask:</span> Nothing. There's no account, and your answers stay in your browser.</p>
+        <div class="cta"><a href="#self-assessment">Start the self-assessment</a></div>
+      </div>
+      <div class="jstep">
+        <h3>Step 2: Free readiness review</h3>
+        <p><span class="lbl">What you get:</span> A free 20-minute walkthrough, with our team, of where your AI policy, records practice and tools stand, plus clear next steps.</p>
+        <p><span class="lbl">What we ask:</span> Your city or county name, a contact person, and your current policy or list of AI tools, if you have them. We don't need any resident data. We schedule a limited number of readiness reviews each week.</p>
+        <div class="cta"><a href="mailto:partnerships@intexiau.com?subject=City%2020-minute%20walkthrough%20request">Request a free 20-minute walkthrough</a><span class="cite">Email partnerships@intexiau.com with your city or county name and what you're working on.</span></div>
+      </div>
+      <div class="jstep s3">
+        <h3>Step 3: Make IntexiaU Institute your AI implementation partner</h3>
+        <p>The partnership grows in steps, at your pace:</p>
+      </div>
+    </div>
+  </div>
+  <div class="stack" style="gap:14px"><h3>How a partnership grows</h3><div class="ladder">
+    <div class="step free"><span class="pill">Free</span><h3>Toolkit</h3><p>Policy templates, records guidance and checklists.</p></div>
+    <div class="step free"><span class="pill">Free</span><h3>Readiness review</h3><p>A short look at where your policy, records practice and tools stand.</p></div>
+    <div class="step"><h3>City pilot</h3><p>Policy rollout with a resident and small business cohort.</p></div>
+    <div class="step"><h3>Training and buildout</h3><p>Staff badges, Board-Ready AI for the commission, and resident and business course cohorts.</p></div>
+    <div class="step"><h3>AI Innovation Center</h3><p>A permanent home for resident, founder and business programs.</p></div>
+  </div></div>
+  <div class="privacy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3Z"/><path d="M9 12l2 2 4-4"/></svg><div class="stack" style="gap:4px"><h3>Resident data comes first</h3><span>The first release stores no resident or staff data. Any pilot starts with a written data and public records plan your city attorney can review.</span></div></div>
+  <h3>What you get, by partner</h3>
+  <div class="grid3">
+    <div class="doc"><p class="eyebrow">Smaller cities and towns</p><h3>Policy partnership</h3><p style="color:var(--muted)">A Florida-ready policy, a department inventory, staff badges and an elected official briefing.</p></div>
+    <div class="doc"><p class="eyebrow">Larger cities and counties</p><h3>Strategy partnership</h3><p style="color:var(--muted)">A second look at an existing policy, department training and a citywide AI strategy.</p></div>
+    <div class="doc"><p class="eyebrow">Workforce and business partners</p><h3>Community partnership</h3><p style="color:var(--muted)">Own Your Future and business transition cohorts, run with your career centers, colleges and business advisors.</p></div>
+  </div>
+  <div class="panel"><h3>Start a conversation</h3><span>Email <strong>partnerships@intexiau.com</strong> with your city or county name and what you're working on. <a class="btn" href="mailto:partnerships@intexiau.com?subject=City%20partnership%20inquiry">Contact partnerships</a></span></div>
+  <p class="notice">Partnership details are set by IntexiaU Institute. Badges show completed training, not college credit.</p>
+</div></section>
+
+<!-- SELF-ASSESSMENT -->
+<section id="v-self-assessment" class="view" hidden><div class="wrap stack" style="gap:24px">
+  <div class="stack" style="gap:10px">
+    <p class="eyebrow">Free self-assessment</p>
+    <h1>Where does your city stand on AI?</h1>
+    <p class="lede">Fifteen questions across six areas. Answer done, partly or not yet, then print a report you can keep. The self-assessment is free.</p>
+  </div>
+  <div class="privacy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3Z"/><path d="M9 12l2 2 4-4"/></svg><div class="stack" style="gap:4px"><h3>Your answers stay in this browser</h3><span>Nothing is sent to us or saved on our side. There is no account and no tracking of your answers. Clearing your browser data, or the button at the bottom, removes them.</span></div></div>
+  <div class="stack" style="gap:12px">
+    <h2>1. Choose your government</h2>
+    <div class="sectors" role="group" aria-label="Type of government">
+      <button type="button" class="sector" data-sector="city" aria-pressed="false">City, town or village<span>Municipal government</span></button>
+      <button type="button" class="sector" data-sector="county" aria-pressed="false">County<span>County government</span></button>
+    </div>
+    <label class="field" for="sa-school">City or county name (optional, for your printout)<input id="sa-school" type="text" autocomplete="organization"></label>
+  </div>
+  <div id="sa-body" class="stack" style="gap:16px" hidden>
+    <h2>2. Answer the questions</h2>
+    <div class="progress"><div class="counts" id="sa-counts"></div><div class="bar" id="sa-bar" aria-hidden="true"></div></div>
+    <div id="sa-areas" class="stack" style="gap:16px"></div>
+    <p class="legend">Items marked <span class="gp">Good practice</span> aren't required by a specific law; they help the policy work.</p>
+  </div>
+  <div id="sa-report-wrap" class="stack" style="gap:12px" hidden>
+    <h2 class="no-print">3. Your report</h2>
+    <div class="report" id="sa-report" aria-live="polite"></div>
+    <div class="no-print" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+      <button class="primary" id="sa-print" type="button">Print or save as PDF</button>
+      <button id="sa-reset" type="button">Clear answers</button>
+      <span class="toast" id="sa-toast" role="status"></span>
+    </div>
+  </div>
+  <p class="notice">General information about Florida law, not legal advice. A result here is not a legal review of your policy. Have your city attorney review any policy before adoption.</p>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div class="foot-row"><img class="foot-seal" src="/assets/seal-192.jpg" alt="" width="40" height="40"><span>City AI Guide, an IntexiaU Institute project · Nov 26, 2026</span></div>
+  <span>General information about Florida law. Not legal advice. Stores no resident or staff information.</span>
+</div></footer>
+
+<script>
+{
+// Set the pilot city here once Andrea picks it. Empty shows "to be announced".
+const PILOT="";
+document.querySelectorAll("[data-pilot]").forEach(e=>e.textContent=PILOT||"to be announced");
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+// [number, text, has a specific Florida or federal requirement]
+const ELEMENTS=[
+ [1,"Approved tools only, with a named owner who keeps the policy current",0],
+ [2,"An inventory of AI in use, including AI features inside existing software",0],
+ [3,"Prompts and outputs on city business treated as public records (Chapter 119, F.S.)",1],
+ [4,"Retention under the state records schedule, with logging of AI records that support decisions",1],
+ [5,"Sunshine Law: no discussion of city business among members through shared AI drafts or workspaces (s. 286.011, F.S.)",1],
+ [6,"No exempt or confidential information in unapproved tools (s. 119.071, F.S.)",1],
+ [7,"Contracts with public records terms and AI clauses on data use, logging and incident notice (s. 119.0701, F.S.)",1],
+ [8,"AI inside the city's cybersecurity program and incident reporting (s. 282.3185, F.S.)",1],
+ [9,"Human review before AI output reaches the public or informs a decision about a resident",0],
+ [10,"Accessible AI chatbots and web tools, WCAG 2.1 AA (28 C.F.R. part 35, subpart H)",1],
+ [11,"Training for staff before use, and a briefing for elected officials",0],
+ [12,"Telling residents which AI tools the city uses, and how to comment",0]
+];
+const DOCS=[
+ ["Model staff AI use policy","A policy the manager can issue or the commission can adopt, covering all twelve areas.","1 to 12"],
+ ["AI use inventory worksheet","A department-by-department list of AI tools and AI features already in use.","1, 2, 12"],
+ ["Public records and Sunshine guide for AI","What to keep, what to delete, and how to avoid an accidental quorum.","3 to 6"],
+ ["Vendor and contract checklist","Model clauses on public records, data use, logging, shutoff and incident notice.","6 to 8"],
+ ["Resident notice and engagement kit","A plain FAQ, a public comment period and an open house format.","9, 10, 12"],
+ ["Rollout checklist and timeline","Steps from inventory to adoption, training and the accessibility deadline.","1, 10, 11"]
+];
+$("#els").innerHTML=ELEMENTS.map(([n,t,nw])=>`<div class="el${nw?" new":""}"><span class="num">${n}</span><span>${esc(t)}</span></div>`).join("");
+$("#docs").innerHTML=DOCS.map(([t,d,e],i)=>`<div class="doc"><p class="eyebrow">Piece ${i+1}</p><h3>${esc(t)}</h3><p style="color:var(--muted)">${esc(d)}</p><div class="meta"><span class="tag">Areas ${esc(e)}</span><span class="tag">Draft in progress</span></div></div>`).join("");
+
+const RPATH=[
+ ["Step 1: Everyday AI skills","AI for Everyone: 30 days, about 25 minutes a day. Safety, scams, writing, money, learning and work.","https://academy.intexiau.com/programs/community-ai","See AI for Everyone"],
+ ["Step 2: AI for your work","Workforce AI if you work for an employer, or Founder AI if you want to start or grow a business.","https://academy.intexiau.com/programs/workforce-ai","See Workforce AI"],
+ ["Step 3: Write your plan","Economic Authorship: a short assessment of your skills and goals, then a plan for your next job or business that you write yourself, with AI coaches to help.","",""],
+ ["Step 4: Connect locally","Bring your plan to your local career center, state college or small business center for training, funding and job leads.","",""]
+];
+$("#rpath").innerHTML=RPATH.map(([h,p,u,l])=>`<div class="jstep"><h3>${esc(h)}</h3><p>${esc(p)}</p>${u?`<div class="cta"><a href="${esc(u)}">${esc(l)}</a></div>`:`<p class="cite">Coming with the city pilot</p>`}</div>`).join("");
+
+const LEDGERS=[
+ ["Delegation: what do you hand to AI?","List the tasks in your business by hour. Mark which AI could draft, which it could do with your check, and which stay with you or your staff."],
+ ["Verification: how do you check its work?","For each task you hand off, decide who checks the result, how, and how often. Start with the tasks that reach customers or money."],
+ ["Disclosure: what do you tell people?","Decide what customers and staff should know about your AI use, what your contracts or industry rules require, and how you'll say it."]
+];
+$("#ledgers").innerHTML=LEDGERS.map(([h,p])=>`<div class="value"><h3>${esc(h)}</h3><p>${esc(p)}</p></div>`).join("")+`<div class="value wide"><h3>Your staff come with you</h3><p>The review asks how each change affects the people who do the work today, and what training they need to take on new roles.</p></div>`;
+const BPROG=[
+ ["Founder AI","Owners and entrepreneurs: validate, market, sell and operate leaner with AI.","30 days, about 35 minutes a day","https://academy.intexiau.com/programs/founder-ai"],
+ ["Workforce AI","Employees and teams: practical upskilling within your business's rules.","30 days, about 30 minutes a day","https://academy.intexiau.com/programs/workforce-ai"],
+ ["Prompt Architecture","Design reliable AI systems you own, from prompts to agents.","8 modules, about 75 minutes each","https://academy.intexiau.com/programs/prompt-architecture"]
+];
+$("#bprog").innerHTML=BPROG.map(([t,d,m,u])=>`<div class="doc"><p class="eyebrow">Institute program</p><h3>${esc(t)}</h3><p style="color:var(--muted)">${esc(d)}</p><div class="meta"><span class="tag">${esc(m)}</span></div><div class="btns"><a class="btn" href="${esc(u)}">View program</a></div></div>`).join("");
+
+const BADGES=[
+ ["AI at Work for City Staff","The city policy, approved tools, checking output and what never goes into a tool.","All staff","25 min"],
+ ["Public Records and the Sunshine Law with AI","Prompts as records, retention, requests and the accidental quorum.","Staff and clerks","30 min"],
+ ["AI for Elected Officials","A short briefing for commissioners and council members.","Elected officials","25 min"],
+ ["Buying and Approving AI Tools","Inventory, procurement, contract clauses and the approved tool list.","Procurement and IT","35 min"],
+ ["Resident-Facing AI","Chatbots, accessibility, disclosure and human review.","Communications and IT","30 min"],
+ ["Supervising AI in Your Department","Human review, records, incidents and training your team.","Managers","30 min"]
+];
+$("#badgelist").innerHTML=BADGES.map(([t,d,w,m],i)=>`<div class="doc"><svg class="badge-seal" viewBox="0 0 64 64" aria-hidden="true"><circle class="core" cx="32" cy="32" r="26"/><circle class="ring" cx="32" cy="32" r="30"/><circle class="ring" cx="32" cy="32" r="22" stroke-dasharray="2 3"/><text x="32" y="37" text-anchor="middle" font-size="14">${i+1}</text></svg><p class="eyebrow">Badge</p><h3>${esc(t)}</h3><p style="color:var(--muted)">${esc(d)}</p><div class="meta"><span class="tag">${esc(w)}</span><span class="tag">${esc(m)}</span><span class="tag">Module in development</span></div></div>`).join("");
+
+const COURSES=[
+ ["AI for Everyone","Residents","Everyday AI: safety, scams, writing, money, learning and work.","30 days, about 25 min a day","community-ai"],
+ ["Workforce AI","Employees and job seekers","Practical AI skills for the job you have or the next one.","30 days, about 30 min a day","workforce-ai"],
+ ["Founder AI","Founders and business owners","Validate, market, sell and run a business leaner with AI.","30 days, about 35 min a day","founder-ai"],
+ ["Board-Ready AI","Commissions and governing boards","What a board needs to know to oversee AI, public and private.","30 days, about 35 min a day","board-ready-ai"],
+ ["Foundation Board AI","Foundation boards","AI oversight for boards of foundations tied to public institutions.","30 days, about 35 min a day","foundation-board"],
+ ["Student AI","Students","AI for school and career readiness.","30 days, about 25 min a day","student-ai"],
+ ["Prompt Architecture and Scaffolding","Builders and professionals","Design reliable AI systems you own, from prompts to agents.","8 modules, about 75 min each","prompt-architecture"]
+];
+$("#courselist").innerHTML=COURSES.map(([t,w,d,m,u])=>`<div class="doc"><p class="eyebrow">${esc(w)}</p><h3>${esc(t)}</h3><p style="color:var(--muted)">${esc(d)}</p><div class="meta"><span class="tag">${esc(m)}</span><span class="tag">Badge</span></div><div class="btns"><a class="btn" href="https://academy.intexiau.com/programs/${u}">View course</a></div></div>`).join("");
+
+// Free self-assessment. Answers stay in this browser (localStorage). Nothing is sent anywhere.
+const SA_KEY="cityai-sa-v1";
+const SECTORS={city:{name:"City, town or village",gov:"city",board:"commission or council"},county:{name:"County",gov:"county",board:"board of county commissioners"}};
+const SA_AREAS=["Policy and ownership","Public records and Sunshine","Tools and contracts","Privacy and security","Training","Residents and accessibility"];
+const SA_QS=[
+ ["q1",0,"The {gov} has a written staff AI use policy, issued by the manager or adopted by the {board}.",""],
+ ["q2",0,"A named person or team owns AI use and keeps the policy current.",""],
+ ["q3",0,"The {gov} has an inventory of the AI tools departments use, including AI features inside existing software.",""],
+ ["q4",1,"Staff know that prompts and outputs on {gov} business can be public records, and the policy says which to keep under the retention schedule.","Chapter 119, F.S."],
+ ["q5",1,"Members of the {board} know not to discuss official business with each other through shared AI drafts or workspaces outside a noticed meeting.","s. 286.011, F.S."],
+ ["q6",1,"Public records requests can reach the AI records the {gov} keeps.","Chapter 119, F.S."],
+ ["q7",2,"AI tools are approved before use, and staff use only approved tools.",""],
+ ["q8",2,"Contracts for AI tools include public records terms and cover data use, logging and incident notice.","s. 119.0701, F.S."],
+ ["q9",3,"Staff never put exempt or confidential information into AI tools that aren't approved for it.","s. 119.071, F.S."],
+ ["q10",3,"AI risks are part of the {gov}'s cybersecurity program and incident reporting.","s. 282.3185, F.S."],
+ ["q11",4,"Staff are trained on the AI policy before they use AI tools at work, and new staff are trained when they start.",""],
+ ["q12",4,"Elected officials have had a short briefing on AI, public records and the Sunshine Law.",""],
+ ["q13",5,"A person reviews AI output before it reaches the public or informs a decision about a resident; AI never decides alone.",""],
+ ["q14",5,"Any AI chatbot or AI feature on the {gov} website meets WCAG 2.1 AA ahead of the federal deadline.","28 C.F.R. part 35, subpart H"],
+ ["q15",5,"Residents can see which AI tools the {gov} uses and how to ask questions or comment.",""]
+];
+const word=(t,sec)=>t.replace(/\{gov\}/g,SECTORS[sec].gov).replace(/\{board\}/g,SECTORS[sec].board);
+const ANS={done:"Done",partly:"Partly",notyet:"Not yet"};
+let sa={sector:"",school:"",a:{city:{},county:{}}};
+try{const raw=localStorage.getItem(SA_KEY);if(raw){const v=JSON.parse(raw);if(v&&v.a)sa={...sa,...v,a:{city:{},county:{},...v.a}};}}catch(e){}
+const saSave=()=>{try{localStorage.setItem(SA_KEY,JSON.stringify(sa))}catch(e){}};
+function areaScore(sec,ai){
+  const qs=SA_QS.filter(q=>q[1]===ai).map(q=>sa.a[sec][q[0]]?.s||"");
+  if(qs.every(s=>s==="done"))return "done";
+  if(qs.some(s=>s===""||s==="notyet"))return "gaps";
+  return "next";
+}
+const SCORE={done:["Done","st-done"],next:["Next steps","st-next"],gaps:["Gaps","st-gaps"]};
+function saCounts(){const c={done:0,partly:0,notyet:0,none:0};SA_QS.forEach(([id])=>c[sa.a[sa.sector][id]?.s||"none"]++);return c;}
+function saRenderQuestions(){
+  const sec=sa.sector;
+  document.querySelectorAll(".sector").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.sector===sec)));
+  $("#sa-body").hidden=!sec;$("#sa-report-wrap").hidden=!sec;
+  if(!sec)return;
+  $("#sa-areas").innerHTML=SA_AREAS.map((name,ai)=>`<div class="sa-area"><h2><span class="num">${ai+1}</span>${esc(name)}</h2>${SA_QS.filter(q=>q[1]===ai).map(([id,,t,cite])=>{const qt=word(t,sec),cur=sa.a[sec][id]||{};
+    return `<div class="sa-q"><p class="qt" id="t-${id}">${esc(qt)}</p><div class="choice" role="radiogroup" aria-labelledby="t-${id}">${Object.entries(ANS).map(([v,l])=>`<label><input type="radio" name="sa-${id}" value="${v}" data-q="${id}"${cur.s===v?" checked":""}><span>${l}</span></label>`).join("")}</div><p class="cite">${cite?`<code>${esc(cite)}</code>`:`<span class="gp">Good practice</span>`}</p><textarea data-qn="${id}" aria-label="Notes for: ${esc(qt)}" placeholder="Notes or policy cite (optional)">${esc(cur.x||"")}</textarea></div>`}).join("")}</div>`).join("");
+  saTally();
+}
+function saTally(){
+  if(!sa.sector)return;
+  const c=saCounts(),tot=SA_QS.length;
+  $("#sa-counts").innerHTML=`<span><i class="dot" style="background:var(--ok)"></i>${c.done} done</span><span><i class="dot" style="background:var(--warn)"></i>${c.partly} partly</span><span><i class="dot" style="background:var(--bad)"></i>${c.notyet} not yet</span><span>${c.none} unanswered</span>`;
+  $("#sa-bar").innerHTML=[["done","ok"],["partly","warn"],["notyet","bad"]].map(([k,v])=>`<i style="width:${c[k]/tot*100}%;background:var(--${v})"></i>`).join("");
+  saRenderReport(c);
+}
+function saRenderReport(c){
+  const sec=sa.sector,S=SECTORS[sec];
+  const today=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
+  const open=SA_QS.filter(([id])=>(sa.a[sec][id]?.s||"")!=="done");
+  $("#sa-report").innerHTML=`
+  <div class="report-head"><img src="/assets/seal-192.jpg" alt="" width="48" height="48"><div class="stack" style="gap:2px"><p class="eyebrow">IntexiaU Institute · City AI Guide</p><h2>City AI readiness self-assessment</h2></div></div>
+  <p class="cite">${sa.school?`<strong>${esc(sa.school)}</strong> · `:""}${esc(S.name)} · ${today} · ${c.done} of ${SA_QS.length} done${c.none?`, ${c.none} unanswered`:""}</p>
+  <div class="scores">${SA_AREAS.map((name,ai)=>{const [l,cls]=SCORE[areaScore(sec,ai)];return `<div class="score"><span class="st ${cls}">${l}</span><b>${ai+1}. ${esc(name)}</b></div>`}).join("")}</div>
+  <p class="legend">Done: every item in the area is done. Next steps: nothing is "not yet", but some items are partly done. Gaps: at least one item is not yet done or unanswered.</p>
+  ${open.length?`<div class="stack" style="gap:8px"><h3>What's still open</h3><ol class="r-list">${open.map(([id,,t])=>{const a=sa.a[sec][id]||{};return `<li><strong>${a.s?ANS[a.s]:"Unanswered"}:</strong> ${esc(word(t,sec))}${a.x?`<br><span class="r-note">Note: ${esc(a.x)}</span>`:""}</li>`}).join("")}</ol></div>`:""}
+  <div class="stack" style="gap:10px"><h3>Two ways to close the gaps</h3><div class="paths">
+    <div class="path"><span class="pl">Path A</span><h3>Do it yourself with this guide</h3><p>Use the City AI Policy Toolkit, short staff trainings with printable badges, and Board-Ready AI for your commission.</p><p class="no-print"><a href="#cities">Open the city toolkit</a></p></div>
+    <div class="path"><span class="pl">Path B</span><h3>Book a free 20-minute walkthrough</h3><p>Walk through this report with IntexiaU Institute and agree on what to do first. We schedule a limited number of readiness reviews each week.</p><p><a href="mailto:partnerships@intexiau.com?subject=City%2020-minute%20walkthrough%20request">partnerships@intexiau.com</a></p></div>
+  </div></div>
+  <p class="notice">This report is general information about Florida law, based only on your own answers. It is not legal advice and not a legal review of your policy. Have your city attorney review any policy before adoption.</p>
+  <p class="cite print-only">Printed from the City AI Guide, an IntexiaU Institute project. Your answers were stored only in your browser.</p>`;
+}
+document.querySelectorAll(".sector").forEach(b=>b.addEventListener("click",()=>{sa.sector=b.dataset.sector;saSave();saRenderQuestions();}));
+$("#sa-school").value=sa.school||"";
+$("#sa-school").addEventListener("input",e=>{sa.school=e.target.value;saSave();if(sa.sector)saTally();});
+document.addEventListener("change",e=>{const el=e.target;if(el.matches("input[data-q]")&&sa.sector){const id=el.dataset.q;sa.a[sa.sector][id]={...(sa.a[sa.sector][id]||{}),s:el.value};saSave();saTally();}});
+document.addEventListener("input",e=>{const el=e.target;if(el.matches("textarea[data-qn]")&&sa.sector){const id=el.dataset.qn;sa.a[sa.sector][id]={...(sa.a[sa.sector][id]||{}),x:el.value};saSave();saRenderReport(saCounts());}});
+$("#sa-print").addEventListener("click",()=>{$("#sa-toast").textContent="If no print window opens here, use your browser's print command. Printing works on the live site.";try{window.print()}catch(e){}});
+$("#sa-reset").addEventListener("click",()=>{sa.a[sa.sector]={};saSave();saRenderQuestions();$("#sa-toast").textContent="Answers cleared.";});
+saRenderQuestions();
+
+const VIEWS=["home","cities","innovation-center","courses","residents","business","badges","partner","self-assessment"];
+function route(){
+  const v=VIEWS.includes(location.hash.slice(1))?location.hash.slice(1):"home";
+  document.querySelectorAll(".view").forEach(s=>s.hidden=s.id!=="v-"+v);
+  document.querySelectorAll("[data-nav]").forEach(a=>{if(a.dataset.nav===v)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");});
+  window.scrollTo(0,0);
+}
+addEventListener("hashchange",route);route();
+}
+</script>
